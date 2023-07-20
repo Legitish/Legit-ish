@@ -1,2 +1,2 @@
-# LEGITISH, a utility mod for Lunar Client 1.8.9.
-### Press L to open the clickgui lol
+# LEGITISH, a utility mod for Weave.
+### Press L to open the clickgui 😳
