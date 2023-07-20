@@ -1,0 +1,5 @@
+{
+  "entrypoints": [
+    "legitish.main.Init"
+  ]
+}
