@@ -114,21 +114,19 @@ public class BedPlates extends Module {
     }
 
     private boolean isBedwars() {
-        if (GameUtils.isHypixel()) {
-            if (mc.thePlayer.getWorldScoreboard() == null || mc.thePlayer.getWorldScoreboard().getObjectiveInDisplaySlot(1) == null || mc.thePlayer.capabilities.allowFlying) {
-                return false;
-            }
+        if (mc.thePlayer.getWorldScoreboard() == null || mc.thePlayer.getWorldScoreboard().getObjectiveInDisplaySlot(1) == null || mc.thePlayer.capabilities.allowFlying) {
+            return false;
+        }
 
-            String d = mc.thePlayer.getWorldScoreboard().getObjectiveInDisplaySlot(1).getDisplayName();
-            if (!d.contains("BED") && !d.contains("WARS")) {
-                return false;
-            }
+        String d = mc.thePlayer.getWorldScoreboard().getObjectiveInDisplaySlot(1).getDisplayName();
+        if (!d.contains("BED") && !d.contains("WARS")) {
+            return false;
+        }
 
-            for (String l : MouseUtils.getScoreboard()) {
-                String s = MouseUtils.str(l);
-                if (s.contains("Diamond") || s.contains("gone") || s.contains("Emerald")) {
-                    return true;
-                }
+        for (String l : MouseUtils.getScoreboard()) {
+            String s = MouseUtils.str(l);
+            if (s.contains("Diamond") || s.contains("gone") || s.contains("Emerald")) {
+                return true;
             }
         }
 

@@ -97,21 +97,19 @@ public class MurderMystery extends Module {
     }
 
     private boolean isMurderMystery() {
-        if (GameUtils.isHypixel()) {
-            if (mc.thePlayer.getWorldScoreboard() == null || mc.thePlayer.getWorldScoreboard().getObjectiveInDisplaySlot(1) == null) {
-                return false;
-            }
+        if (mc.thePlayer.getWorldScoreboard() == null || mc.thePlayer.getWorldScoreboard().getObjectiveInDisplaySlot(1) == null) {
+            return false;
+        }
 
-            String d = mc.thePlayer.getWorldScoreboard().getObjectiveInDisplaySlot(1).getDisplayName();
-            if (!d.contains("MURDER") && !d.contains("MYSTERY")) {
-                return false;
-            }
+        String d = mc.thePlayer.getWorldScoreboard().getObjectiveInDisplaySlot(1).getDisplayName();
+        if (!d.contains("MURDER") && !d.contains("MYSTERY")) {
+            return false;
+        }
 
-            for (String l : MouseUtils.getScoreboard()) {
-                String s = MouseUtils.str(l);
-                if (s.contains("Role:")) {
-                    return true;
-                }
+        for (String l : MouseUtils.getScoreboard()) {
+            String s = MouseUtils.str(l);
+            if (s.contains("Role:")) {
+                return true;
             }
         }
 

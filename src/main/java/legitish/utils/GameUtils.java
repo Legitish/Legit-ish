@@ -22,10 +22,6 @@ public class GameUtils {
         return mc.thePlayer != null && mc.theWorld != null;
     }
 
-    public static boolean isHypixel() {
-        return !mc.isSingleplayer() && mc.getCurrentServerData().serverIP.toLowerCase().contains("hypixel.net");
-    }
-
     public static void sendChat(String txt) {
         if (isPlayerInGame()) {
             String message = formatColorCode("[!] " + txt);
