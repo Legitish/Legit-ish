@@ -181,6 +181,7 @@ public class Module {
 
     public enum category {
         Combat,
+        Minigames,
         Movement,
         Player,
         Visual,

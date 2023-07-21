@@ -5,7 +5,7 @@ import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.GameUtils;
 import legitish.utils.MouseUtils;
-import legitish.utils.render.RenderUtils;
+import legitish.utils.render.GLUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.weavemc.loader.api.event.RenderWorldEvent;
 import net.weavemc.loader.api.event.SubscribeEvent;
@@ -78,7 +78,7 @@ public class Tracers extends Module {
                 } while (!a.isToggled() && en.isInvisible());
 
                 if (!AntiBot.bot(en)) {
-                    RenderUtils.dtl(en, rgb, (float) f.getInput());
+                    GLUtils.dtl(en, rgb, (float) f.getInput());
                 }
             }
         }

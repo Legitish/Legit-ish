@@ -1,15 +1,16 @@
-package legitish.module.modules.render;
+package legitish.module.modules.client;
 
 import legitish.main.Legitish;
 import legitish.module.Module;
 import legitish.module.ModuleManager;
+import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.ColorUtils;
 import legitish.utils.GameUtils;
 import legitish.utils.MouseUtils;
 import legitish.utils.font.FontUtils;
 import legitish.utils.font.MinecraftFontRenderer;
-import legitish.utils.render.RenderUtils;
+import legitish.utils.render.GLUtils;
 import legitish.utils.render.RoundedUtils;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -24,7 +25,8 @@ import java.util.List;
 
 public class Arraylist extends Module {
     private static final MinecraftFontRenderer mfr = FontUtils.regular20;
-    public static ModuleTickSetting editPosition, watermark, rectangles, dropShadow, backgroundBlur, alphabeticalSort;
+    public static ModuleTickSetting editPosition, watermark, rectangles, shadow, background, alphabeticalSort;
+    public static ModuleSliderSetting margin;
     public static MouseUtils.PositionMode positionMode;
     private static int hudX = 5;
     private static int hudY = 90;
@@ -32,10 +34,11 @@ public class Arraylist extends Module {
     public Arraylist() {
         super("Arraylist", Module.category.Visual, 0);
         this.registerSetting(watermark = new ModuleTickSetting("Watermark", true));
-        this.registerSetting(dropShadow = new ModuleTickSetting("Drop shadow", true));
+        this.registerSetting(shadow = new ModuleTickSetting("Text shadow", true));
         this.registerSetting(rectangles = new ModuleTickSetting("Rectangles", false));
-        this.registerSetting(backgroundBlur = new ModuleTickSetting("Background blur", false));
+        this.registerSetting(background = new ModuleTickSetting("Background", false));
         this.registerSetting(alphabeticalSort = new ModuleTickSetting("Alphabetical sort", false));
+        this.registerSetting(margin = new ModuleSliderSetting("Margin", 4, 1, 10, 1));
     }
 
     public static int getHudX() {
@@ -75,39 +78,38 @@ public class Arraylist extends Module {
                 return;
             }
 
-            int margin = 2;
-            int y = hudY;
+            double y = hudY;
             ModuleManager.sort();
 
             List<Module> en = new ArrayList<>(Legitish.moduleManager.enabledModuleList());
             if (en.isEmpty()) return;
 
             if (hudX < 0) {
-                hudX = margin;
+                hudX = 2;
             }
             if (hudY < 0) {
                 {
-                    hudY = margin;
+                    hudY = 2;
                 }
             }
             if (watermark.isToggled()) {
-                FontUtils.regular_bold30.drawString("LEGITISH", hudX, hudY, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(1).getRGB());
+                FontUtils.regular_bold30.drawString("LEGITISH", hudX, hudY, MinecraftFontRenderer.CenterMode.NONE, shadow.isToggled(), ColorUtils.getFontColor(1).getRGB());
                 y += 15;
             }
             for (Module m : en) {
                 if (m.isEnabled() && m != this) {
                     if (Arraylist.positionMode == MouseUtils.PositionMode.DOWNRIGHT || Arraylist.positionMode == MouseUtils.PositionMode.UPRIGHT) {
-                        mfr.drawString(m.getName(), hudX + (Legitish.moduleManager.getLongestActiveModule(mfr) - mfr.getStringWidth(m.getName())), y, MinecraftFontRenderer.CenterMode.NONE, dropShadow.isToggled(), ColorUtils.getFontColor(1).getRGB());
-                        y += mc.fontRendererObj.FONT_HEIGHT + margin;
+                        mfr.drawString(m.getName(), hudX + (Legitish.moduleManager.getLongestActiveModule(mfr) - mfr.getStringWidth(m.getName())), y, MinecraftFontRenderer.CenterMode.NONE, shadow.isToggled(), ColorUtils.getFontColor(1).getRGB());
+                        y += mc.fontRendererObj.FONT_HEIGHT + margin.getInput();
                     } else {
-                        if (backgroundBlur.isToggled()) {
-                            RoundedUtils.drawRoundBlur(hudX, y, mfr.getStringWidth(m.getName()), mfr.getHeight() + margin, 0, 5);
+                        if (background.isToggled()) {
+                            RoundedUtils.drawRound(hudX, y, mfr.getStringWidth(m.getName()) + 2, mfr.getHeight() + margin.getInput() - 1.4, 0, new Color(0, 0, 0, 90));
                         }
                         if (rectangles.isToggled()) {
-                            RoundedUtils.drawRound(hudX, y - margin, 0.5, mfr.getHeight(), 0, ColorUtils.getBackgroundColor(3));
+                            RoundedUtils.drawRound(hudX, y, 0.6, mfr.getHeight() + margin.getInput() - 1.4, 0, ColorUtils.getBackgroundColor(3));
                         }
-                        mfr.drawString(m.getName(), hudX, y, MinecraftFontRenderer.CenterMode.NONE, dropShadow.isToggled(), ColorUtils.getFontColor(1).getRGB());
-                        y += mfr.getHeight() + margin;
+                        mfr.drawString(m.getName(), hudX + 2, y + margin.getInput() / 2, MinecraftFontRenderer.CenterMode.NONE, shadow.isToggled(), ColorUtils.getFontColor(1).getRGB());
+                        y += mfr.getHeight() + margin.getInput();
                     }
                 }
             }
@@ -152,7 +154,7 @@ public class Arraylist extends Module {
             ScaledResolution res = new ScaledResolution(this.mc);
             int x = res.getScaledWidth() / 2 - 84;
             int y = res.getScaledHeight() / 2 - 20;
-            RenderUtils.dct("Edit the HUD position by dragging.", '-', x, y, 2L, 0L, true, this.mc.fontRendererObj);
+            GLUtils.dct("Edit the HUD position by dragging.", '-', x, y, 2L, 0L, true, this.mc.fontRendererObj);
 
             this.handleInput();
 
@@ -165,7 +167,7 @@ public class Arraylist extends Module {
             String[] var5 = t.split("-");
 
             for (String s : var5) {
-                fr.drawString(s, (float) x, (float) y, Color.white.getRGB(), Arraylist.dropShadow.isToggled());
+                fr.drawString(s, (float) x, (float) y, Color.white.getRGB(), Arraylist.shadow.isToggled());
                 y += fr.FONT_HEIGHT + 2;
             }
 

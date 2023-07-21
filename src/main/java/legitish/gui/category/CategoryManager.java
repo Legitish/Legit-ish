@@ -15,10 +15,6 @@ public class CategoryManager {
         return categories;
     }
 
-    public Category getCategoryByName(String name) {
-        return categories.stream().filter(category -> category.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
-    }
-
     public Category getCategoryByClass(Class<?> categoryClass) {
         return categories.stream().filter(category -> category.getClass().equals(categoryClass)).findFirst().orElse(null);
     }

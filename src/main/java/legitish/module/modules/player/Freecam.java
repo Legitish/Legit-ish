@@ -4,7 +4,7 @@ import legitish.module.Module;
 import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.GameUtils;
-import legitish.utils.render.RenderUtils;
+import legitish.utils.render.GLUtils;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.weavemc.loader.api.event.MouseEvent;
 import net.weavemc.loader.api.event.RenderWorldEvent;
@@ -145,7 +145,7 @@ public class Freecam extends Module {
     public void re(RenderWorldEvent e) {
         if (GameUtils.isPlayerInGame()) {
             mc.thePlayer.renderArmPitch = mc.thePlayer.prevRenderArmPitch = 700.0F;
-            RenderUtils.RenderESP(mc.thePlayer, 2, 0.0D, 0.0D, Color.green.getRGB(), false);
+            GLUtils.RenderESP(mc.thePlayer, 2, 0.0D, 0.0D, Color.green.getRGB(), false);
         }
 
     }

@@ -5,7 +5,7 @@ import legitish.module.ModuleManager;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.GameUtils;
 import legitish.utils.MouseUtils;
-import legitish.utils.render.RenderUtils;
+import legitish.utils.render.GLUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
@@ -90,7 +90,7 @@ public class MurderMystery extends Module {
                         rgb = Color.cyan.getRGB();
                     }
 
-                    RenderUtils.RenderESP(en, 5, 0.0D, 0.0D, rgb, false);
+                    GLUtils.RenderESP(en, 5, 0.0D, 0.0D, rgb, false);
                 }
             }
         }

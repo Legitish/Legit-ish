@@ -52,8 +52,4 @@ public class AnimationUtils {
     public double getValue() {
         return value;
     }
-
-    public void setValue(float value) {
-        this.value = value;
-    }
 }

@@ -1,7 +1,7 @@
 package legitish.config;
 
 import legitish.main.Legitish;
-import legitish.module.modules.render.Arraylist;
+import legitish.module.modules.client.Arraylist;
 import net.minecraft.client.Minecraft;
 
 import java.io.File;
@@ -13,21 +13,18 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ClientConfig {
-    private static final Minecraft mc = Minecraft.getMinecraft();
     private final File configFile;
-    private final File configDir;
     private final String HUDX_prefix = "HUDX ~";
     private final String HUDY_prefix = "HUDY ~";
-    private final String fileName = "config";
     private final String loadedConfigPrefix = "loaded-cfg~ ";
 
     public ClientConfig() {
-        configDir = new File(Minecraft.getMinecraft().mcDataDir, "config/legitish/client");
+        File configDir = new File(Minecraft.getMinecraft().mcDataDir, "config/legitish/client");
         if (!configDir.exists()) {
             configDir.mkdir();
         }
 
-        configFile = new File(configDir, fileName);
+        configFile = new File(configDir, "config");
         if (!configFile.exists()) {
             try {
                 configFile.createNewFile();
@@ -44,7 +41,7 @@ public class ClientConfig {
         config.add(HUDX_prefix + Arraylist.getHudX());
         config.add(HUDY_prefix + Arraylist.getHudY());
 
-        PrintWriter writer = null;
+        PrintWriter writer;
         try {
             writer = new PrintWriter(this.configFile);
             for (String line : config) {
@@ -86,8 +83,11 @@ public class ClientConfig {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        while (reader.hasNextLine())
-            configFileContents.add(reader.nextLine());
+        if (reader != null) {
+            while (reader.hasNextLine()) {
+                configFileContents.add(reader.nextLine());
+            }
+        }
 
         return configFileContents;
     }

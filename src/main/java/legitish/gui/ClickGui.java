@@ -9,8 +9,7 @@ import legitish.utils.ColorUtils;
 import legitish.utils.MouseUtils;
 import legitish.utils.font.FontUtils;
 import legitish.utils.font.MinecraftFontRenderer;
-import legitish.utils.render.GaussianBlur;
-import legitish.utils.render.RenderUtils;
+import legitish.utils.render.GLUtils;
 import legitish.utils.render.RoundedUtils;
 import legitish.utils.render.StencilUtils;
 import net.minecraft.client.gui.GuiScreen;
@@ -53,8 +52,7 @@ public class ClickGui extends GuiScreen {
         if (closed) {
             mc.displayGuiScreen(null);
         }
-        GaussianBlur.renderBlur(10);
-        RenderUtils.startScale((float) ((this.getX()) + (this.getX() + this.getWidth())) / 2, (float) ((this.getY()) + (this.getY() + this.getHeight())) / 2, 1);
+        GLUtils.startScale((float) ((this.getX()) + (this.getX() + this.getWidth())) / 2, (float) ((this.getY()) + (this.getY() + this.getHeight())) / 2, 1);
         if (ModulesCategory.openModSetting) {
             RoundedUtils.drawRound(this.getX() + 90, this.getY() + 25, this.getWidth() - 90D, this.getHeight() - 25, 3, ColorUtils.getBackgroundColor(4));
         } else {

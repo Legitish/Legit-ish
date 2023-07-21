@@ -7,7 +7,7 @@ import legitish.utils.ColorUtils;
 import legitish.utils.MouseUtils;
 import legitish.utils.font.FontUtils;
 import legitish.utils.font.MinecraftFontRenderer;
-import legitish.utils.render.RenderUtils;
+import legitish.utils.render.GLUtils;
 import legitish.utils.render.RoundedUtils;
 import net.minecraft.client.renderer.GlStateManager;
 
@@ -31,7 +31,7 @@ public class CompCheckBox extends Comp {
 
         RoundedUtils.drawRound((float) (clickGui.getX() + x - 70), (float) (clickGui.getY() + y), 10, 10, 3, ColorUtils.getBackgroundColor(2));
 
-        RenderUtils.startScale((float) (clickGui.getX() + x - 70 + clickGui.getX() + x - 70 + 10) / 2, (float) (clickGui.getY() + y + clickGui.getY() + y + 10) / 2, (float) animation.getValue());
+        GLUtils.startScale((float) (clickGui.getX() + x - 70 + clickGui.getX() + x - 70 + 10) / 2, (float) (clickGui.getY() + y + clickGui.getY() + y + 10) / 2, (float) animation.getValue());
         RoundedUtils.drawRound((float) (clickGui.getX() + x - 70), (float) (clickGui.getY() + y), 10, 10, 3, ColorUtils.RGB(0, 10D));
         FontUtils.icon20.drawString("D", (clickGui.getX() + x - 70), (clickGui.getY() + y + 3), MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
         GlStateManager.popMatrix();

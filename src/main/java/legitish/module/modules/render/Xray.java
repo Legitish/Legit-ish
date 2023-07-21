@@ -4,7 +4,7 @@ import legitish.module.Module;
 import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.GameUtils;
-import legitish.utils.render.RenderUtils;
+import legitish.utils.render.GLUtils;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
@@ -89,7 +89,7 @@ public class Xray extends Module {
     private void drawHighlight(BlockPos p) {
         int[] rgb = this.getBlockColor(mc.theWorld.getBlockState(p).getBlock());
         if (rgb[0] + rgb[1] + rgb[2] != 0) {
-            RenderUtils.HighlightBlock(p, (new Color(rgb[0], rgb[1], rgb[2])).getRGB(), false);
+            GLUtils.HighlightBlock(p, (new Color(rgb[0], rgb[1], rgb[2])).getRGB(), false);
         }
 
     }

@@ -4,7 +4,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.shader.Framebuffer;
 import org.lwjgl.opengl.EXTFramebufferObject;
 import org.lwjgl.opengl.EXTPackedDepthStencil;
-import org.lwjgl.opengl.GL11;
+
+import static org.lwjgl.opengl.GL11.*;
 
 public class StencilUtils {
     private static final Minecraft mc = Minecraft.getMinecraft();
@@ -30,21 +31,21 @@ public class StencilUtils {
     public static void initStencilToWrite() {
         mc.getFramebuffer().bindFramebuffer(false);
         checkSetupFBO(mc.getFramebuffer());
-        GL11.glClear(GL11.GL_STENCIL_BUFFER_BIT);
-        GL11.glEnable(GL11.GL_STENCIL_TEST);
+        glClear(GL_STENCIL_BUFFER_BIT);
+        glEnable(GL_STENCIL_TEST);
 
-        GL11.glStencilFunc(GL11.GL_ALWAYS, 1, 1);
-        GL11.glStencilOp(GL11.GL_REPLACE, GL11.GL_REPLACE, GL11.GL_REPLACE);
-        GL11.glColorMask(false, false, false, false);
+        glStencilFunc(GL_ALWAYS, 1, 1);
+        glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
+        glColorMask(false, false, false, false);
     }
 
     public static void readStencilBuffer(int ref) {
-        GL11.glColorMask(true, true, true, true);
-        GL11.glStencilFunc(GL11.GL_EQUAL, ref, 1);
-        GL11.glStencilOp(GL11.GL_KEEP, GL11.GL_KEEP, GL11.GL_KEEP);
+        glColorMask(true, true, true, true);
+        glStencilFunc(GL_EQUAL, ref, 1);
+        glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
     }
 
     public static void uninitStencilBuffer() {
-        GL11.glDisable(GL11.GL_STENCIL_TEST);
+        glDisable(GL_STENCIL_TEST);
     }
 }

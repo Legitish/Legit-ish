@@ -20,7 +20,7 @@ import java.awt.*;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class RenderUtils {
+public class GLUtils {
     public static final int rc = -1089466352;
     private static final double p2 = 6.283185307179586D;
     private static final Minecraft mc = Minecraft.getMinecraft();

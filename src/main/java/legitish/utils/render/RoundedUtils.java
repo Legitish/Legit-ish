@@ -63,14 +63,6 @@ public class RoundedUtils {
         GlStateManager.disableBlend();
     }
 
-    public static void drawRoundBlur(double x, double y, double width, double height, double radius, double blurStrength) {
-        StencilUtils.initStencilToWrite();
-        RoundedUtils.drawRound(x, y, width, height, radius, ColorUtils.getBackgroundColor(1));
-        StencilUtils.readStencilBuffer(1);
-        GaussianBlur.renderBlur(blurStrength);
-        StencilUtils.uninitStencilBuffer();
-    }
-
     private static void setupRoundedRectUniforms(double x, double y, double width, double height, double radius, ShaderUtils roundedTexturedShader) {
         ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
         roundedTexturedShader.setUniformf("location", x * sr.getScaleFactor(), (Minecraft.getMinecraft().displayHeight - (height * sr.getScaleFactor())) - (y * sr.getScaleFactor()));

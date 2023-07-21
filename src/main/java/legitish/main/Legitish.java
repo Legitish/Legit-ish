@@ -6,7 +6,6 @@ import legitish.config.ConfigManager;
 import legitish.gui.ClickGui;
 import legitish.module.Module;
 import legitish.module.ModuleManager;
-import legitish.module.modules.client.SelfDestruct;
 import legitish.utils.GameUtils;
 import legitish.utils.MouseUtils;
 import legitish.utils.font.FontUtils;
@@ -49,7 +48,7 @@ public class Legitish {
 
     @SubscribeEvent
     public void clientTimer(RenderWorldEvent e) {
-        if (GameUtils.isPlayerInGame() && !SelfDestruct.destructed) {
+        if (GameUtils.isPlayerInGame()) {
             for (Module module : moduleManager.moduleList()) {
                 if (mc.currentScreen == null) {
                     module.keybind();

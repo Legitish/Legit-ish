@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "me.legitish"
-version = "2.0"
+version = "2.0.0-beta"
 
 minecraft.version("1.8.9")
 

@@ -1,13 +1,13 @@
 package legitish.utils.render;
 
-import legitish.utils.FileUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL20;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
@@ -108,7 +108,7 @@ public class ShaderUtils {
 
     private int createShader(InputStream inputStream, int shaderType) {
         int shader = glCreateShader(shaderType);
-        GL20.glShaderSource(shader, FileUtils.readInputStream(inputStream));
+        glShaderSource(shader, readInputStream(inputStream));
         glCompileShader(shader);
 
 
@@ -118,5 +118,20 @@ public class ShaderUtils {
         }
 
         return shader;
+    }
+
+    private static String readInputStream(InputStream inputStream) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            while ((line = bufferedReader.readLine()) != null)
+                stringBuilder.append(line).append('\n');
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return stringBuilder.toString();
     }
 }

@@ -1,12 +1,11 @@
 package legitish.module.modules.render;
 
 import legitish.module.Module;
-import legitish.module.modules.client.SelfDestruct;
 import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.GameUtils;
 import legitish.utils.MouseUtils;
-import legitish.utils.render.RenderUtils;
+import legitish.utils.render.GLUtils;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityEnderChest;
@@ -34,7 +33,7 @@ public class ChestESP extends Module {
 
     @SubscribeEvent
     public void o(RenderWorldEvent ev) {
-        if (GameUtils.isPlayerInGame() && !SelfDestruct.destructed) {
+        if (GameUtils.isPlayerInGame()) {
             int rgb = d.isToggled() ? MouseUtils.gc(2L, 0L) : (new Color((int) a.getInput(), (int) b.getInput(), (int) c.getInput())).getRGB();
             Iterator<TileEntity> var3 = mc.theWorld.loadedTileEntityList.iterator();
 
@@ -48,7 +47,7 @@ public class ChestESP extends Module {
                     te = var3.next();
                 } while (!(te instanceof TileEntityChest) && !(te instanceof TileEntityEnderChest));
 
-                RenderUtils.HighlightBlock(te.getPos(), rgb, true);
+                GLUtils.HighlightBlock(te.getPos(), rgb, true);
             }
         }
     }

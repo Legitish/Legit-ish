@@ -1,15 +1,11 @@
 package legitish.config;
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
 import legitish.main.Legitish;
 import legitish.module.Module;
 import net.minecraft.client.Minecraft;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -34,18 +30,6 @@ public class ConfigManager {
 
     }
 
-    public static boolean isOutdated(File file) {
-        JsonParser jsonParser = new JsonParser();
-        try (FileReader reader = new FileReader(file)) {
-            Object obj = jsonParser.parse(reader);
-            JsonObject data = (JsonObject) obj;
-            return false;
-        } catch (JsonSyntaxException | ClassCastException | IOException e) {
-            e.printStackTrace();
-        }
-        return true;
-    }
-
     public void discoverConfigs() {
         configs.clear();
         if (configDirectory.listFiles() == null || !(Objects.requireNonNull(configDirectory.listFiles()).length > 0))
@@ -53,11 +37,9 @@ public class ConfigManager {
 
         for (File file : Objects.requireNonNull(configDirectory.listFiles())) {
             if (file.getName().endsWith(".lcfg")) {
-                if (!isOutdated(file)) {
-                    configs.add(new Config(
-                            new File(file.getPath())
-                    ));
-                }
+                configs.add(new Config(
+                        new File(file.getPath())
+                ));
             }
         }
     }
@@ -101,40 +83,6 @@ public class ConfigManager {
             if (config.getName().equals(replace)) {
                 setConfig(config);
             }
-        }
-    }
-
-    public ArrayList<Config> getConfigs() {
-        discoverConfigs();
-        return configs;
-    }
-
-    public void copyConfig(Config config, String s) {
-        File file = new File(configDirectory, s);
-        Config newConfig = new Config(file);
-        newConfig.save(config.getData());
-    }
-
-    public void resetConfig() {
-        for (Module module : Legitish.moduleManager.moduleList())
-            module.resetToDefaults();
-        save();
-    }
-
-    public void deleteConfig(Config config) {
-        config.file.delete();
-        if (config.getName().equals(this.config.getName())) {
-            discoverConfigs();
-            if (this.configs.size() < 2) {
-                this.resetConfig();
-                File defaultFile = new File(configDirectory, "default.lcfg");
-                this.config = new Config(defaultFile);
-                save();
-            } else {
-                this.config = this.configs.get(0);
-            }
-
-            this.save();
         }
     }
 }

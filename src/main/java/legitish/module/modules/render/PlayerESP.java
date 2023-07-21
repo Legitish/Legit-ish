@@ -6,7 +6,7 @@ import legitish.module.modulesettings.ModuleComboSetting;
 import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.GameUtils;
-import legitish.utils.render.RenderUtils;
+import legitish.utils.render.GLUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.weavemc.loader.api.event.RenderWorldEvent;
@@ -48,7 +48,7 @@ public class PlayerESP extends Module {
     }
 
     public void onDisable() {
-        RenderUtils.ring_c = false;
+        GLUtils.ring_c = false;
     }
 
     public void guiUpdate() {
@@ -85,19 +85,19 @@ public class PlayerESP extends Module {
 
     private void r(Entity en, int rgb) {
         if (t1.isToggled()) {
-            RenderUtils.RenderESP(en, 1, i.getInput(), j.getInput(), rgb, h.isToggled());
+            GLUtils.RenderESP(en, 1, i.getInput(), j.getInput(), rgb, h.isToggled());
         }
 
         if (t2.isToggled()) {
-            RenderUtils.RenderESP(en, 2, i.getInput(), j.getInput(), rgb, h.isToggled());
+            GLUtils.RenderESP(en, 2, i.getInput(), j.getInput(), rgb, h.isToggled());
         }
 
         if (t3.isToggled()) {
-            RenderUtils.RenderESP(en, 3, i.getInput(), j.getInput(), rgb, h.isToggled());
+            GLUtils.RenderESP(en, 3, i.getInput(), j.getInput(), rgb, h.isToggled());
         }
 
         if (t4.isToggled()) {
-            RenderUtils.RenderESP(en, 4, i.getInput(), j.getInput(), rgb, h.isToggled());
+            GLUtils.RenderESP(en, 4, i.getInput(), j.getInput(), rgb, h.isToggled());
         }
     }
 }

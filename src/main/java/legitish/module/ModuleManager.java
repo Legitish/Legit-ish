@@ -1,7 +1,7 @@
 package legitish.module;
 
+import legitish.module.modules.client.Arraylist;
 import legitish.module.modules.client.Gui;
-import legitish.module.modules.client.SelfDestruct;
 import legitish.module.modules.combat.*;
 import legitish.module.modules.movement.KeepSprint;
 import legitish.module.modules.movement.Sprint;
@@ -60,13 +60,12 @@ public class ModuleManager {
         this.addModule(new Xray());
         // Client
         this.addModule(gui = new Gui());
-        this.addModule(new SelfDestruct());
         this.enableDefaultModules();
     }
 
     public void enableDefaultModules() {
-        antiBot.enable();
         arrayList.enable();
+        antiBot.enable();
     }
 
     private void addModule(Module m) {

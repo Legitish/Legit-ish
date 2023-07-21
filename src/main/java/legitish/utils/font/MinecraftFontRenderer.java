@@ -1,7 +1,7 @@
 package legitish.utils.font;
 
 import legitish.utils.ColorUtils;
-import legitish.utils.render.RenderUtils;
+import legitish.utils.render.GLUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
@@ -76,7 +76,7 @@ public class MinecraftFontRenderer extends CFont {
         ColorUtils.setColor(color);
         GlStateManager.enableTexture2D();
         GlStateManager.bindTexture(this.tex.getGlTextureId());
-        RenderUtils.bindTexture(this.tex.getGlTextureId());
+        GLUtils.bindTexture(this.tex.getGlTextureId());
 
         GlStateManager.enableBlend();
 
