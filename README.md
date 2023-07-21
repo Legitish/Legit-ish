@@ -1,4 +1,4 @@
-# LEGITISH, a utility mod for Weave.
+# LEGIT-ISH, a utility mod for Weave.
 
 # Installation
 ## Using Weave Manager
