@@ -13,6 +13,6 @@
 # Usage
 Press L in-game to open the ClickGUI. 
 
-##⚠ Some features may be buggy/not work, so issues would be appreciated!
+###⚠ Some features may be buggy/not work, so issues would be appreciated!
 
 Credit to EldoDebug 💀 for some utils and Kopamed/Blowsy for the client base (originally forked from b+)
