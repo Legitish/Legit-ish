@@ -6,7 +6,7 @@ import legitish.utils.ColorUtils;
 import legitish.utils.MouseUtils;
 import legitish.utils.font.FontUtils;
 import legitish.utils.font.MinecraftFontRenderer;
-import legitish.utils.render.RoundedUtils;
+import legitish.utils.render.RRectUtils;
 import org.lwjgl.input.Keyboard;
 
 public class CompBind extends Comp {
@@ -24,13 +24,13 @@ public class CompBind extends Comp {
     public void drawScreen(int mouseX, int mouseY, double scrollY) {
         final String bindText = this.isBinding ? "Press a key" : Keyboard.getKeyName(module.getKeycode()).equalsIgnoreCase("none") ? "-" : Keyboard.getKeyName(module.getKeycode());
         width = mfr.getStringWidth(bindText) < 14 ? 14 : mfr.getStringWidth(bindText) + 4;
-        RoundedUtils.drawRoundOutline(x - width - 2, y + scrollY + 3, width, 14, 3, 0.5, ColorUtils.getBackgroundColor(4), ColorUtils.getBackgroundColor(1));
+        RRectUtils.drawRoundOutline(x - width - 2, y + scrollY + 3, width, 14, 3, 0.5, ColorUtils.getBackgroundColor(4), ColorUtils.getBackgroundColor(1));
         mfr.drawString(bindText, x - width + width / 2 - 2, y + scrollY + 9, MinecraftFontRenderer.CenterMode.X, false, ColorUtils.getFontColor(2).getRGB());
     }
 
     @Override
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
-        if (MouseUtils.isInside(mouseX, mouseY, x - width - 4.5, y, width + 5, 20) && mouseButton == 0) {
+        if (MouseUtils.mouseInBounds(mouseX, mouseY, x - width - 4.5, y, width + 5, 20) && mouseButton == 0) {
             this.isBinding = !this.isBinding;
         }
     }

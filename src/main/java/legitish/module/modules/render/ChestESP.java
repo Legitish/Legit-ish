@@ -4,7 +4,6 @@ import legitish.module.Module;
 import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.GameUtils;
-import legitish.utils.MouseUtils;
 import legitish.utils.render.GLUtils;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
@@ -24,7 +23,6 @@ public class ChestESP extends Module {
         a = new ModuleSliderSetting("Red", 0.0D, 0.0D, 255.0D, 1.0D);
         b = new ModuleSliderSetting("Green", 0.0D, 0.0D, 255.0D, 1.0D);
         c = new ModuleSliderSetting("Blue", 255.0D, 0.0D, 255.0D, 1.0D);
-        d = new ModuleTickSetting("Rainbow", false);
         this.registerSetting(a);
         this.registerSetting(b);
         this.registerSetting(c);
@@ -34,7 +32,7 @@ public class ChestESP extends Module {
     @SubscribeEvent
     public void o(RenderWorldEvent ev) {
         if (GameUtils.isPlayerInGame()) {
-            int rgb = d.isToggled() ? MouseUtils.gc(2L, 0L) : (new Color((int) a.getInput(), (int) b.getInput(), (int) c.getInput())).getRGB();
+            int rgb = (new Color((int) a.getInput(), (int) b.getInput(), (int) c.getInput())).getRGB();
             Iterator<TileEntity> var3 = mc.theWorld.loadedTileEntityList.iterator();
 
             while (true) {

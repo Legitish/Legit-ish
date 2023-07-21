@@ -8,7 +8,7 @@ import legitish.utils.MathUtils;
 import legitish.utils.MouseUtils;
 import legitish.utils.font.FontUtils;
 import legitish.utils.font.MinecraftFontRenderer;
-import legitish.utils.render.RoundedUtils;
+import legitish.utils.render.RRectUtils;
 
 public class CompSlider extends Comp {
 
@@ -49,9 +49,9 @@ public class CompSlider extends Comp {
             }
         }
 
-        RoundedUtils.drawRound((float) (clickGui.getX() + x - 70), (float) (clickGui.getY() + y + 13), (float) (renderWidth2), 6, 3, ColorUtils.getBackgroundColor(2));
-        RoundedUtils.drawRound((float) (clickGui.getX() + x - 70), (float) (clickGui.getY() + y + 13), animation.getValue(), 6, 3, ColorUtils.RGB(0, 10D));
-        RoundedUtils.drawRound((float) (clickGui.getX() + x) + animation.getValue() - 72, (float) (clickGui.getY() + y + 10), 5, 12, 2, ColorUtils.getBackgroundColor(1));
+        RRectUtils.drawRound((float) (clickGui.getX() + x - 70), (float) (clickGui.getY() + y + 13), (float) (renderWidth2), 6, 3, ColorUtils.getBackgroundColor(2));
+        RRectUtils.drawGradientRoundCorner((float) (clickGui.getX() + x - 70), (float) (clickGui.getY() + y + 13), animation.getValue(), 6, 3);
+        RRectUtils.drawRound((float) (clickGui.getX() + x) + animation.getValue() - 72, (float) (clickGui.getY() + y + 10), 5, 12, 2, ColorUtils.getBackgroundColor(1));
 
         FontUtils.regular20.drawString(sliderSetting.get() + ": " + sliderSetting.getInput(), clickGui.getX() + x - 70, clickGui.getY() + y, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
     }
@@ -59,7 +59,7 @@ public class CompSlider extends Comp {
     @Override
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
         super.mouseClicked(mouseX, mouseY, mouseButton);
-        if (MouseUtils.isInside(mouseX, mouseY, clickGui.getX() + x - 70, clickGui.getY() + y + 10, renderWidth2 + 3, 10) && mouseButton == 0) {
+        if (MouseUtils.mouseInBounds(mouseX, mouseY, clickGui.getX() + x - 70, clickGui.getY() + y + 10, renderWidth2 + 3, 10) && mouseButton == 0) {
             dragging = true;
         }
     }

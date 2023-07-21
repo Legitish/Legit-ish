@@ -5,7 +5,7 @@ import legitish.module.ModuleManager;
 import legitish.module.modulesettings.ModuleDoubleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.GameUtils;
-import legitish.utils.MouseUtils;
+import legitish.utils.MathUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItemFrame;
@@ -50,7 +50,7 @@ public class Reach extends Module {
                 }
             }
 
-            double reach = MouseUtils.mmVal(Reach.reach, MouseUtils.rand());
+            double reach = MathUtils.mmVal(Reach.reach, MathUtils.rand());
             Object[] object = zz(reach);
             if (object == null) {
                 return false;
@@ -124,7 +124,7 @@ public class Reach extends Module {
     }
 
     public void guiUpdate() {
-        MouseUtils.b(reach);
+        MathUtils.b(reach);
     }
 
     @SubscribeEvent

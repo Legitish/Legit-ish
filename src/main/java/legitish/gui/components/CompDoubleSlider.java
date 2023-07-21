@@ -8,7 +8,7 @@ import legitish.utils.MathUtils;
 import legitish.utils.MouseUtils;
 import legitish.utils.font.FontUtils;
 import legitish.utils.font.MinecraftFontRenderer;
-import legitish.utils.render.RoundedUtils;
+import legitish.utils.render.RRectUtils;
 
 public class CompDoubleSlider extends Comp {
 
@@ -70,10 +70,10 @@ public class CompDoubleSlider extends Comp {
             if (focus != 0) focus = 0;
         }
 
-        RoundedUtils.drawRound((float) (clickGui.getX() + x - 70), (float) (clickGui.getY() + y + 13), (float) (width), 6, 3, ColorUtils.getBackgroundColor(2));
-        RoundedUtils.drawRound((float) (clickGui.getX() + x - 70 + animationMin.getValue()), (float) (clickGui.getY() + y + 13), animationMax.getValue() - animationMin.getValue(), 6, 3, ColorUtils.RGB(0, 10D));
-        RoundedUtils.drawRound((float) (clickGui.getX() + x) + animationMin.getValue() - 72, (float) (clickGui.getY() + y + 10), 5, 12, 2, ColorUtils.getBackgroundColor(1));
-        RoundedUtils.drawRound((float) (clickGui.getX() + x) + animationMax.getValue() - 72, (float) (clickGui.getY() + y + 10), 5, 12, 2, ColorUtils.getBackgroundColor(1));
+        RRectUtils.drawRound((float) (clickGui.getX() + x - 70), (float) (clickGui.getY() + y + 13), (float) (width), 6, 3, ColorUtils.getBackgroundColor(2));
+        RRectUtils.drawGradientRoundCorner((float) (clickGui.getX() + x - 70 + animationMin.getValue()), (float) (clickGui.getY() + y + 13), animationMax.getValue() - animationMin.getValue(), 6, 3);
+        RRectUtils.drawRound((float) (clickGui.getX() + x) + animationMin.getValue() - 72, (float) (clickGui.getY() + y + 10), 5, 12, 2, ColorUtils.getBackgroundColor(1));
+        RRectUtils.drawRound((float) (clickGui.getX() + x) + animationMax.getValue() - 72, (float) (clickGui.getY() + y + 10), 5, 12, 2, ColorUtils.getBackgroundColor(1));
 
         FontUtils.regular20.drawString(doubleSliderSetting.get() + ": " + doubleSliderSetting.getInputMin() + ", " + doubleSliderSetting.getInputMax(), clickGui.getX() + x - 70, clickGui.getY() + y, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
     }
@@ -81,7 +81,7 @@ public class CompDoubleSlider extends Comp {
     @Override
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
         super.mouseClicked(mouseX, mouseY, mouseButton);
-        if (MouseUtils.isInside(mouseX, mouseY, clickGui.getX() + x - 70, clickGui.getY() + y + 10, realMax + 3, 10) && mouseButton == 0) {
+        if (MouseUtils.mouseInBounds(mouseX, mouseY, clickGui.getX() + x - 70, clickGui.getY() + y + 10, realMax + 3, 10) && mouseButton == 0) {
             dragging = true;
         }
     }

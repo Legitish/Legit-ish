@@ -5,7 +5,6 @@ import legitish.module.modules.render.AntiBot;
 import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.GameUtils;
-import legitish.utils.MouseUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFishingRod;
@@ -32,7 +31,7 @@ public class RodAimbot extends Module {
                 Entity en = this.gE();
                 if (en != null) {
                     ev.setCancelled(true);
-                    MouseUtils.aim(en, -7.0F, true);
+                    GameUtils.aim(en, -7.0F, true);
                     mc.playerController.sendUseItem(mc.thePlayer, mc.theWorld, mc.thePlayer.getCurrentEquippedItem());
                 }
             }
@@ -57,7 +56,7 @@ public class RodAimbot extends Module {
                     } while (en == mc.thePlayer);
                 } while (en.deathTime != 0);
             } while (!aimInvis.isToggled() && en.isInvisible());
-        } while ((double) mc.thePlayer.getDistanceToEntity(en) > distance.getInput() || AntiBot.bot(en) || !MouseUtils.fov(en, (float) f));
+        } while ((double) mc.thePlayer.getDistanceToEntity(en) > distance.getInput() || AntiBot.bot(en) || !GameUtils.fov(en, (float) f));
 
         return en;
     }

@@ -10,7 +10,7 @@ import legitish.utils.MouseUtils;
 import legitish.utils.font.FontUtils;
 import legitish.utils.font.MinecraftFontRenderer;
 import legitish.utils.render.GLUtils;
-import legitish.utils.render.RoundedUtils;
+import legitish.utils.render.RRectUtils;
 import legitish.utils.render.StencilUtils;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
@@ -54,16 +54,16 @@ public class ClickGui extends GuiScreen {
         }
         GLUtils.startScale((float) ((this.getX()) + (this.getX() + this.getWidth())) / 2, (float) ((this.getY()) + (this.getY() + this.getHeight())) / 2, 1);
         if (ModulesCategory.openModSetting) {
-            RoundedUtils.drawRound(this.getX() + 90, this.getY() + 25, this.getWidth() - 90D, this.getHeight() - 25, 3, ColorUtils.getBackgroundColor(4));
+            RRectUtils.drawRound(this.getX() + 90, this.getY() + 25, this.getWidth() - 90D, this.getHeight() - 25, 3, ColorUtils.getBackgroundColor(4));
         } else {
-            RoundedUtils.drawGradientRoundCorner(this.getX() + 90, this.getY() + 25, this.getWidth() - 90D, this.getHeight() - 25, 3, ColorUtils.getBackgroundColor(2), ColorUtils.getBackgroundColor(1));
+            RRectUtils.drawGradientRoundCorner(this.getX() + 90, this.getY() + 25, this.getWidth() - 90D, this.getHeight() - 25, 3);
         }
-        RoundedUtils.drawRound(this.getX() + 90, this.getY(), this.getWidth() - 90, 20, 3, ColorUtils.getBackgroundColor(4));
-        RoundedUtils.drawRound(this.getX(), this.getY(), 85, this.getHeight(), 3, ColorUtils.getBackgroundColor(4));
+        RRectUtils.drawRound(this.getX() + 90, this.getY(), this.getWidth() - 90, 20, 3, ColorUtils.getBackgroundColor(4));
+        RRectUtils.drawRound(this.getX(), this.getY(), 85, this.getHeight(), 3, ColorUtils.getBackgroundColor(4));
 
         FontUtils.regular_bold26.drawString("LEGITISH", this.getX() + 9D, this.getY() + 6D, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(1).getRGB());
 
-        RoundedUtils.drawGradientRoundCorner(this.getX() + 5D, this.getY() + currentCategoryY, 75, 15, 4, ColorUtils.getBackgroundColor(2), ColorUtils.getBackgroundColor(1));
+        RRectUtils.drawGradientRoundCorner(this.getX() + 5D, this.getY() + currentCategoryY, 75, 15, 4);
 
         for (Category category : categoryManager.getCategories()) {
             boolean settingsCategory = selectedCategory.equals(categoryManager.getCategoryByClass(SettingsCategory.class));
@@ -73,13 +73,13 @@ public class ClickGui extends GuiScreen {
             if (!category.equals(categoryManager.getCategoryByClass(SettingsCategory.class))) {
                 FontUtils.regular20.drawString(category.getName(), (int) this.getX() + 12, (int) this.getY() + categoryOffset + 5, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
             } else {
-                RoundedUtils.drawRound(this.getX(), this.getY() + this.getHeight() - 26, 85, 1, 0, ColorUtils.getBackgroundColor(2));
+                RRectUtils.drawRound(this.getX(), this.getY() + this.getHeight() - 26, 85, 1, 0, ColorUtils.getBackgroundColor(2));
                 FontUtils.icon20.drawString("I", (int) this.getX() + 12, (int) (this.getY() + this.getHeight()) - 14, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
                 FontUtils.regular20.drawString(category.getName(), this.getX() + 26, (this.getY() + this.getHeight()) - 15, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
             }
 
-            StencilUtils.initStencilToWrite();
-            RoundedUtils.drawRound((float) this.getX() + addX, (float) this.getY() + 25D, this.getWidth() - addX, this.getHeight() - 25D, 6D, ColorUtils.getBackgroundColor(1));
+            StencilUtils.enableStencilBuffer();
+            RRectUtils.drawRound((float) this.getX() + addX, (float) this.getY() + 25D, this.getWidth() - addX, this.getHeight() - 25D, 6D, ColorUtils.getBackgroundColor(1));
             StencilUtils.readStencilBuffer(1);
 
             if (category.equals(selectedCategory)) {
@@ -89,7 +89,7 @@ public class ClickGui extends GuiScreen {
                 category.drawScreen(mouseX, mouseY, partialTicks);
             }
 
-            StencilUtils.uninitStencilBuffer();
+            StencilUtils.disableStencilBuffer();
 
             categoryOffset += 25;
         }
@@ -103,12 +103,12 @@ public class ClickGui extends GuiScreen {
 
         for (Category c : categoryManager.getCategories()) {
             if (!c.equals(categoryManager.getCategoryByClass(SettingsCategory.class))) {
-                if (MouseUtils.isInside(mouseX, mouseY, this.getX() + 4, this.getY() + categoryOffset, 75, 16) && mouseButton == 0) {
+                if (MouseUtils.mouseInBounds(mouseX, mouseY, this.getX() + 4, this.getY() + categoryOffset, 75, 16) && mouseButton == 0) {
                     selectedCategory = c;
                     ModulesCategory.openModSetting = false;
                 }
             } else {
-                if (MouseUtils.isInside(mouseX, mouseY, this.getX(), this.getY() + height - 30, 85, 30) && mouseButton == 0) {
+                if (MouseUtils.mouseInBounds(mouseX, mouseY, this.getX(), this.getY() + height - 30, 85, 30) && mouseButton == 0) {
                     selectedCategory = c;
                     ModulesCategory.openModSetting = false;
                 }

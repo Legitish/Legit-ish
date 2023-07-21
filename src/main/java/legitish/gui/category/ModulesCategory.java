@@ -15,7 +15,7 @@ import legitish.utils.MouseUtils;
 import legitish.utils.MouseUtils.Scroll;
 import legitish.utils.font.FontUtils;
 import legitish.utils.font.MinecraftFontRenderer;
-import legitish.utils.render.RoundedUtils;
+import legitish.utils.render.RRectUtils;
 import legitish.utils.render.StencilUtils;
 
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class ModulesCategory extends Category {
         ClickGui clickGUI = Legitish.clickGui;
         if (!openModSetting) {
             for (Module module : Legitish.moduleManager.inCategory(getModuleCategory())) {
-                RoundedUtils.drawRound(clickGUI.getX() + 95, clickGUI.getY() + offset + scrollAnimation.getValue(), clickGUI.getWidth() - 100, 20, 3, ColorUtils.getBackgroundColor(4));
+                RRectUtils.drawRound(clickGUI.getX() + 95, clickGUI.getY() + offset + scrollAnimation.getValue(), clickGUI.getWidth() - 100, 20, 3, ColorUtils.getBackgroundColor(4));
                 FontUtils.regular20.drawString(module.getName(), clickGUI.getX() + 105, clickGUI.getY() + offset + scrollAnimation.getValue() + 8, MinecraftFontRenderer.CenterMode.NONE, false, module.isEnabled() ? ColorUtils.getBackgroundColor(1).getRGB() : ColorUtils.getFontColor(2).getRGB());
                 if (!module.getSettings().isEmpty()) {
                     FontUtils.icon20.drawString("C", clickGUI.getX() + clickGUI.getWidth() - 21, clickGUI.getY() + offset + scrollAnimation.getValue() + 8, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
@@ -83,11 +83,11 @@ public class ModulesCategory extends Category {
         scrollAnimation.setAnimation((float) scrollY, 16);
 
         double addX = getModuleCategory() == Module.category.Movement ? 20 : getModuleCategory() == Module.category.Player ? 40 : getModuleCategory() == Module.category.Visual ? 60 : 0;
-        canToggle = MouseUtils.isInside(mouseX, mouseY, clickGUI.getX(), clickGUI.getY(), clickGUI.getWidth(), clickGUI.getHeight());
-        StencilUtils.uninitStencilBuffer();
+        canToggle = MouseUtils.mouseInBounds(mouseX, mouseY, clickGUI.getX(), clickGUI.getY(), clickGUI.getWidth(), clickGUI.getHeight());
+        StencilUtils.disableStencilBuffer();
 
         FontUtils.regular20.drawString(openModSetting ? selectedMod.getName() : moduleCategory.name(), clickGUI.getX() + 95, clickGUI.getY() + 8, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
-        RoundedUtils.drawGradientRoundCorner(clickGUI.getX() + clickGUI.getWidth() - 76 + addX, clickGUI.getY() + 4, 12, 12, 3, ColorUtils.getBackgroundColor(2), ColorUtils.getBackgroundColor(1));
+        RRectUtils.drawGradientRoundCorner(clickGUI.getX() + clickGUI.getWidth() - 76 + addX, clickGUI.getY() + 4, 12, 12, 3);
         FontUtils.icon20.drawString("O", clickGUI.getX() + clickGUI.getWidth() - 75, clickGUI.getY() + 8, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
         FontUtils.icon20.drawString("F", clickGUI.getX() + clickGUI.getWidth() - 55, clickGUI.getY() + 8, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
         FontUtils.icon20.drawString("P", clickGUI.getX() + clickGUI.getWidth() - 35, clickGUI.getY() + 8, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
@@ -102,7 +102,7 @@ public class ModulesCategory extends Category {
         for (Comp comp : bindComps) {
             comp.mouseClicked(mouseX, mouseY, mouseButton);
         }
-        if (MouseUtils.isInside(mouseX, mouseY, clickGUI.getX() + clickGUI.getWidth() - 78, clickGUI.getY(), 78, 20)) {
+        if (MouseUtils.mouseInBounds(mouseX, mouseY, clickGUI.getX() + clickGUI.getWidth() - 78, clickGUI.getY(), 78, 20)) {
             if (mouseX <= clickGUI.getX() + clickGUI.getWidth() - 60D) {
                 setCategory(Module.category.Combat);
             } else if (mouseX <= clickGUI.getX() + clickGUI.getWidth() - 40) {
@@ -114,7 +114,7 @@ public class ModulesCategory extends Category {
             }
         }
         for (Module mod : Legitish.moduleManager.inCategory(getModuleCategory())) {
-            if (MouseUtils.isInside(mouseX, mouseY, clickGUI.getX() + clickGUI.getWidth() - 23.5, clickGUI.getY() + offset + scrollAnimation.getValue(), 23.5, 20) && canToggle && !openModSetting && mouseButton == 0) {
+            if (MouseUtils.mouseInBounds(mouseX, mouseY, clickGUI.getX() + clickGUI.getWidth() - 23.5, clickGUI.getY() + offset + scrollAnimation.getValue(), 23.5, 20) && canToggle && !openModSetting && mouseButton == 0) {
                 int settingOffset = 35;
                 comps.clear();
                 if (!mod.getSettings().isEmpty()) {
@@ -146,7 +146,7 @@ public class ModulesCategory extends Category {
                 }
             }
 
-            if (MouseUtils.isInside(mouseX, mouseY, clickGUI.getX() + 95, clickGUI.getY() + offset + scrollAnimation.getValue(), clickGUI.getWidth() - 200, 26) && canToggle) {
+            if (MouseUtils.mouseInBounds(mouseX, mouseY, clickGUI.getX() + 95, clickGUI.getY() + offset + scrollAnimation.getValue(), clickGUI.getWidth() - 200, 26) && canToggle) {
                 if (mouseButton == 0 && !openModSetting) {
                     mod.toggle();
                 }

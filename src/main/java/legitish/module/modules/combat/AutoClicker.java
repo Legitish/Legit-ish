@@ -6,6 +6,7 @@ import legitish.module.modulesettings.ModuleDoubleSliderSetting;
 import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.GameUtils;
+import legitish.utils.MathUtils;
 import legitish.utils.MouseUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
@@ -74,7 +75,7 @@ public class AutoClicker extends Module {
     }
 
     public void guiUpdate() {
-        MouseUtils.b(CPS);
+        MathUtils.b(CPS);
     }
 
     public void update() {
@@ -168,7 +169,7 @@ public class AutoClicker extends Module {
     }
 
     public void gd() {
-        double c = MouseUtils.mmVal(CPS, this.rand) + 0.4D * this.rand.nextDouble();
+        double c = MathUtils.mmVal(CPS, this.rand) + 0.4D * this.rand.nextDouble();
         long d = (int) Math.round(1000.0D / c);
         if (System.currentTimeMillis() > this.k) {
             if (!this.n && this.rand.nextInt(100) >= 85) {

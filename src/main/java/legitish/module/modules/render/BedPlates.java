@@ -7,7 +7,7 @@ import legitish.utils.ColorUtils;
 import legitish.utils.CooldownUtils;
 import legitish.utils.GameUtils;
 import legitish.utils.MouseUtils;
-import legitish.utils.render.RoundedUtils;
+import legitish.utils.render.RRectUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -99,7 +99,7 @@ public class BedPlates extends Module {
         glRotatef(mc.getRenderManager().playerViewX, rotateX, 0.0F, 0.0F);
         glScaled(-0.01666666753590107D * Math.sqrt(mc.thePlayer.getDistance(blockPos.getX(), blockPos.getY(), blockPos.getZ())), -0.01666666753590107D * Math.sqrt(mc.thePlayer.getDistance(blockPos.getX(), blockPos.getY(), blockPos.getZ())), 0.01666666753590107D * Math.sqrt(mc.thePlayer.getDistance(blockPos.getX(), blockPos.getY(), blockPos.getZ())));
         String dist = Math.round(mc.thePlayer.getDistance(blockPos.getX(), blockPos.getY(), blockPos.getZ())) + "m";
-        RoundedUtils.drawRound(Math.max(17.5, bedBlocks.get(index).size() * 17.5) / -2, -0.5, Math.max(17.5, bedBlocks.get(index).size() * 17.5) - 2.5, 26.5, 3, new Color(0, 0, 0, 90));
+        RRectUtils.drawRound(Math.max(17.5, bedBlocks.get(index).size() * 17.5) / -2, -0.5, Math.max(17.5, bedBlocks.get(index).size() * 17.5) - 2.5, 26.5, 3, new Color(0, 0, 0, 90));
         mc.fontRendererObj.drawString(dist, -mc.fontRendererObj.getStringWidth(dist) / 2, 0, ColorUtils.getFontColor(1).getRGB());
         double offset = (bedBlocks.get(index).size() * -17.5) / 2;
         for (Block block : bedBlocks.get(index)) {
@@ -121,7 +121,7 @@ public class BedPlates extends Module {
             return false;
         }
 
-        for (String l : MouseUtils.getScoreboard()) {
+        for (String l : GameUtils.getScoreboard()) {
             String s = MouseUtils.str(l);
             if (s.contains("Diamond") || s.contains("gone") || s.contains("Emerald")) {
                 return true;

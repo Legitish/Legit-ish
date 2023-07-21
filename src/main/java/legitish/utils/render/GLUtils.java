@@ -1,14 +1,13 @@
 package legitish.utils.render;
 
+import legitish.utils.ColorUtils;
 import legitish.utils.MouseUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,10 +20,10 @@ import java.awt.*;
 import static org.lwjgl.opengl.GL11.*;
 
 public class GLUtils {
-    public static final int rc = -1089466352;
-    private static final double p2 = 6.283185307179586D;
+    // fixing this never >:(
     private static final Minecraft mc = Minecraft.getMinecraft();
-    public static boolean ring_c = false;
+    // Can someone explain to me the difference between putting this in a function vs putting it outside? I feel like it's
+    // the updating but if it isnt then I cant be bothered to change it
 
     public static void HighlightBlock(BlockPos bp, int color, boolean shade) {
         if (bp != null) {
@@ -55,8 +54,7 @@ public class GLUtils {
     }
 
     public static void RenderESP(Entity e, int type, double expand, double shift, int color, boolean damage) {
-        if (e instanceof EntityLivingBase) {
-            assert MouseUtils.getTimer() != null;
+        if (e instanceof EntityLivingBase && MouseUtils.getTimer() != null) {
             double x = e.lastTickPosX + (e.posX - e.lastTickPosX) * (double) MouseUtils.getTimer().renderPartialTicks - mc.getRenderManager().viewerPosX;
             double y = e.lastTickPosY + (e.posY - e.lastTickPosY) * (double) MouseUtils.getTimer().renderPartialTicks - mc.getRenderManager().viewerPosY;
             double z = e.lastTickPosZ + (e.posZ - e.lastTickPosZ) * (double) MouseUtils.getTimer().renderPartialTicks - mc.getRenderManager().viewerPosZ;
@@ -82,8 +80,8 @@ public class GLUtils {
                     net.minecraft.client.gui.Gui.drawRect(-21, 0, 24, 4, color);
                     net.minecraft.client.gui.Gui.drawRect(-21, 71, 25, 74, color);
                 } else {
-                    int st = MouseUtils.gc(2L, 0L);
-                    int en = MouseUtils.gc(2L, 1000L);
+                    int st = ColorUtils.getBackgroundColor(1).getRGB();
+                    int en = ColorUtils.getBackgroundColor(2).getRGB();
                     dGR(-21, 0, -25, 74, st, en);
                     dGR(21, 0, 25, 74, st, en);
                     net.minecraft.client.gui.Gui.drawRect(-21, 0, 21, 4, en);
@@ -107,11 +105,9 @@ public class GLUtils {
                     net.minecraft.client.gui.Gui.drawRect(i + 1, b, i + 4, 74, Color.darkGray.getRGB());
                     net.minecraft.client.gui.Gui.drawRect(i + 1, 0, i + 4, b, hc);
                     GlStateManager.enableDepth();
-                } else if (type == 6) {
-                    d3p(x, y, z, 0.699999988079071D, 45, 1.5F, color, color == 0);
                 } else {
                     if (color == 0) {
-                        color = MouseUtils.gc(2L, 0L);
+                        color = ColorUtils.getBackgroundColor(1).getRGB();
                     }
 
                     float a = (float) (color >> 24 & 255) / 255.0F;
@@ -229,9 +225,8 @@ public class GLUtils {
         ts.draw();
     }
 
-    public static void dtl(Entity e, int color, float lw) {
-        if (e != null) {
-            assert MouseUtils.getTimer() != null;
+    public static void drawTracerLine(Entity e, int color, float lw) {
+        if (e != null && MouseUtils.getTimer() != null) {
             double x = e.lastTickPosX + (e.posX - e.lastTickPosX) * (double) MouseUtils.getTimer().renderPartialTicks - mc.getRenderManager().viewerPosX;
             double y = (double) e.getEyeHeight() + e.lastTickPosY + (e.posY - e.lastTickPosY) * (double) MouseUtils.getTimer().renderPartialTicks - mc.getRenderManager().viewerPosY;
             double z = e.lastTickPosZ + (e.posZ - e.lastTickPosZ) * (double) MouseUtils.getTimer().renderPartialTicks - mc.getRenderManager().viewerPosZ;
@@ -302,34 +297,6 @@ public class GLUtils {
         GlStateManager.enableTexture2D();
     }
 
-    public static void db(int w, int h, int r) {
-        int c = r == -1 ? -1089466352 : r;
-        net.minecraft.client.gui.Gui.drawRect(0, 0, w, h, c);
-    }
-
-    public static void dct(String text, char lineSplit, int x, int y, long s, long shift, boolean rect, FontRenderer fontRenderer) {
-        int bX = x;
-        int l = 0;
-        long r = 0L;
-
-        for (int i = 0; i < text.length(); ++i) {
-            char c = text.charAt(i);
-            if (c == lineSplit) {
-                ++l;
-                x = bX;
-                y += fontRenderer.FONT_HEIGHT + 5;
-                r = shift * (long) l;
-            } else {
-                fontRenderer.drawString(String.valueOf(c), (float) x, (float) y, MouseUtils.gc(s, r), rect);
-                x += fontRenderer.getCharWidth(c);
-                if (c != ' ') {
-                    r -= 90L;
-                }
-            }
-        }
-
-    }
-
     public static void d2p(double x, double y, int radius, int sides, int color) {
         float a = (float) (color >> 24 & 255) / 255.0F;
         float r = (float) (color >> 16 & 255) / 255.0F;
@@ -353,91 +320,6 @@ public class GLUtils {
         GlStateManager.disableBlend();
     }
 
-    public static void d3p(double x, double y, double z, double radius, int sides, float lineWidth, int color, boolean chroma) {
-        float a = (float) (color >> 24 & 255) / 255.0F;
-        float r = (float) (color >> 16 & 255) / 255.0F;
-        float g = (float) (color >> 8 & 255) / 255.0F;
-        float b = (float) (color & 255) / 255.0F;
-        mc.entityRenderer.disableLightmap();
-        glDisable(3553);
-        glEnable(3042);
-        glBlendFunc(770, 771);
-        glDisable(2929);
-        glEnable(2848);
-        glDepthMask(false);
-        glLineWidth(lineWidth);
-        if (!chroma) {
-            glColor4f(r, g, b, a);
-        }
-
-        glBegin(1);
-        long d = 0L;
-        long ed = 15000L / (long) sides;
-        long hed = ed / 2L;
-
-        for (int i = 0; i < sides * 2; ++i) {
-            if (chroma) {
-                if (i % 2 != 0) {
-                    if (i == 47) {
-                        d = hed;
-                    }
-
-                    d += ed;
-                }
-
-                int c = MouseUtils.gc(2L, d);
-                float r2 = (float) (c >> 16 & 255) / 255.0F;
-                float g2 = (float) (c >> 8 & 255) / 255.0F;
-                float b2 = (float) (c & 255) / 255.0F;
-                glColor3f(r2, g2, b2);
-            }
-
-            double angle = 6.283185307179586D * (double) i / (double) sides + Math.toRadians(180.0D);
-            glVertex3d(x + Math.cos(angle) * radius, y, z + Math.sin(angle) * radius);
-        }
-
-        glEnd();
-        glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        glDepthMask(true);
-        glDisable(2848);
-        glEnable(2929);
-        glDisable(3042);
-        glEnable(3553);
-        mc.entityRenderer.enableLightmap();
-    }
-
-    public static int getScaleFactor() {
-        int scaleFactor = 1;
-        final boolean isUnicode = mc.isUnicode();
-        int guiScale = mc.gameSettings.guiScale;
-        if (guiScale == 0) {
-            guiScale = 1000;
-        }
-
-        while (scaleFactor < guiScale && mc.displayWidth / (scaleFactor + 1) >= 320 && mc.displayHeight / (scaleFactor + 1) >= 240) {
-            ++scaleFactor;
-        }
-        if (isUnicode && scaleFactor % 2 != 0 && scaleFactor != 1) {
-            --scaleFactor;
-        }
-        return scaleFactor;
-    }
-
-    public static void setAlphaLimit(float limit) {
-        GlStateManager.enableAlpha();
-        GlStateManager.alphaFunc(GL11.GL_GREATER, (float) (limit * .01));
-    }
-
-    public static Framebuffer createFrameBuffer(Framebuffer framebuffer) {
-        if (framebuffer == null || framebuffer.framebufferWidth != mc.displayWidth || framebuffer.framebufferHeight != mc.displayHeight) {
-            if (framebuffer != null) {
-                framebuffer.deleteFramebuffer();
-            }
-            return new Framebuffer(mc.displayWidth, mc.displayHeight, true);
-        }
-        return framebuffer;
-    }
-
     public static void bindTexture(int texture) {
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture);
     }
@@ -454,10 +336,5 @@ public class GLUtils {
         GlStateManager.translate((x + (x + width)) / 2, (y + (y + height)) / 2, 0);
         GlStateManager.scale(scale, scale, 1);
         GlStateManager.translate(-(x + (x + width)) / 2, -(y + (y + height)) / 2, 0);
-    }
-
-    public static void startTranslate(float x, float y) {
-        GlStateManager.pushMatrix();
-        GlStateManager.translate(x, y, 0);
     }
 }

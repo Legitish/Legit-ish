@@ -7,7 +7,8 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
-public class CFont {
+public class CharRenderer {
+    // Credit to EldoDebug for this one :clown:
     float imgSize = 1024;
     CharData[] charData = new CharData[256];
     Font font;
@@ -15,7 +16,7 @@ public class CFont {
     int fontHeight = -1, charOffset = 0;
     DynamicTexture tex;
 
-    public CFont(Font font, boolean antiAlias, boolean fractionalMetrics) {
+    public CharRenderer(Font font, boolean antiAlias, boolean fractionalMetrics) {
         this.font = font;
         this.antiAlias = antiAlias;
         this.fractionalMetrics = fractionalMetrics;

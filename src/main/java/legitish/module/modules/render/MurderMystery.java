@@ -106,7 +106,7 @@ public class MurderMystery extends Module {
             return false;
         }
 
-        for (String l : MouseUtils.getScoreboard()) {
+        for (String l : GameUtils.getScoreboard()) {
             String s = MouseUtils.str(l);
             if (s.contains("Role:")) {
                 return true;

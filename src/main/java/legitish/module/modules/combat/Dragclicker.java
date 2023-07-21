@@ -6,6 +6,7 @@ import legitish.module.ModuleDesc;
 import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.GameUtils;
+import legitish.utils.MathUtils;
 import legitish.utils.MouseUtils;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.ItemBlock;
@@ -59,7 +60,7 @@ public class Dragclicker extends Module {
                             if (del != 0) {
                                 int realDel = del;
                                 if (delayRandomizer.isToggled()) {
-                                    realDel = del + MouseUtils.rand().nextInt(25) * (MouseUtils.rand().nextBoolean() ? -1 : 1);
+                                    realDel = del + MathUtils.rand().nextInt(25) * (MathUtils.rand().nextBoolean() ? -1 : 1);
                                     if (realDel <= 0) {
                                         realDel = del / 3 - realDel;
                                     }

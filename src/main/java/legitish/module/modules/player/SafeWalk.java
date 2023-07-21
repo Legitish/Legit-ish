@@ -5,7 +5,7 @@ import legitish.module.modulesettings.ModuleDoubleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.CooldownUtils;
 import legitish.utils.GameUtils;
-import legitish.utils.MouseUtils;
+import legitish.utils.MathUtils;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -30,7 +30,7 @@ public class SafeWalk extends Module {
     }
 
     public void onDisable() {
-        if (shift.isToggled() && MouseUtils.playerAboveAir()) {
+        if (shift.isToggled() && GameUtils.playerAboveAir()) {
             this.setShift(false);
         }
 
@@ -73,8 +73,8 @@ public class SafeWalk extends Module {
             }
 
             if (mc.thePlayer.onGround) {
-                if (MouseUtils.playerAboveAir()) {
-                    shiftTimer.setCooldown(MouseUtils.randomInt(shiftTime.getInputMin(), shiftTime.getInputMax() + 0.1));
+                if (GameUtils.playerAboveAir()) {
+                    shiftTimer.setCooldown(MathUtils.randomInt(shiftTime.getInputMin(), shiftTime.getInputMax() + 0.1));
                     shiftTimer.start();
                     isShifting = true;
                     this.setShift(true);
@@ -99,7 +99,7 @@ public class SafeWalk extends Module {
             } else if (shouldBridge && mc.thePlayer.capabilities.isFlying) {
                 this.setShift(false);
                 shouldBridge = false;
-            } else if (shouldBridge && MouseUtils.playerAboveAir() && shiftOnJump.isToggled()) {
+            } else if (shouldBridge && GameUtils.playerAboveAir() && shiftOnJump.isToggled()) {
                 isShifting = true;
                 this.setShift(true);
             } else {

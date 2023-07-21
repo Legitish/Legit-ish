@@ -70,6 +70,21 @@ public class ShaderUtils {
         glEnd();
     }
 
+    private static String readInputStream(InputStream inputStream) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            while ((line = bufferedReader.readLine()) != null)
+                stringBuilder.append(line).append('\n');
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return stringBuilder.toString();
+    }
+
     public void init() {
         glUseProgram(programID);
     }
@@ -118,20 +133,5 @@ public class ShaderUtils {
         }
 
         return shader;
-    }
-
-    private static String readInputStream(InputStream inputStream) {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            String line;
-            while ((line = bufferedReader.readLine()) != null)
-                stringBuilder.append(line).append('\n');
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return stringBuilder.toString();
     }
 }

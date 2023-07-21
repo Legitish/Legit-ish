@@ -5,7 +5,6 @@ import legitish.module.modules.render.AntiBot;
 import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.GameUtils;
-import legitish.utils.MouseUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.input.Mouse;
@@ -34,9 +33,9 @@ public class AimAssist extends Module {
                     Entity en = this.getEnemy();
                     if (en != null) {
                         if (blatantMode.isToggled()) {
-                            MouseUtils.aim(en, 0.0F, false);
+                            GameUtils.aim(en, 0.0F, false);
                         } else {
-                            double n = MouseUtils.n(en);
+                            double n = GameUtils.n(en);
                             if (n > 1.0D || n < -1.0D) {
                                 float val = (float) (-(n / (101.0D - speed.getInput())));
                                 mc.thePlayer.rotationYaw += val;
@@ -70,7 +69,7 @@ public class AimAssist extends Module {
                     } while (!aimInvis.isToggled() && en.isInvisible());
                 } while ((double) mc.thePlayer.getDistanceToEntity(en) > distance.getInput());
             } while (AntiBot.bot(en));
-        } while (!blatantMode.isToggled() && !MouseUtils.fov(en, (float) fov));
+        } while (!blatantMode.isToggled() && !GameUtils.fov(en, (float) fov));
 
         return en;
     }

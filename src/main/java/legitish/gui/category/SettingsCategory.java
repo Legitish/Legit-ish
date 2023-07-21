@@ -22,7 +22,7 @@ public class SettingsCategory extends Category {
         FontUtils.regular20.drawString("soon™", clickGUI.getX() + clickGUI.getWidth() / 2 + 90, clickGUI.getY() + (clickGUI.getHeight() - 25) / 2, MinecraftFontRenderer.CenterMode.XY, false, ColorUtils.getFontColor(2).getRGB());
         compBind = new CompBind(clickGUI.getX() + clickGUI.getWidth() / 2 + 90, clickGUI.getY() + (clickGUI.getHeight() - 25) / 2, ModuleManager.gui);
         compBind.drawScreen(mouseX, mouseY, 0);
-        StencilUtils.uninitStencilBuffer();
+        StencilUtils.disableStencilBuffer();
         FontUtils.regular20.drawString("Settings", clickGUI.getX() + 95, clickGUI.getY() + 8, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
     }
 

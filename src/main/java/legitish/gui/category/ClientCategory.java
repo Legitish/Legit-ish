@@ -16,7 +16,7 @@ public class ClientCategory extends Category {
         ClickGui clickGUI = Legitish.clickGui;
 
         FontUtils.regular20.drawString("soon™", clickGUI.getX() + (clickGUI.getWidth() - 90) / 2, clickGUI.getY() + (clickGUI.getHeight() - 25) / 2, MinecraftFontRenderer.CenterMode.XY, false, ColorUtils.getFontColor(2).getRGB());
-        StencilUtils.uninitStencilBuffer();
+        StencilUtils.disableStencilBuffer();
         FontUtils.regular20.drawString("Client", clickGUI.getX() + 95, clickGUI.getY() + 8, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
     }
 

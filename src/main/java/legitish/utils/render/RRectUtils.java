@@ -8,28 +8,24 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
-public class RoundedUtils {
-    private static final ShaderUtils roundedGradientShader = new ShaderUtils("legitish/shaders/roundedRectGradient.frag");
-    public static ShaderUtils roundedShader = new ShaderUtils("legitish/shaders/roundedRect.frag");
-    public static ShaderUtils roundedOutlineShader = new ShaderUtils("legitish/shaders/roundRectOutline.frag");
+public class RRectUtils {
+    private static final ShaderUtils roundedGradientShader = new ShaderUtils("legitish/shaders/rrectGradient.frag");
+    public static ShaderUtils roundedShader = new ShaderUtils("legitish/shaders/rrect.frag");
+    public static ShaderUtils roundedOutlineShader = new ShaderUtils("legitish/shaders/rrectOutline.frag");
 
-    public static void drawGradientRound(double x, double y, double width, double height, double radius, Color topLeft, Color bottomLeft, Color bottomRight, Color topRight) {
+    public static void drawGradientRoundCorner(double x, double y, double width, double height, double radius) {
         ColorUtils.resetColor();
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         roundedGradientShader.init();
         setupRoundedRectUniforms(x, y, width, height, radius, roundedGradientShader);
-        roundedGradientShader.setUniformf("color1", topLeft.getRed() / 255f, topLeft.getGreen() / 255f, topLeft.getBlue() / 255f, topLeft.getAlpha() / 255f);
-        roundedGradientShader.setUniformf("color2", bottomRight.getRed() / 255f, bottomRight.getGreen() / 255f, bottomRight.getBlue() / 255f, bottomRight.getAlpha() / 255f);
-        roundedGradientShader.setUniformf("color3", bottomLeft.getRed() / 255f, bottomLeft.getGreen() / 255f, bottomLeft.getBlue() / 255f, bottomLeft.getAlpha() / 255f);
-        roundedGradientShader.setUniformf("color4", topRight.getRed() / 255f, topRight.getGreen() / 255f, topRight.getBlue() / 255f, topRight.getAlpha() / 255f);
+        roundedGradientShader.setUniformf("color1", ColorUtils.getBackgroundColor(1).getRed() / 255f, ColorUtils.getBackgroundColor(1).getGreen() / 255f, ColorUtils.getBackgroundColor(1).getBlue() / 255f, ColorUtils.getBackgroundColor(1).getAlpha() / 255f);
+        roundedGradientShader.setUniformf("color2", ColorUtils.getBackgroundColor(2).getRed() / 255f, ColorUtils.getBackgroundColor(2).getGreen() / 255f, ColorUtils.getBackgroundColor(2).getBlue() / 255f, ColorUtils.getBackgroundColor(2).getAlpha() / 255f);
+        roundedGradientShader.setUniformf("color3", ColorUtils.getBackgroundColor(2).getRed() / 255f, ColorUtils.getBackgroundColor(2).getGreen() / 255f, ColorUtils.getBackgroundColor(2).getBlue() / 255f, ColorUtils.getBackgroundColor(2).getAlpha() / 255f);
+        roundedGradientShader.setUniformf("color4", ColorUtils.getBackgroundColor(1).getRed() / 255f, ColorUtils.getBackgroundColor(1).getGreen() / 255f, ColorUtils.getBackgroundColor(1).getBlue() / 255f, ColorUtils.getBackgroundColor(1).getAlpha() / 255f);
         ShaderUtils.drawQuads(x - 1, y - 1, width + 2, height + 2);
         roundedGradientShader.unload();
         GlStateManager.disableBlend();
-    }
-
-    public static void drawGradientRoundCorner(double x, double y, double width, double height, double radius, Color primary, Color secondary) {
-        drawGradientRound(x, y, width, height, radius, secondary, primary, primary, secondary);
     }
 
     public static void drawRound(double x, double y, double width, double height, double radius, Color color) {

@@ -4,7 +4,6 @@ import legitish.module.Module;
 import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.GameUtils;
-import legitish.utils.MouseUtils;
 import legitish.utils.render.GLUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.weavemc.loader.api.event.RenderWorldEvent;
@@ -21,7 +20,6 @@ public class Tracers extends Module {
     public static ModuleTickSetting e;
     public static ModuleSliderSetting f;
     private boolean g;
-    private int rgb_c = 0;
 
     public Tracers() {
         super("Tracers", Module.category.Visual, 0);
@@ -30,7 +28,6 @@ public class Tracers extends Module {
         this.registerSetting(b = new ModuleSliderSetting("Red", 0.0D, 0.0D, 255.0D, 1.0D));
         this.registerSetting(c = new ModuleSliderSetting("Green", 255.0D, 0.0D, 255.0D, 1.0D));
         this.registerSetting(d = new ModuleSliderSetting("Blue", 0.0D, 0.0D, 255.0D, 1.0D));
-        this.registerSetting(e = new ModuleTickSetting("Rainbow", false));
     }
 
     public void onEnable() {
@@ -52,14 +49,10 @@ public class Tracers extends Module {
 
     }
 
-    public void guiUpdate() {
-        this.rgb_c = (new Color((int) b.getInput(), (int) c.getInput(), (int) d.getInput())).getRGB();
-    }
-
     @SubscribeEvent
     public void o(RenderWorldEvent ev) {
         if (GameUtils.isPlayerInGame()) {
-            int rgb = e.isToggled() ? MouseUtils.gc(2L, 0L) : this.rgb_c;
+            int rgb = (new Color((int) b.getInput(), (int) c.getInput(), (int) d.getInput())).getRGB();
             Iterator var3;
             var3 = mc.theWorld.playerEntities.iterator();
 
@@ -78,7 +71,7 @@ public class Tracers extends Module {
                 } while (!a.isToggled() && en.isInvisible());
 
                 if (!AntiBot.bot(en)) {
-                    GLUtils.dtl(en, rgb, (float) f.getInput());
+                    GLUtils.drawTracerLine(en, rgb, (float) f.getInput());
                 }
             }
         }

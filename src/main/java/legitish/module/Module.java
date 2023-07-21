@@ -3,18 +3,15 @@ package legitish.module;
 import com.google.gson.JsonObject;
 import legitish.main.Legitish;
 import legitish.module.modulesettings.ModuleTickSetting;
-import legitish.utils.AnimationUtils;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Module {
     protected static Minecraft mc;
     private final String moduleName;
     private final Module.category moduleCategory;
-    public AnimationUtils buttonAnimation = new AnimationUtils(0.0F);
     protected ArrayList<ModuleSettingsList> settings;
     private boolean isToggled = false;
     private boolean enabled;
@@ -35,21 +32,6 @@ public class Module {
         this.moduleCategory = moduleCategory;
         this.keycode = 0;
         this.enabled = false;
-    }
-
-    public static Module getModule(Class<? extends Module> a) {
-        Iterator<Module> var1 = ModuleManager.moduleList.iterator();
-
-        Module module;
-        do {
-            if (!var1.hasNext()) {
-                return null;
-            }
-
-            module = var1.next();
-        } while (module.getClass() != a);
-
-        return module;
     }
 
     public void keybind() {

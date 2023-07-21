@@ -19,13 +19,4 @@ public class CooldownUtils {
     public void setCooldown(long time) {
         this.duration = time;
     }
-
-    public long getCooldownTime() {
-        return duration;
-    }
-
-    public long getElapsedTime() {
-        long elapsedTime = System.currentTimeMillis() - this.start;
-        return Math.min(elapsedTime, duration);
-    }
 }

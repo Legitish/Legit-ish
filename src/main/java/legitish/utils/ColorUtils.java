@@ -6,6 +6,7 @@ import java.awt.*;
 import java.util.regex.Pattern;
 
 public class ColorUtils {
+    // fixing this never >:(
     private static final Pattern COLOR_PATTERN = Pattern.compile("(?i)§[0-9A-FK-OR]");
 
     public static AnimationUtils[] animation = {
@@ -83,14 +84,6 @@ public class ColorUtils {
 
     public static void resetColor() {
         GlStateManager.color(1, 1, 1, 1);
-    }
-
-    public static Color RGB(int index, double speed) {
-        int angle = (int) ((System.currentTimeMillis() / speed + index) % 360);
-        float hue = angle / 360f;
-        int color = Color.HSBtoRGB(hue, 1F, 1);
-        Color c = new Color(color);
-        return new Color(c.getRed(), c.getGreen(), c.getBlue());
     }
 
     public static String stripColor(String input) {

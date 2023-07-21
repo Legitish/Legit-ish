@@ -2,35 +2,31 @@ package legitish.utils.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.shader.Framebuffer;
-import org.lwjgl.opengl.EXTFramebufferObject;
 import org.lwjgl.opengl.EXTPackedDepthStencil;
 
+import static org.lwjgl.opengl.EXTFramebufferObject.*;
 import static org.lwjgl.opengl.GL11.*;
 
 public class StencilUtils {
-    private static final Minecraft mc = Minecraft.getMinecraft();
+    public static void setupFBO(Framebuffer framebuffer) {
+        Minecraft mc = Minecraft.getMinecraft();
+        glDeleteRenderbuffersEXT(framebuffer.depthBuffer);
+        final int stencilDepthBufferID = glGenRenderbuffersEXT();
+        glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, stencilDepthBufferID);
+        glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, EXTPackedDepthStencil.GL_DEPTH_STENCIL_EXT, mc.displayWidth, mc.displayHeight);
+        glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_STENCIL_ATTACHMENT_EXT, GL_RENDERBUFFER_EXT, stencilDepthBufferID);
+        glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_RENDERBUFFER_EXT, stencilDepthBufferID);
+    }
 
-    public static void checkSetupFBO(Framebuffer framebuffer) {
-        if (framebuffer != null) {
-            if (framebuffer.depthBuffer > -1) {
-                setupFBO(framebuffer);
-                framebuffer.depthBuffer = -1;
+    public static void enableStencilBuffer() {
+        Minecraft mc = Minecraft.getMinecraft();
+        mc.getFramebuffer().bindFramebuffer(false);
+        if (mc.getFramebuffer() != null) {
+            if (mc.getFramebuffer().depthBuffer > -1) {
+                setupFBO(mc.getFramebuffer());
+                mc.getFramebuffer().depthBuffer = -1;
             }
         }
-    }
-
-    public static void setupFBO(Framebuffer framebuffer) {
-        EXTFramebufferObject.glDeleteRenderbuffersEXT(framebuffer.depthBuffer);
-        final int stencilDepthBufferID = EXTFramebufferObject.glGenRenderbuffersEXT();
-        EXTFramebufferObject.glBindRenderbufferEXT(EXTFramebufferObject.GL_RENDERBUFFER_EXT, stencilDepthBufferID);
-        EXTFramebufferObject.glRenderbufferStorageEXT(EXTFramebufferObject.GL_RENDERBUFFER_EXT, EXTPackedDepthStencil.GL_DEPTH_STENCIL_EXT, mc.displayWidth, mc.displayHeight);
-        EXTFramebufferObject.glFramebufferRenderbufferEXT(EXTFramebufferObject.GL_FRAMEBUFFER_EXT, EXTFramebufferObject.GL_STENCIL_ATTACHMENT_EXT, EXTFramebufferObject.GL_RENDERBUFFER_EXT, stencilDepthBufferID);
-        EXTFramebufferObject.glFramebufferRenderbufferEXT(EXTFramebufferObject.GL_FRAMEBUFFER_EXT, EXTFramebufferObject.GL_DEPTH_ATTACHMENT_EXT, EXTFramebufferObject.GL_RENDERBUFFER_EXT, stencilDepthBufferID);
-    }
-
-    public static void initStencilToWrite() {
-        mc.getFramebuffer().bindFramebuffer(false);
-        checkSetupFBO(mc.getFramebuffer());
         glClear(GL_STENCIL_BUFFER_BIT);
         glEnable(GL_STENCIL_TEST);
 
@@ -45,7 +41,7 @@ public class StencilUtils {
         glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
     }
 
-    public static void uninitStencilBuffer() {
+    public static void disableStencilBuffer() {
         glDisable(GL_STENCIL_TEST);
     }
 }

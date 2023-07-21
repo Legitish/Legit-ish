@@ -47,10 +47,6 @@ public class PlayerESP extends Module {
         this.registerSetting(d = new ModuleTickSetting("Rainbow", false));
     }
 
-    public void onDisable() {
-        GLUtils.ring_c = false;
-    }
-
     public void guiUpdate() {
         this.rgb_c = (new Color(0, 255, 0).getRGB());
     }

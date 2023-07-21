@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FontUtils {
+    // Credit to EldoDebug for this one :clown:
     public static MinecraftFontRenderer
             regular12,
             regular16,

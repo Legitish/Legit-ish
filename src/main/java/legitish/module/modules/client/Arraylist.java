@@ -10,8 +10,7 @@ import legitish.utils.GameUtils;
 import legitish.utils.MouseUtils;
 import legitish.utils.font.FontUtils;
 import legitish.utils.font.MinecraftFontRenderer;
-import legitish.utils.render.GLUtils;
-import legitish.utils.render.RoundedUtils;
+import legitish.utils.render.RRectUtils;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -103,10 +102,10 @@ public class Arraylist extends Module {
                         y += mc.fontRendererObj.FONT_HEIGHT + margin.getInput();
                     } else {
                         if (background.isToggled()) {
-                            RoundedUtils.drawRound(hudX, y, mfr.getStringWidth(m.getName()) + 2, mfr.getHeight() + margin.getInput() - 1.4, 0, new Color(0, 0, 0, 90));
+                            RRectUtils.drawRound(hudX, y, mfr.getStringWidth(m.getName()) + 2, mfr.getHeight() + margin.getInput() - 1.4, 0, new Color(0, 0, 0, 90));
                         }
                         if (rectangles.isToggled()) {
-                            RoundedUtils.drawRound(hudX, y, 0.6, mfr.getHeight() + margin.getInput() - 1.4, 0, ColorUtils.getBackgroundColor(3));
+                            RRectUtils.drawRound(hudX, y, 0.6, mfr.getHeight() + margin.getInput() - 1.4, 0, ColorUtils.getBackgroundColor(3));
                         }
                         mfr.drawString(m.getName(), hudX + 2, y + margin.getInput() / 2, MinecraftFontRenderer.CenterMode.NONE, shadow.isToggled(), ColorUtils.getFontColor(1).getRGB());
                         y += mfr.getHeight() + margin.getInput();
@@ -154,7 +153,7 @@ public class Arraylist extends Module {
             ScaledResolution res = new ScaledResolution(this.mc);
             int x = res.getScaledWidth() / 2 - 84;
             int y = res.getScaledHeight() / 2 - 20;
-            GLUtils.dct("Edit the HUD position by dragging.", '-', x, y, 2L, 0L, true, this.mc.fontRendererObj);
+            //GLUtils.dct("Edit the HUD position by dragging.", '-', x, y, 2L, 0L, true, this.mc.fontRendererObj);
 
             this.handleInput();
 

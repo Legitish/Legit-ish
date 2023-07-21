@@ -8,7 +8,7 @@ import legitish.utils.MouseUtils;
 import legitish.utils.font.FontUtils;
 import legitish.utils.font.MinecraftFontRenderer;
 import legitish.utils.render.GLUtils;
-import legitish.utils.render.RoundedUtils;
+import legitish.utils.render.RRectUtils;
 import net.minecraft.client.renderer.GlStateManager;
 
 public class CompCheckBox extends Comp {
@@ -29,10 +29,10 @@ public class CompCheckBox extends Comp {
         animation.setAnimation(tickSetting.isToggled() ? 1 : 0, 10);
         animation2.setAnimation(tickSetting.isToggled() ? 255 : 0, 12);
 
-        RoundedUtils.drawRound((float) (clickGui.getX() + x - 70), (float) (clickGui.getY() + y), 10, 10, 3, ColorUtils.getBackgroundColor(2));
+        RRectUtils.drawRound((float) (clickGui.getX() + x - 70), (float) (clickGui.getY() + y), 10, 10, 3, ColorUtils.getBackgroundColor(2));
 
         GLUtils.startScale((float) (clickGui.getX() + x - 70 + clickGui.getX() + x - 70 + 10) / 2, (float) (clickGui.getY() + y + clickGui.getY() + y + 10) / 2, (float) animation.getValue());
-        RoundedUtils.drawRound((float) (clickGui.getX() + x - 70), (float) (clickGui.getY() + y), 10, 10, 3, ColorUtils.RGB(0, 10D));
+        RRectUtils.drawGradientRoundCorner((float) (clickGui.getX() + x - 70), (float) (clickGui.getY() + y), 10, 10, 3);
         FontUtils.icon20.drawString("D", (clickGui.getX() + x - 70), (clickGui.getY() + y + 3), MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
         GlStateManager.popMatrix();
 
@@ -42,7 +42,7 @@ public class CompCheckBox extends Comp {
     @Override
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
         super.mouseClicked(mouseX, mouseY, mouseButton);
-        if (MouseUtils.isInside(mouseX, mouseY, clickGui.getX() + x - 70, clickGui.getY() + y, 10, 10) && mouseButton == 0) {
+        if (MouseUtils.mouseInBounds(mouseX, mouseY, clickGui.getX() + x - 70, clickGui.getY() + y, 10, 10) && mouseButton == 0) {
             tickSetting.setEnabled(!tickSetting.isToggled());
         }
     }
