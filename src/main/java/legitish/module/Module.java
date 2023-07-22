@@ -53,14 +53,12 @@ public class Module {
             ModuleManager.sort();
         }
         net.weavemc.loader.api.event.EventBus.subscribe(this);
-        Legitish.eventBus.register(this);
         this.onEnable();
     }
 
     public void disable() {
         this.setEnabled(false);
         ModuleManager.enabledModuleList.remove(this);
-        Legitish.eventBus.unregister(this);
         net.weavemc.loader.api.event.EventBus.unsubscribe(this);
         this.onDisable();
     }
@@ -125,7 +123,7 @@ public class Module {
         JsonObject settings = new JsonObject();
 
         for (ModuleSettingsList setting : this.settings) {
-            if (!(setting instanceof ModuleDesc)) {
+            if (!(setting instanceof ModuleDesc) && setting != null) {
                 JsonObject settingData = setting.getConfigAsJson();
                 settings.add(setting.n, settingData);
             }

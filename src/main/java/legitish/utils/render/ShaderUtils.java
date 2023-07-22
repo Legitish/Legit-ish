@@ -1,7 +1,6 @@
 package legitish.utils.render;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
 
 import java.io.BufferedReader;
@@ -54,22 +53,6 @@ public class ShaderUtils {
         glEnd();
     }
 
-    public static void drawQuads() {
-        ScaledResolution sr = new ScaledResolution(mc);
-        float width = (float) sr.getScaledWidth_double();
-        float height = (float) sr.getScaledHeight_double();
-        glBegin(GL_QUADS);
-        glTexCoord2f(0, 1);
-        glVertex2f(0, 0);
-        glTexCoord2f(0, 0);
-        glVertex2f(0, height);
-        glTexCoord2f(1, 0);
-        glVertex2f(width, height);
-        glTexCoord2f(1, 1);
-        glVertex2f(width, 0);
-        glEnd();
-    }
-
     private static String readInputStream(InputStream inputStream) {
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -93,10 +76,6 @@ public class ShaderUtils {
         glUseProgram(0);
     }
 
-    public int getUniform(String name) {
-        return glGetUniformLocation(programID, name);
-    }
-
     public void setUniformf(String name, double... args) {
         int loc = glGetUniformLocation(programID, name);
         switch (args.length) {
@@ -115,12 +94,6 @@ public class ShaderUtils {
         }
     }
 
-    public void setUniformi(String name, int... args) {
-        int loc = glGetUniformLocation(programID, name);
-        if (args.length > 1) glUniform2i(loc, args[0], args[1]);
-        else glUniform1i(loc, args[0]);
-    }
-
     private int createShader(InputStream inputStream, int shaderType) {
         int shader = glCreateShader(shaderType);
         glShaderSource(shader, readInputStream(inputStream));
@@ -128,8 +101,7 @@ public class ShaderUtils {
 
 
         if (glGetShaderi(shader, GL_COMPILE_STATUS) == 0) {
-            System.out.println(glGetShaderInfoLog(shader, 4096));
-            throw new IllegalStateException(String.format("Shader failed to compile!", shaderType));
+            throw new RuntimeException("Shader failed to compile!");
         }
 
         return shader;

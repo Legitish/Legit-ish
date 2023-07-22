@@ -46,18 +46,13 @@ public class AutoClicker extends Module {
         this.registerSetting(breakBlocks = new ModuleTickSetting("Break blocks", false));
 
         try {
-            this.gs = GuiScreen.class.getDeclaredMethod("func_73864_a", Integer.TYPE, Integer.TYPE, Integer.TYPE);
-        } catch (Exception var4) {
-            try {
-                this.gs = GuiScreen.class.getDeclaredMethod("mouseClicked", Integer.TYPE, Integer.TYPE, Integer.TYPE);
-            } catch (Exception ignored) {
-            }
+            this.gs = GuiScreen.class.getDeclaredMethod("mouseClicked", Integer.TYPE, Integer.TYPE, Integer.TYPE);
+        } catch (Exception ignored) {
         }
 
         if (this.gs != null) {
             this.gs.setAccessible(true);
         }
-
     }
 
     public void onEnable() {
@@ -156,11 +151,11 @@ public class AutoClicker extends Module {
             if (System.currentTimeMillis() > this.j) {
                 KeyBinding.setKeyBindState(key, true);
                 KeyBinding.onTick(key);
-                MouseUtils.sc(mouse, true);
+                MouseUtils.sendClick(mouse, true);
                 this.gd();
             } else if (System.currentTimeMillis() > this.i) {
                 KeyBinding.setKeyBindState(key, false);
-                MouseUtils.sc(mouse, false);
+                MouseUtils.sendClick(mouse, false);
             }
         } else {
             this.gd();

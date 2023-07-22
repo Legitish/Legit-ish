@@ -12,12 +12,12 @@ import net.weavemc.loader.api.event.TickEvent;
 
 import java.util.HashMap;
 
-public class AntiBot extends Module {
+public class Targets extends Module {
     private static final HashMap<EntityPlayer, Long> newEnt = new HashMap<>();
     public static ModuleTickSetting cooldown;
     public static ModuleTickSetting removeDead;
 
-    public AntiBot() {
+    public Targets() {
         super("AntiBot", Module.category.Visual, 0);
         this.registerSetting(cooldown = new ModuleTickSetting("Wait 80 ticks", false));
         this.registerSetting(removeDead = new ModuleTickSetting("Remove dead", true));

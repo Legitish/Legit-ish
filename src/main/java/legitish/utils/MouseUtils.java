@@ -1,6 +1,5 @@
 package legitish.utils;
 
-import legitish.main.Legitish;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.StringUtils;
 import net.weavemc.loader.api.event.MouseEvent;
@@ -42,23 +41,22 @@ public class MouseUtils {
         }
     }
 
-    public static void sc(int t, boolean s) {
+    // Remind me to replace this with Java's bot because I'm pretty sure it works better.
+    public static void sendClick(int button, boolean press) {
         if (g != null && f != null && h != null) {
             MouseEvent m = new MouseEvent();
 
             try {
                 g.setAccessible(true);
-                g.set(m, t);
+                g.set(m, button);
                 f.setAccessible(true);
-                f.set(m, s);
-                Legitish.eventBus.post(m);
+                f.set(m, press);
                 h.setAccessible(true);
                 ByteBuffer bf = (ByteBuffer) h.get(null);
                 h.setAccessible(false);
-                bf.put(t, (byte) (s ? 1 : 0));
+                bf.put(button, (byte) (press ? 1 : 0));
             } catch (IllegalAccessException ignored) {
             }
-
         }
     }
 

@@ -11,7 +11,7 @@ import org.lwjgl.input.Keyboard;
 
 public class CompBind extends Comp {
     MinecraftFontRenderer mfr = FontUtils.regular16;
-    private boolean isBinding;
+    private boolean isBinding = false;
     private double width;
 
     public CompBind(double x, double y, Module module) {
@@ -44,8 +44,6 @@ public class CompBind extends Comp {
                 } else {
                     this.module.setbind(0);
                 }
-            } else if (keyCode == 1) {
-                this.isBinding = false;
             } else {
                 this.module.setbind(keyCode);
             }

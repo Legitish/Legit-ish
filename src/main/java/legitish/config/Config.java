@@ -1,34 +1,33 @@
 package legitish.config;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
+import com.google.gson.*;
 
 import java.io.*;
+import java.util.Objects;
 
 public class Config {
     public final File file;
-    public final long creationDate;
+    public long creationDate;
 
     public Config(File pathToFile) {
-        long creationDate1;
         this.file = pathToFile;
 
         if (!file.exists()) {
-            creationDate1 = System.currentTimeMillis();
+            creationDate = System.currentTimeMillis();
             try {
-                file.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+                if (!file.createNewFile()) {
+                    throw new RuntimeException("Error creating config file!");
+                }
+            } catch (IOException exception) {
+                exception.printStackTrace();
             }
         } else {
             try {
-                creationDate1 = getData().get("creationTime").getAsLong();
+                creationDate = getData().get("creationTime").getAsLong();
             } catch (NullPointerException e) {
-                creationDate1 = 0L;
+                creationDate = 0L;
             }
         }
-        this.creationDate = creationDate1;
     }
 
     public String getName() {
@@ -38,20 +37,20 @@ public class Config {
     public JsonObject getData() {
         JsonParser jsonParser = new JsonParser();
         try (FileReader reader = new FileReader(file)) {
-            Object obj = jsonParser.parse(reader);
+            JsonElement obj = jsonParser.parse(reader);
             return (JsonObject) obj;
-        } catch (JsonSyntaxException | ClassCastException | IOException e) {
-            e.printStackTrace();
+        } catch (JsonSyntaxException | ClassCastException | IOException exception) {
+            exception.printStackTrace();
         }
         return null;
     }
 
-    public void save(JsonObject data) {
+    public void saveConfigData(JsonObject data) {
         data.addProperty("creationTime", creationDate);
-        try (PrintWriter out = new PrintWriter(new FileWriter(file))) {
-            out.write(data.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
+        try (PrintWriter config = new PrintWriter(new FileWriter(file))) {
+            config.write(data.toString());
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
     }
 }

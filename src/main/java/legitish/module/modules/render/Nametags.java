@@ -38,7 +38,7 @@ public class Nametags extends Module {
                     return;
                 }
 
-                if (AntiBot.bot(en) || en.getDisplayName().getUnformattedText().isEmpty()) {
+                if (Targets.bot(en) || en.getDisplayName().getUnformattedText().isEmpty()) {
                     return;
                 }
 

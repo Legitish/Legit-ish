@@ -21,12 +21,8 @@ public class DelayRemover extends Module {
 
     public void onEnable() {
         try {
-            this.l = Minecraft.class.getDeclaredField("field_71429_W");
-        } catch (Exception var4) {
-            try {
-                this.l = Minecraft.class.getDeclaredField("leftClickCounter");
-            } catch (Exception ignored) {
-            }
+            this.l = Minecraft.class.getDeclaredField("leftClickCounter");
+        } catch (Exception ignored) {
         }
 
         if (this.l != null) {

@@ -147,7 +147,7 @@ public class ClickGui extends GuiScreen {
 
     public void onGuiClosed() {
         ModulesCategory.openModSetting = false;
-        Legitish.configManager.save();
+        Legitish.configManager.saveConfig();
         Legitish.clientConfig.saveConfig();
     }
 

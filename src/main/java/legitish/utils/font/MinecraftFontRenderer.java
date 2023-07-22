@@ -12,6 +12,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("ALL")
 public class MinecraftFontRenderer extends CharRenderer {
     // Credit to EldoDebug for this one :clown:
     CharData[] boldChars = new CharData[256],

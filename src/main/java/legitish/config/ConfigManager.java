@@ -5,6 +5,8 @@ import legitish.main.Legitish;
 import legitish.module.Module;
 import net.minecraft.client.Minecraft;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +19,9 @@ public class ConfigManager {
 
     public ConfigManager() {
         if (!configDirectory.isDirectory()) {
-            configDirectory.mkdirs();
+            if (!configDirectory.mkdirs()) {
+                throw new RuntimeException("Error creating config directory!");
+            }
         }
 
         discoverConfigs();
@@ -25,15 +29,15 @@ public class ConfigManager {
         this.config = new Config(defaultFile);
 
         if (!defaultFile.exists()) {
-            save();
+            saveConfig();
         }
-
     }
 
     public void discoverConfigs() {
         configs.clear();
-        if (configDirectory.listFiles() == null || !(Objects.requireNonNull(configDirectory.listFiles()).length > 0))
-            return;  // nothing to discover if there are no files in the directory
+        if (configDirectory.listFiles() == null || !(Objects.requireNonNull(configDirectory.listFiles()).length > 0)) {
+            return;
+        }
 
         for (File file : Objects.requireNonNull(configDirectory.listFiles())) {
             if (file.getName().endsWith(".lcfg")) {
@@ -50,18 +54,23 @@ public class ConfigManager {
 
     public void setConfig(Config config) {
         this.config = config;
-        JsonObject data = config.getData().get("modules").getAsJsonObject();
-        List<Module> knownModules = new ArrayList<>(Legitish.moduleManager.moduleList());
-        for (Module module : knownModules) {
-            if (data.has(module.getName())) {
-                module.applyConfigFromJson(data.get(module.getName()).getAsJsonObject());
-            } else {
-                module.resetToDefaults();
+        JsonObject data = config.getData();
+        if (data != null) {
+            data = data.get("modules").getAsJsonObject();
+            List<Module> knownModules = new ArrayList<>(Legitish.moduleManager.moduleList());
+            for (Module module : knownModules) {
+                if (data.has(module.getName())) {
+                    module.applyConfigFromJson(data.get(module.getName()).getAsJsonObject());
+                } else {
+                    module.resetToDefaults();
+                }
             }
+        } else {
+            saveConfig();
         }
     }
 
-    public void save() {
+    public void saveConfig() {
         JsonObject data = new JsonObject();
         data.addProperty("title", "");
         data.addProperty("author", "Unknown");
@@ -74,7 +83,7 @@ public class ConfigManager {
         }
         data.add("modules", modules);
 
-        config.save(data);
+        config.saveConfigData(data);
     }
 
     public void loadConfigByName(String replace) {

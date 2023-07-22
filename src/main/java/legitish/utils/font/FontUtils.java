@@ -38,7 +38,6 @@ public class FontUtils {
     private static int prevScale;
 
     public static void init() {
-
         Map<String, Font> locationMap = new HashMap<>();
 
         ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());

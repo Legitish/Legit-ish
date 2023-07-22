@@ -1,6 +1,5 @@
 package legitish.main;
 
-import com.google.common.eventbus.EventBus;
 import legitish.config.ClientConfig;
 import legitish.config.ConfigManager;
 import legitish.gui.ClickGui;
@@ -12,13 +11,10 @@ import legitish.utils.font.FontUtils;
 import net.minecraft.client.Minecraft;
 import net.weavemc.loader.api.event.RenderWorldEvent;
 import net.weavemc.loader.api.event.SubscribeEvent;
+import net.weavemc.loader.api.event.EventBus;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 
 public class Legitish {
-    public static final EventBus eventBus = new EventBus();
-    private static final ScheduledExecutorService ex = Executors.newScheduledThreadPool(2);
     private static final Minecraft mc = Minecraft.getMinecraft();
     public static ConfigManager configManager;
     public static ClientConfig clientConfig;
@@ -30,9 +26,8 @@ public class Legitish {
     }
 
     public static void init() {
-        Runtime.getRuntime().addShutdownHook(new Thread(ex::shutdown));
-        net.weavemc.loader.api.event.EventBus.subscribe(new Legitish());
-        net.weavemc.loader.api.event.EventBus.subscribe(new MouseUtils());
+        EventBus.subscribe(new Legitish());
+        EventBus.subscribe(new MouseUtils());
         FontUtils.init();
         clickGui = new ClickGui();
         moduleManager.RegisterMods();
@@ -40,10 +35,6 @@ public class Legitish {
         configManager = new ConfigManager();
         clientConfig = new ClientConfig();
         clientConfig.applyConfig();
-    }
-
-    public static ScheduledExecutorService getExecutor() {
-        return ex;
     }
 
     @SubscribeEvent

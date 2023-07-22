@@ -153,11 +153,6 @@ public class GameUtils {
         return mc.thePlayer.moveForward != 0.0F || mc.thePlayer.moveStrafing != 0.0F;
     }
 
-    public static int f() {
-        return mc.getNetHandler().getPlayerInfo(mc.thePlayer.getUniqueID()).getResponseTime();
-    }
-
-
     public static boolean playerAboveAir() {
         double x = mc.thePlayer.posX;
         double y = mc.thePlayer.posY - 1.0D;

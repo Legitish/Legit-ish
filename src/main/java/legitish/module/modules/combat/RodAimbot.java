@@ -1,7 +1,7 @@
 package legitish.module.modules.combat;
 
 import legitish.module.Module;
-import legitish.module.modules.render.AntiBot;
+import legitish.module.modules.render.Targets;
 import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.GameUtils;
@@ -56,7 +56,7 @@ public class RodAimbot extends Module {
                     } while (en == mc.thePlayer);
                 } while (en.deathTime != 0);
             } while (!aimInvis.isToggled() && en.isInvisible());
-        } while ((double) mc.thePlayer.getDistanceToEntity(en) > distance.getInput() || AntiBot.bot(en) || !GameUtils.fov(en, (float) f));
+        } while ((double) mc.thePlayer.getDistanceToEntity(en) > distance.getInput() || Targets.bot(en) || !GameUtils.fov(en, (float) f));
 
         return en;
     }

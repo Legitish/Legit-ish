@@ -13,38 +13,42 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ClientConfig {
-    private final File configFile;
+    private final File clientConfigFile;
     private final String HUDX_prefix = "HUDX ~";
     private final String HUDY_prefix = "HUDY ~";
     private final String loadedConfigPrefix = "loaded-cfg~ ";
 
     public ClientConfig() {
-        File configDir = new File(Minecraft.getMinecraft().mcDataDir, "config/legitish/client");
-        if (!configDir.exists()) {
-            configDir.mkdir();
+        File clientConfigDirectory = new File(Minecraft.getMinecraft().mcDataDir, "config/legitish/client");
+        if (!clientConfigDirectory.exists()) {
+            if (!clientConfigDirectory.mkdirs()) {
+                throw new RuntimeException("Error creating config directory!");
+            }
         }
 
-        configFile = new File(configDir, "config");
-        if (!configFile.exists()) {
+        clientConfigFile = new File(clientConfigDirectory, "config");
+        if (!clientConfigFile.exists()) {
             try {
-                configFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
+                if (clientConfigFile.createNewFile()) {
+                    throw new RuntimeException("Error creating client config file!");
+                }
+            } catch (IOException exception) {
+                exception.printStackTrace();
             }
         }
     }
 
 
     public void saveConfig() {
-        List<String> config = new ArrayList<>();
-        config.add(loadedConfigPrefix + Legitish.configManager.getConfig().getName());
-        config.add(HUDX_prefix + Arraylist.getHudX());
-        config.add(HUDY_prefix + Arraylist.getHudY());
+        List<String> clientConfig = new ArrayList<>();
+        clientConfig.add(loadedConfigPrefix + Legitish.configManager.getConfig().getName());
+        clientConfig.add(HUDX_prefix + Arraylist.getHudX());
+        clientConfig.add(HUDY_prefix + Arraylist.getHudY());
 
         PrintWriter writer;
         try {
-            writer = new PrintWriter(this.configFile);
-            for (String line : config) {
+            writer = new PrintWriter(this.clientConfigFile);
+            for (String line : clientConfig) {
                 writer.println(line);
             }
             writer.close();
@@ -79,7 +83,7 @@ public class ClientConfig {
         List<String> configFileContents = new ArrayList<>();
         Scanner reader = null;
         try {
-            reader = new Scanner(this.configFile);
+            reader = new Scanner(this.clientConfigFile);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

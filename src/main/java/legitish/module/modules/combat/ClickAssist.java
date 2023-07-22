@@ -120,12 +120,12 @@ public class ClickAssist extends Module {
         }
     }
 
-    private void fix(int t) {
-        if (t == 0) {
+    private void fix(int button) {
+        if (button == 0) {
             if (this.ignNL && !Mouse.isButtonDown(0)) {
                 this.robot.mouseRelease(16);
             }
-        } else if (t == 1 && this.ignNR && !Mouse.isButtonDown(1)) {
+        } else if (button == 1 && this.ignNR && !Mouse.isButtonDown(1)) {
             this.robot.mouseRelease(4);
         }
 

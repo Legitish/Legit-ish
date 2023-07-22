@@ -86,10 +86,10 @@ public class AutoPlace extends Module {
                                         if (n - this.l >= 25L) {
                                             this.l = n;
                                             if (mc.playerController.onPlayerRightClick(mc.thePlayer, mc.theWorld, i, pos, m.sideHit, m.hitVec)) {
-                                                MouseUtils.sc(1, true);
+                                                MouseUtils.sendClick(1, true);
                                                 mc.thePlayer.swingItem();
                                                 mc.getItemRenderer().resetEquippedProgress();
-                                                MouseUtils.sc(1, false);
+                                                MouseUtils.sendClick(1, false);
                                                 this.lp = pos;
                                                 this.f = 0;
                                             }

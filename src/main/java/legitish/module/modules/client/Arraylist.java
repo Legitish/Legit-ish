@@ -105,7 +105,7 @@ public class Arraylist extends Module {
                             RRectUtils.drawRound(hudX, y, mfr.getStringWidth(m.getName()) + 2, mfr.getHeight() + margin.getInput() - 1.4, 0, new Color(0, 0, 0, 90));
                         }
                         if (rectangles.isToggled()) {
-                            RRectUtils.drawRound(hudX, y, 0.6, mfr.getHeight() + margin.getInput() - 1.4, 0, ColorUtils.getBackgroundColor(3));
+                            RRectUtils.drawRound(hudX - 0.2, y, 0.75, mfr.getHeight() + margin.getInput() - 1.4, 0, ColorUtils.getBackgroundColor(3));
                         }
                         mfr.drawString(m.getName(), hudX + 2, y + margin.getInput() / 2, MinecraftFontRenderer.CenterMode.NONE, shadow.isToggled(), ColorUtils.getFontColor(1).getRGB());
                         y += mfr.getHeight() + margin.getInput();

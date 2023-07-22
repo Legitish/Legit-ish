@@ -3,7 +3,6 @@ package legitish.module;
 import legitish.module.modules.client.Arraylist;
 import legitish.module.modules.client.Gui;
 import legitish.module.modules.combat.*;
-import legitish.module.modules.movement.KeepSprint;
 import legitish.module.modules.movement.Sprint;
 import legitish.module.modules.player.*;
 import legitish.module.modules.render.*;
@@ -34,12 +33,11 @@ public class ModuleManager {
         this.addModule(new AimAssist());
         this.addModule(new ClickAssist());
         this.addModule(new DelayRemover());
-        this.addModule(new Dragclicker());
         this.addModule(reach = new Reach());
         this.addModule(new RodAimbot());
         this.addModule(new Velocity());
         // Movement
-        this.addModule(new KeepSprint());
+        //this.addModule(new KeepSprint());
         this.addModule(new Sprint());
         // Player
         this.addModule(new AutoJump());
@@ -48,7 +46,7 @@ public class ModuleManager {
         this.addModule(new Freecam());
         this.addModule(new SafeWalk());
         // Visual
-        this.addModule(antiBot = new AntiBot());
+        this.addModule(antiBot = new Targets());
         this.addModule(arrayList = new Arraylist());
         this.addModule(new BedPlates());
         this.addModule(new Chams());

@@ -1,7 +1,7 @@
 package legitish.module.modules.combat;
 
 import legitish.module.Module;
-import legitish.module.modules.render.AntiBot;
+import legitish.module.modules.render.Targets;
 import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.GameUtils;
@@ -68,7 +68,7 @@ public class AimAssist extends Module {
                         } while (en.deathTime != 0);
                     } while (!aimInvis.isToggled() && en.isInvisible());
                 } while ((double) mc.thePlayer.getDistanceToEntity(en) > distance.getInput());
-            } while (AntiBot.bot(en));
+            } while (Targets.bot(en));
         } while (!blatantMode.isToggled() && !GameUtils.fov(en, (float) fov));
 
         return en;

@@ -55,7 +55,7 @@ public class MurderMystery extends Module {
                                 en = var2.next();
                             } while (en == mc.thePlayer);
                         } while (en.isInvisible());
-                    } while (AntiBot.bot(en));
+                    } while (Targets.bot(en));
 
                     if (en.getHeldItem() != null && en.getHeldItem().hasDisplayName()) {
                         Item i = en.getHeldItem().getItem();

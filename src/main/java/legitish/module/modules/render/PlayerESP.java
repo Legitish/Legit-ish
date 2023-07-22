@@ -2,7 +2,6 @@ package legitish.module.modules.render;
 
 import legitish.module.Module;
 import legitish.module.ModuleDesc;
-import legitish.module.modulesettings.ModuleComboSetting;
 import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.GameUtils;
@@ -18,14 +17,10 @@ import java.util.Iterator;
 public class PlayerESP extends Module {
     public static ModuleDesc g;
     public static ModuleSliderSetting a;
-    public static ModuleSliderSetting b;
-    public static ModuleSliderSetting c;
     public static ModuleSliderSetting i;
     public static ModuleSliderSetting j;
-    public static ModuleTickSetting d;
     public static ModuleTickSetting f;
     public static ModuleTickSetting h;
-    public static ModuleComboSetting t;
     public static ModuleTickSetting t1;
     public static ModuleTickSetting t2;
     public static ModuleTickSetting t3;
@@ -44,7 +39,6 @@ public class PlayerESP extends Module {
         this.registerSetting(j = new ModuleSliderSetting("X-Shift", 0.0D, -35.0D, 10.0D, 1.0D));
         this.registerSetting(f = new ModuleTickSetting("Show invis", true));
         this.registerSetting(h = new ModuleTickSetting("Red on damage", true));
-        this.registerSetting(d = new ModuleTickSetting("Rainbow", false));
     }
 
     public void guiUpdate() {
@@ -54,7 +48,7 @@ public class PlayerESP extends Module {
     @SubscribeEvent
     public void r1(RenderWorldEvent renderWorldEvent) {
         if (GameUtils.isPlayerInGame()) {
-            int rgb = d.isToggled() ? 0 : this.rgb_c;
+            int rgb = this.rgb_c;
             Iterator var3;
             var3 = mc.theWorld.playerEntities.iterator();
 
@@ -72,7 +66,7 @@ public class PlayerESP extends Module {
                     } while (en.deathTime != 0);
                 } while (!f.isToggled() && en.isInvisible());
 
-                if (!AntiBot.bot(en)) {
+                if (!Targets.bot(en)) {
                     this.r(en, rgb);
                 }
             }

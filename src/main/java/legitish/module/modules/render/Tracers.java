@@ -17,7 +17,6 @@ public class Tracers extends Module {
     public static ModuleSliderSetting b;
     public static ModuleSliderSetting c;
     public static ModuleSliderSetting d;
-    public static ModuleTickSetting e;
     public static ModuleSliderSetting f;
     private boolean g;
 
@@ -70,7 +69,7 @@ public class Tracers extends Module {
                     } while (en.deathTime != 0);
                 } while (!a.isToggled() && en.isInvisible());
 
-                if (!AntiBot.bot(en)) {
+                if (!Targets.bot(en)) {
                     GLUtils.drawTracerLine(en, rgb, (float) f.getInput());
                 }
             }
