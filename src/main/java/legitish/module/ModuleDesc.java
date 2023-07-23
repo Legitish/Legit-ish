@@ -26,8 +26,4 @@ public class ModuleDesc extends ModuleSettingsList {
     public JsonObject getConfigAsJson() {
         return null;
     }
-
-    @Override
-    public void resetToDefaults() {
-    }
 }

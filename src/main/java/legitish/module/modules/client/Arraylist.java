@@ -96,7 +96,7 @@ public class Arraylist extends Module {
                 y += 15;
             }
             for (Module m : en) {
-                if (m.isEnabled() && m != this) {
+                if (m.isEnabled() && m != this && m.moduleCategory() != Module.category.Client) {
                     if (Arraylist.positionMode == MouseUtils.PositionMode.DOWNRIGHT || Arraylist.positionMode == MouseUtils.PositionMode.UPRIGHT) {
                         mfr.drawString(m.getName(), hudX + (Legitish.moduleManager.getLongestActiveModule(mfr) - mfr.getStringWidth(m.getName())), y, MinecraftFontRenderer.CenterMode.NONE, shadow.isToggled(), ColorUtils.getFontColor(1).getRGB());
                         y += mc.fontRendererObj.FONT_HEIGHT + margin.getInput();

@@ -2,7 +2,10 @@ package legitish.module;
 
 import legitish.module.modules.client.Arraylist;
 import legitish.module.modules.client.Gui;
+import legitish.module.modules.client.Notifications;
 import legitish.module.modules.combat.*;
+import legitish.module.modules.minigames.BedPlates;
+import legitish.module.modules.minigames.MurderMystery;
 import legitish.module.modules.movement.Sprint;
 import legitish.module.modules.player.*;
 import legitish.module.modules.render.*;
@@ -20,8 +23,9 @@ public class ModuleManager {
     public static Module arrayList;
     public static Module playerESP;
     public static Module gui;
-    static List<Module> moduleList = new ArrayList<>();
-    static List<Module> enabledModuleList = new ArrayList<>();
+    public static Module notifications;
+    public static List<Module> moduleList = new ArrayList<>();
+    public static List<Module> enabledModuleList = new ArrayList<>();
 
     public static void sort() {
         enabledModuleList.sort((o1, o2) -> MouseUtils.mc.fontRendererObj.getStringWidth(o2.getName()) - MouseUtils.mc.fontRendererObj.getStringWidth(o1.getName()));
@@ -47,7 +51,6 @@ public class ModuleManager {
         this.addModule(new SafeWalk());
         // Visual
         this.addModule(antiBot = new Targets());
-        this.addModule(arrayList = new Arraylist());
         this.addModule(new BedPlates());
         this.addModule(new Chams());
         this.addModule(new ChestESP());
@@ -57,13 +60,16 @@ public class ModuleManager {
         this.addModule(new Tracers());
         this.addModule(new Xray());
         // Client
+        this.addModule(arrayList = new Arraylist());
         this.addModule(gui = new Gui());
+        this.addModule(notifications = new Notifications());
         this.enableDefaultModules();
     }
 
     public void enableDefaultModules() {
-        arrayList.enable();
         antiBot.enable();
+        notifications.enable();
+        arrayList.enable();
     }
 
     private void addModule(Module m) {

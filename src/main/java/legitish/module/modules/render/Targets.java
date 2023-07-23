@@ -5,7 +5,6 @@ import legitish.module.ModuleManager;
 import legitish.module.modules.player.Freecam;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.ColorUtils;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.weavemc.loader.api.event.SubscribeEvent;
 import net.weavemc.loader.api.event.TickEvent;
@@ -23,7 +22,7 @@ public class Targets extends Module {
         this.registerSetting(removeDead = new ModuleTickSetting("Remove dead", true));
     }
 
-    public static boolean bot(Entity en) {
+    public static boolean bot(EntityPlayer en) {
         if (Freecam.en != null && Freecam.en == en) {
             return true;
         } else if (!ModuleManager.antiBot.isEnabled()) {

@@ -44,9 +44,9 @@ public class Velocity extends Module {
                 mc.thePlayer.motionZ *= horizontal.getInput() / 100.0D;
             }
 
-            //if (b.getInput() != 100.0D) {
-            //mc.thePlayer.motionY *= b.getInput() / 100.0D;
-            //}
+            if (vertical.getInput() != 100.0D) {
+                mc.thePlayer.motionY *= vertical.getInput() / 100.0D;
+            }
         }
 
     }

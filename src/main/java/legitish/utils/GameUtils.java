@@ -160,4 +160,24 @@ public class GameUtils {
         BlockPos p = new BlockPos(MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z));
         return mc.theWorld.isAirBlock(p);
     }
+
+    public static boolean isBedwars() {
+        if (mc.thePlayer.getWorldScoreboard() == null || mc.thePlayer.getWorldScoreboard().getObjectiveInDisplaySlot(1) == null || mc.thePlayer.capabilities.allowFlying) {
+            return false;
+        }
+
+        String d = mc.thePlayer.getWorldScoreboard().getObjectiveInDisplaySlot(1).getDisplayName();
+        if (!d.contains("BED") && !d.contains("WARS")) {
+            return false;
+        }
+
+        for (String l : getScoreboard()) {
+            String s = MouseUtils.str(l);
+            if (s.contains("Diamond") || s.contains("gone") || s.contains("Emerald")) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

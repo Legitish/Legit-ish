@@ -1,4 +1,4 @@
-package legitish.module.modules.render;
+package legitish.module.modules.minigames;
 
 import legitish.module.Module;
 import legitish.module.modulesettings.ModuleSliderSetting;
@@ -6,7 +6,6 @@ import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.ColorUtils;
 import legitish.utils.CooldownUtils;
 import legitish.utils.GameUtils;
-import legitish.utils.MouseUtils;
 import legitish.utils.render.RRectUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -55,7 +54,7 @@ public class BedPlates extends Module {
     }
 
     public void updateBeds() {
-        if (GameUtils.isPlayerInGame() && (!bedwarsOnly.isToggled() || isBedwars())) {
+        if (GameUtils.isPlayerInGame() && (!bedwarsOnly.isToggled() || GameUtils.isBedwars())) {
             findOwnBed();
             if (ownBed != null) {
                 findBed(ownBed.getZ(), ownBed.getY(), ownBed.getX(), 1);
@@ -109,26 +108,6 @@ public class BedPlates extends Module {
             offset += 17.5;
         }
         glPopMatrix();
-    }
-
-    private boolean isBedwars() {
-        if (mc.thePlayer.getWorldScoreboard() == null || mc.thePlayer.getWorldScoreboard().getObjectiveInDisplaySlot(1) == null || mc.thePlayer.capabilities.allowFlying) {
-            return false;
-        }
-
-        String d = mc.thePlayer.getWorldScoreboard().getObjectiveInDisplaySlot(1).getDisplayName();
-        if (!d.contains("BED") && !d.contains("WARS")) {
-            return false;
-        }
-
-        for (String l : GameUtils.getScoreboard()) {
-            String s = MouseUtils.str(l);
-            if (s.contains("Diamond") || s.contains("gone") || s.contains("Emerald")) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     private void findOwnBed() {

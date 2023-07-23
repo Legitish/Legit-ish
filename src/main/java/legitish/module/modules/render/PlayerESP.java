@@ -14,9 +14,8 @@ import net.weavemc.loader.api.event.SubscribeEvent;
 import java.awt.*;
 import java.util.Iterator;
 
+@SuppressWarnings("unused")
 public class PlayerESP extends Module {
-    public static ModuleDesc g;
-    public static ModuleSliderSetting a;
     public static ModuleSliderSetting i;
     public static ModuleSliderSetting j;
     public static ModuleTickSetting f;
@@ -29,8 +28,6 @@ public class PlayerESP extends Module {
 
     public PlayerESP() {
         super("Player ESP", Module.category.Visual, 0);
-
-        this.registerSetting(g = new ModuleDesc("ESP Types"));
         this.registerSetting(t3 = new ModuleTickSetting("2D", false));
         this.registerSetting(t1 = new ModuleTickSetting("Box", false));
         this.registerSetting(t4 = new ModuleTickSetting("Health", true));
@@ -49,8 +46,7 @@ public class PlayerESP extends Module {
     public void r1(RenderWorldEvent renderWorldEvent) {
         if (GameUtils.isPlayerInGame()) {
             int rgb = this.rgb_c;
-            Iterator var3;
-            var3 = mc.theWorld.playerEntities.iterator();
+            Iterator<EntityPlayer> var3 = mc.theWorld.playerEntities.iterator();
 
             while (true) {
                 EntityPlayer en;

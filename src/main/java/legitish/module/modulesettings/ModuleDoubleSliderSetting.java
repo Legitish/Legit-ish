@@ -12,7 +12,6 @@ public class ModuleDoubleSliderSetting extends ModuleSettingsList {
     private final double min;
     private final double interval;
     private double valMax, valMin;
-    private double defaultValMin, defaultValMax;
 
     public ModuleDoubleSliderSetting(String settingName, double defaultValueMin, double defaultValueMax, double min,
                                      double max, double intervals) {
@@ -71,12 +70,6 @@ public class ModuleDoubleSliderSetting extends ModuleSettingsList {
         n = correct(n, this.valMin, this.max);
         n = (double) Math.round(n * (1.0D / this.interval)) / (1.0D / this.interval);
         this.valMax = n;
-    }
-
-    @Override
-    public void resetToDefaults() {
-        this.setValueMin(defaultValMin);
-        this.setValueMax(defaultValMax);
     }
 
     @Override

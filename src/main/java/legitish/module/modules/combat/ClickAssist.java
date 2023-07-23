@@ -40,7 +40,6 @@ public class ClickAssist extends Module {
         } catch (AWTException var2) {
             this.disable();
         }
-
     }
 
     public void onDisable() {

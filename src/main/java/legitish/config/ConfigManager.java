@@ -5,8 +5,6 @@ import legitish.main.Legitish;
 import legitish.module.Module;
 import net.minecraft.client.Minecraft;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,8 +59,6 @@ public class ConfigManager {
             for (Module module : knownModules) {
                 if (data.has(module.getName())) {
                     module.applyConfigFromJson(data.get(module.getName()).getAsJsonObject());
-                } else {
-                    module.resetToDefaults();
                 }
             }
         } else {

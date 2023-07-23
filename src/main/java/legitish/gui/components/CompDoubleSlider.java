@@ -29,7 +29,6 @@ public class CompDoubleSlider extends Comp {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, double scrollY) {
-
         super.drawScreen(mouseX, mouseY, scrollY);
         double min = doubleSliderSetting.getMin();
         double max = doubleSliderSetting.getMax();
@@ -41,7 +40,7 @@ public class CompDoubleSlider extends Comp {
         animationMin.setAnimation((float) realMin, 14);
         animationMax.setAnimation((float) realMax, 14);
         double boundedMouseX = Math.min(width, Math.max(0, mouseX - (clickGui.getX() + x - 70)));
-
+        double newValue = MathUtils.round((boundedMouseX / width) * (max - min) + min, 2);
         if (dragging) {
             if (boundedMouseX > realMin + (realMax - realMin) / 2 || focus == 2) {
                 if (focus == 0) focus = 2;
@@ -49,7 +48,6 @@ public class CompDoubleSlider extends Comp {
                     if (boundedMouseX <= realMin) {
                         doubleSliderSetting.setValueMax(doubleSliderSetting.getInputMin());
                     } else {
-                        double newValue = MathUtils.round((boundedMouseX / width) * (max - min) + min, 2);
                         doubleSliderSetting.setValueMax(newValue);
                     }
                 }
@@ -61,7 +59,6 @@ public class CompDoubleSlider extends Comp {
                     if (boundedMouseX >= realMax) {
                         doubleSliderSetting.setValueMin(doubleSliderSetting.getInputMax());
                     } else {
-                        double newValue = MathUtils.round((boundedMouseX / width) * (max - min) + min, 2);
                         doubleSliderSetting.setValueMin(newValue);
                     }
                 }

@@ -35,11 +35,6 @@ public class ModuleComboSetting extends ModuleSettingsList {
     }
 
     @Override
-    public void resetToDefaults() {
-        this.setValue(this.value);
-    }
-
-    @Override
     public void applyConfigFromJson(JsonObject data) {
         if (!data.get("type").getAsString().equals("combo")) {
             return;

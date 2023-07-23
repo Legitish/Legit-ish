@@ -15,7 +15,7 @@ import org.lwjgl.opengl.GL11;
 
 public class Nametags extends Module {
     public static ModuleSliderSetting offset;
-    public static ModuleTickSetting rect, showHealth, showInvis, removeTags, e, noScale;
+    public static ModuleTickSetting rect, showHealth, showInvis, removeTags, noScale;
 
     public Nametags() {
         super("Nametags", Module.category.Visual, 0);

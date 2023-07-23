@@ -204,7 +204,8 @@ public class MinecraftFontRenderer extends CharRenderer {
         }
         lines.add(line.toString());
 
-        double newY = y;
+        double newY = y - (centerMode == CenterMode.XY || centerMode == CenterMode.Y ? ((lines.size() - 1) * (getHeight() + heightIncrement)) / 2 : 0);
+        // add x centermode support never !!!!
         for (String s : lines) {
             ColorUtils.resetColor();
             drawString(s, x, newY, centerMode, shadow, color);

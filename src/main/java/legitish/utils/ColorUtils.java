@@ -19,7 +19,7 @@ public class ColorUtils {
     };
 
     public static Color getBackgroundColor(int id) {
-        Color color = new Color(255, 0, 0);
+        Color color = new Color(255, 0, 255);
         if (id == 1) {
             color = new Color(16, 15, 69);
         } else if (id == 2) {
@@ -56,7 +56,7 @@ public class ColorUtils {
     }
 
     private static Color getRawFontColor(int id) {
-        Color color = new Color(0, 0, 255);
+        Color color = new Color(255, 0, 0);
 
         if (id == 1) {
             color = new Color(255, 255, 255);

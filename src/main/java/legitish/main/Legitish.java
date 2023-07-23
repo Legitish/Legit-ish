@@ -9,9 +9,9 @@ import legitish.utils.GameUtils;
 import legitish.utils.MouseUtils;
 import legitish.utils.font.FontUtils;
 import net.minecraft.client.Minecraft;
+import net.weavemc.loader.api.event.EventBus;
 import net.weavemc.loader.api.event.RenderWorldEvent;
 import net.weavemc.loader.api.event.SubscribeEvent;
-import net.weavemc.loader.api.event.EventBus;
 
 
 public class Legitish {

@@ -39,11 +39,6 @@ public class ModuleTickSetting extends ModuleSettingsList {
     }
 
     @Override
-    public void resetToDefaults() {
-        this.setEnabled(this.isEnabled);
-    }
-
-    @Override
     public void applyConfigFromJson(JsonObject data) {
         if (!data.get("type").getAsString().equals("tick")) {
             return;

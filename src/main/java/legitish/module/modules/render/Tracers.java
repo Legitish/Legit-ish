@@ -52,8 +52,7 @@ public class Tracers extends Module {
     public void o(RenderWorldEvent ev) {
         if (GameUtils.isPlayerInGame()) {
             int rgb = (new Color((int) b.getInput(), (int) c.getInput(), (int) d.getInput())).getRGB();
-            Iterator var3;
-            var3 = mc.theWorld.playerEntities.iterator();
+            Iterator<EntityPlayer> var3 = mc.theWorld.playerEntities.iterator();
 
             while (true) {
                 EntityPlayer en;

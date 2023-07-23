@@ -80,7 +80,7 @@ public class ModulesCategory extends Category {
                     break;
             }
         }
-        scrollAnimation.setAnimation((float) scrollY, 16);
+        scrollAnimation.setAnimation(scrollY, 16);
 
         double addX = getModuleCategory() == Module.category.Movement ? 20 : getModuleCategory() == Module.category.Player ? 40 : getModuleCategory() == Module.category.Visual ? 60 : 0;
         canToggle = MouseUtils.mouseInBounds(mouseX, mouseY, clickGUI.getX(), clickGUI.getY(), clickGUI.getWidth(), clickGUI.getHeight());

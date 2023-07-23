@@ -35,7 +35,7 @@ public class MouseUtils {
 
         try {
             g = MouseEvent.class.getDeclaredField("button");
-            f = MouseEvent.class.getDeclaredField("buttonstate");
+            f = MouseEvent.class.getDeclaredField("buttonState");
             h = Mouse.class.getDeclaredField("buttons");
         } catch (Exception ignored) {
         }

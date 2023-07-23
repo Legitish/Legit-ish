@@ -1,7 +1,8 @@
-package legitish.module.modules.render;
+package legitish.module.modules.minigames;
 
 import legitish.module.Module;
 import legitish.module.ModuleManager;
+import legitish.module.modules.render.Targets;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.GameUtils;
 import legitish.utils.MouseUtils;

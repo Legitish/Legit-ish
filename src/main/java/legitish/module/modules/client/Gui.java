@@ -36,6 +36,5 @@ public class Gui extends Module {
             case 3:
                 b.setDesc("Mode: 3");
         }
-
     }
 }

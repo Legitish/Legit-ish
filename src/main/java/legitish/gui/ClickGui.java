@@ -17,8 +17,6 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 
 public class ClickGui extends GuiScreen {
-    private final int width = 305;
-    private final int height = 230;
     public boolean closed;
     public Category selectedCategory;
     public CategoryManager categoryManager;
@@ -108,7 +106,7 @@ public class ClickGui extends GuiScreen {
                     ModulesCategory.openModSetting = false;
                 }
             } else {
-                if (MouseUtils.mouseInBounds(mouseX, mouseY, this.getX(), this.getY() + height - 30, 85, 30) && mouseButton == 0) {
+                if (MouseUtils.mouseInBounds(mouseX, mouseY, this.getX(), this.getY() + this.getHeight() - 30, 85, 30) && mouseButton == 0) {
                     selectedCategory = c;
                     ModulesCategory.openModSetting = false;
                 }
@@ -164,10 +162,10 @@ public class ClickGui extends GuiScreen {
     }
 
     public float getWidth() {
-        return width;
+        return 305;
     }
 
     public float getHeight() {
-        return height;
+        return 230;
     }
 }

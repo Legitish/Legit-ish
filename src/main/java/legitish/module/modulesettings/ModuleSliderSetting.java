@@ -61,11 +61,6 @@ public class ModuleSliderSetting extends ModuleSettingsList {
     }
 
     @Override
-    public void resetToDefaults() {
-        this.setValue(this.val);
-    }
-
-    @Override
     public void applyConfigFromJson(JsonObject data) {
         if (!data.get("type").getAsString().equals("slider")) {
             return;

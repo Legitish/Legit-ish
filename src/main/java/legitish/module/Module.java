@@ -2,8 +2,10 @@ package legitish.module;
 
 import com.google.gson.JsonObject;
 import legitish.main.Legitish;
+import legitish.module.modules.client.Notifications;
 import legitish.module.modulesettings.ModuleTickSetting;
 import net.minecraft.client.Minecraft;
+import net.weavemc.loader.api.event.EventBus;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
@@ -27,13 +29,6 @@ public class Module {
         this.settings = new ArrayList<>();
     }
 
-    public Module(String name, Module.category moduleCategory) {
-        this.moduleName = name;
-        this.moduleCategory = moduleCategory;
-        this.keycode = 0;
-        this.enabled = false;
-    }
-
     public void keybind() {
         if (this.keycode != 0) {
             if (!this.isToggled && Keyboard.isKeyDown(this.keycode)) {
@@ -47,19 +42,21 @@ public class Module {
     }
 
     public void enable() {
+        Notifications.sendNotification(Notifications.NotificationTypes.INFO, this.moduleName + " was enabled!", 2000);
         this.setEnabled(true);
         ModuleManager.enabledModuleList.add(this);
         if (ModuleManager.arrayList.isEnabled()) {
             ModuleManager.sort();
         }
-        net.weavemc.loader.api.event.EventBus.subscribe(this);
+        EventBus.subscribe(this);
         this.onEnable();
     }
 
     public void disable() {
+        Notifications.sendNotification(Notifications.NotificationTypes.INFO, this.moduleName + " was disabled!", 2000);
         this.setEnabled(false);
         ModuleManager.enabledModuleList.remove(this);
-        net.weavemc.loader.api.event.EventBus.unsubscribe(this);
+        EventBus.unsubscribe(this);
         this.onDisable();
     }
 
@@ -128,7 +125,6 @@ public class Module {
                 settings.add(setting.n, settingData);
             }
         }
-
         JsonObject data = new JsonObject();
         data.addProperty("keycode", keycode);
         data.add("settings", settings);
@@ -147,15 +143,6 @@ public class Module {
             }
         } catch (NullPointerException ignored) {
 
-        }
-    }
-
-    public void resetToDefaults() {
-        this.keycode = defaultKeyCode;
-        Legitish.moduleManager.enableDefaultModules();
-
-        for (ModuleSettingsList setting : this.settings) {
-            setting.resetToDefaults();
         }
     }
 

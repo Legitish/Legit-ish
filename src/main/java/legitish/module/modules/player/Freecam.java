@@ -85,7 +85,6 @@ public class Freecam extends Module {
                 dz = Math.cos(rad) * speed;
                 freecam = en;
                 freecam.posX += dx;
-                freecam = en;
                 freecam.posZ += dz;
             }
 
@@ -95,7 +94,6 @@ public class Freecam extends Module {
                 dz = Math.cos(rad) * speed;
                 freecam = en;
                 freecam.posX -= dx;
-                freecam = en;
                 freecam.posZ -= dz;
             }
 
@@ -105,7 +103,6 @@ public class Freecam extends Module {
                 dz = Math.cos(rad) * speed;
                 freecam = en;
                 freecam.posX += dx;
-                freecam = en;
                 freecam.posZ += dz;
             }
 
@@ -115,7 +112,6 @@ public class Freecam extends Module {
                 dz = Math.cos(rad) * speed;
                 freecam = en;
                 freecam.posX += dx;
-                freecam = en;
                 freecam.posZ += dz;
             }
 

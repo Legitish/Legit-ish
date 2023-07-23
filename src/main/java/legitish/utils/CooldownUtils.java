@@ -19,4 +19,8 @@ public class CooldownUtils {
     public void setCooldown(long time) {
         this.duration = time;
     }
+
+    public long getTimeLeft() {
+        return duration - (System.currentTimeMillis() - start);
+    }
 }
