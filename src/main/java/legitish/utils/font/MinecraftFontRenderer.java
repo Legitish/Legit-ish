@@ -78,7 +78,7 @@ public class MinecraftFontRenderer extends CharRenderer {
         ColorUtils.setColor(color);
         GlStateManager.enableTexture2D();
         GlStateManager.bindTexture(this.tex.getGlTextureId());
-        GLUtils.bindTexture(this.tex.getGlTextureId());
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.tex.getGlTextureId());
 
         GlStateManager.enableBlend();
 
@@ -186,7 +186,7 @@ public class MinecraftFontRenderer extends CharRenderer {
         this.texItalicBold = this.setupTexture(this.font.deriveFont(Font.BOLD | Font.ITALIC), this.antiAlias, this.fractionalMetrics, this.boldItalicChars);
     }
 
-    public void wrapText(String text, double x, double y, CenterMode centerMode, boolean shadow, int color, double width, double heightIncrement) {
+    public void wrapText(String text, double x, double y, CenterMode centerMode, boolean shadow, int color, double width) {
         List<String> lines = new ArrayList<>();
         String[] words = text.trim().split(" ");
         StringBuilder line = new StringBuilder();
@@ -204,12 +204,12 @@ public class MinecraftFontRenderer extends CharRenderer {
         }
         lines.add(line.toString());
 
-        double newY = y - (centerMode == CenterMode.XY || centerMode == CenterMode.Y ? ((lines.size() - 1) * (getHeight() + heightIncrement)) / 2 : 0);
+        double newY = y - (centerMode == CenterMode.XY || centerMode == CenterMode.Y ? ((lines.size() - 1) * (getHeight() + 5)) / 2 : 0);
         // add x centermode support never !!!!
         for (String s : lines) {
             ColorUtils.resetColor();
             drawString(s, x, newY, centerMode, shadow, color);
-            newY += getHeight() + heightIncrement;
+            newY += getHeight() + 5;
         }
     }
 

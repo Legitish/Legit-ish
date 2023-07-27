@@ -18,7 +18,7 @@ public class RodAimbot extends Module {
     public static ModuleTickSetting aimInvis;
 
     public RodAimbot() {
-        super("Rod Aimbot", Module.category.Combat, 0);
+        super("Rod Aimbot", category.Combat, 0);
         this.registerSetting(fov = new ModuleSliderSetting("FOV", 90.0D, 15.0D, 360.0D, 1.0D));
         this.registerSetting(distance = new ModuleSliderSetting("Distance", 4.5D, 1.0D, 10.0D, 0.5D));
         this.registerSetting(aimInvis = new ModuleTickSetting("Aim invis", false));

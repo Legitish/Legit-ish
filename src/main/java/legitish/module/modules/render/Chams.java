@@ -8,7 +8,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Chams extends Module {
     public Chams() {
-        super("Chams", Module.category.Visual, 0);
+        super("Chams", category.Visual, 0);
     }
 
     @SubscribeEvent

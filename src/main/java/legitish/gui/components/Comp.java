@@ -5,7 +5,7 @@ import legitish.main.Legitish;
 import legitish.module.Module;
 
 public class Comp {
-    public double x, y, width, height;
+    public double x, y, width;
     public ClickGui clickGui = Legitish.clickGui;
     public Module module;
 

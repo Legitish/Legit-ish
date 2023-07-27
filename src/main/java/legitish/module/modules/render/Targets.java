@@ -5,11 +5,15 @@ import legitish.module.ModuleManager;
 import legitish.module.modules.player.Freecam;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.ColorUtils;
+import legitish.utils.GameUtils;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.play.client.C09PacketHeldItemChange;
+import net.weavemc.loader.api.event.PacketEvent;
 import net.weavemc.loader.api.event.SubscribeEvent;
 import net.weavemc.loader.api.event.TickEvent;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class Targets extends Module {
     private static final HashMap<EntityPlayer, Long> newEnt = new HashMap<>();
@@ -17,7 +21,7 @@ public class Targets extends Module {
     public static ModuleTickSetting removeDead;
 
     public Targets() {
-        super("AntiBot", Module.category.Visual, 0);
+        super("Targets", category.Client, 0);
         this.registerSetting(cooldown = new ModuleTickSetting("Wait 80 ticks", false));
         this.registerSetting(removeDead = new ModuleTickSetting("Remove dead", true));
     }
@@ -33,7 +37,7 @@ public class Targets extends Module {
             return true;
         } else if (en.isDead && removeDead.isToggled()) {
             return true;
-        } else return ColorUtils.stripColor(en.getDisplayName().getFormattedText()).contains("[NPC]");
+        } else return ColorUtils.stripColor(en.getDisplayName().getUnformattedText()).contains("[NPC]");
     }
 
     public void onDisable() {

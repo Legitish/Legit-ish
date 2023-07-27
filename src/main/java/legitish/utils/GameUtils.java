@@ -40,13 +40,13 @@ public class GameUtils {
 
     public static void sendChat(String txt) {
         if (isPlayerInGame()) {
-            String message = formatColorCode("[!] " + txt);
+            String message = formatColorCode(txt);
             mc.thePlayer.addChatMessage(new ChatComponentText(message));
         }
     }
 
     public static String formatColorCode(String txt) {
-        return txt.replaceAll("&", "§");
+        return txt.replaceAll("&", String.valueOf('\u00a7'));
     }
 
     public static List<String> getScoreboard() {

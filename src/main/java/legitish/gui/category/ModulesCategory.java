@@ -4,7 +4,8 @@ import legitish.gui.ClickGui;
 import legitish.gui.components.*;
 import legitish.main.Legitish;
 import legitish.module.Module;
-import legitish.module.ModuleSettingsList;
+import legitish.module.modulesettings.ModuleDesc;
+import legitish.module.modulesettings.ModuleSettingsList;
 import legitish.module.modulesettings.ModuleComboSetting;
 import legitish.module.modulesettings.ModuleDoubleSliderSetting;
 import legitish.module.modulesettings.ModuleSliderSetting;
@@ -115,31 +116,47 @@ public class ModulesCategory extends Category {
         }
         for (Module mod : Legitish.moduleManager.inCategory(getModuleCategory())) {
             if (MouseUtils.mouseInBounds(mouseX, mouseY, clickGUI.getX() + clickGUI.getWidth() - 23.5, clickGUI.getY() + offset + scrollAnimation.getValue(), 23.5, 20) && canToggle && !openModSetting && mouseButton == 0) {
-                int settingOffset = 35;
+                int settingOffset = 30;
                 comps.clear();
                 if (!mod.getSettings().isEmpty()) {
+                    int alternate = 0;
                     for (ModuleSettingsList settingsList : mod.getSettings()) {
                         selectedMod = mod;
                         openModSetting = true;
-
+                        if (!(settingsList instanceof ModuleTickSetting))
+                        {
+                            settingOffset += alternate == 1 ? 15 : 0;
+                            alternate = alternate == 1 ? 0 : alternate;
+                        }
+                        if (settingsList instanceof ModuleDesc) {
+                            ModuleDesc desc = (ModuleDesc) settingsList;
+                            comps.add(new CompDesc(95, settingOffset, selectedMod, desc));
+                            settingOffset += 20;
+                        }
                         if (settingsList instanceof ModuleComboSetting) {
                             ModuleComboSetting comboSetting = (ModuleComboSetting) settingsList;
-                            comps.add(new CompCombo(165, settingOffset, selectedMod, comboSetting));
+                            comps.add(new CompCombo(95, settingOffset, selectedMod, comboSetting));
                             settingOffset += 15;
                         }
                         if (settingsList instanceof ModuleTickSetting) {
                             ModuleTickSetting tickSetting = (ModuleTickSetting) settingsList;
-                            comps.add(new CompCheckBox(165, settingOffset, selectedMod, tickSetting));
-                            settingOffset += 15;
+                            if (alternate == 1) {
+                                comps.add(new CompCheckBox(95 + (clickGUI.getWidth() - 95) / 2, settingOffset, selectedMod, tickSetting));
+                                alternate = 0;
+                                settingOffset += 15;
+                            } else {
+                                comps.add(new CompCheckBox(95, settingOffset, selectedMod, tickSetting));
+                                alternate = 1;
+                            }
                         }
                         if (settingsList instanceof ModuleSliderSetting) {
                             ModuleSliderSetting sliderSetting = (ModuleSliderSetting) settingsList;
-                            comps.add(new CompSlider(165, settingOffset, selectedMod, sliderSetting));
+                            comps.add(new CompSlider(95, settingOffset, selectedMod, sliderSetting));
                             settingOffset += 25;
                         }
                         if (settingsList instanceof ModuleDoubleSliderSetting) {
                             ModuleDoubleSliderSetting doubleSliderSetting = (ModuleDoubleSliderSetting) settingsList;
-                            comps.add(new CompDoubleSlider(165, settingOffset, selectedMod, doubleSliderSetting));
+                            comps.add(new CompDoubleSlider(95, settingOffset, selectedMod, doubleSliderSetting));
                             settingOffset += 25;
                         }
                     }

@@ -1,7 +1,6 @@
 package legitish.module.modulesettings;
 
 import com.google.gson.JsonObject;
-import legitish.module.ModuleSettingsList;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

@@ -16,7 +16,7 @@ public class AimAssist extends Module {
     public static ModuleTickSetting clickAim, weaponOnly, aimInvis, blatantMode;
 
     public AimAssist() {
-        super("Aim Assist", Module.category.Combat, 0);
+        super("Aim Assist", category.Combat, 0);
         this.registerSetting(speed = new ModuleSliderSetting("Speed", 45.0D, 1.0D, 100.0D, 1.0D));
         this.registerSetting(fov = new ModuleSliderSetting("FOV", 90.0D, 15.0D, 180.0D, 1.0D));
         this.registerSetting(distance = new ModuleSliderSetting("Distance", 4.5D, 1.0D, 10.0D, 0.5D));

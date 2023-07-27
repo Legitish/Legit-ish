@@ -8,5 +8,6 @@ public class BedwarsAlerts extends Module {
 
     public BedwarsAlerts() {
         super("Bedwars Alerts", category.Visual, 0);
+        fireball = new ModuleTickSetting("Fireball", true);
     }
 }

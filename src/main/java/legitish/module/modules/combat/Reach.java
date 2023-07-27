@@ -25,7 +25,7 @@ public class Reach extends Module {
     public static ModuleTickSetting weaponOnly, movingOnly, sprintOnly, hitThroughBlocks;
 
     public Reach() {
-        super("Reach", Module.category.Combat, 0);
+        super("Reach", category.Combat, 0);
         this.registerSetting(reach = new ModuleDoubleSliderSetting("Reach", 3.0D, 3.15D, 3.0D, 6.0D, 0.05D));
         this.registerSetting(weaponOnly = new ModuleTickSetting("Weapon only", false));
         this.registerSetting(movingOnly = new ModuleTickSetting("Moving only", false));

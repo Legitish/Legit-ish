@@ -1,10 +1,7 @@
 package legitish.module.modulesettings;
 
 import com.google.gson.JsonObject;
-import legitish.module.ModuleSettingsList;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import legitish.utils.MathUtils;
 
 public class ModuleDoubleSliderSetting extends ModuleSettingsList {
     private final String name;
@@ -30,26 +27,16 @@ public class ModuleDoubleSliderSetting extends ModuleSettingsList {
         return val;
     }
 
-    public static double round(double val, int p) {
-        if (p < 0) {
-            return 0.0D;
-        } else {
-            BigDecimal bd = new BigDecimal(val);
-            bd = bd.setScale(p, RoundingMode.HALF_UP);
-            return bd.doubleValue();
-        }
-    }
-
     public String get() {
         return this.name;
     }
 
     public double getInputMin() {
-        return round(this.valMin, 2);
+        return MathUtils.round(this.valMin, 2);
     }
 
     public double getInputMax() {
-        return round(this.valMax, 2);
+        return MathUtils.round(this.valMax, 2);
     }
 
     public double getMin() {

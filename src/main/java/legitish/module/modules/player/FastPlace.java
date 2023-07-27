@@ -17,7 +17,7 @@ public class FastPlace extends Module {
     public static Field field = null;
 
     public FastPlace() {
-        super("Fast Place", Module.category.Player, 0);
+        super("Fast Place", category.Player, 0);
         this.registerSetting(delay = new ModuleSliderSetting("Delay", 0.0D, 0.0D, 4.0D, 1.0D));
         this.registerSetting(blocksOnly = new ModuleTickSetting("Blocks only", true));
         try {
@@ -34,7 +34,6 @@ public class FastPlace extends Module {
         if (field == null) {
             this.disable();
         }
-        GameUtils.sendChat("hi §  hello &§ heya &");
     }
 
     @SubscribeEvent

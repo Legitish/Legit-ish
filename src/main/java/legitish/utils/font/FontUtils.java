@@ -42,7 +42,7 @@ public class FontUtils {
             FontUtils.regular_bold26 = new MinecraftFontRenderer(FontUtils.regular_bold26_);
             FontUtils.regular_bold30_ = FontUtils.getFont(locationMap, "regular_bold.ttf", 30);
             FontUtils.regular_bold30 = new MinecraftFontRenderer(FontUtils.regular_bold26_);
-            
+
             FontUtils.icon20_ = FontUtils.getFont(locationMap, "icon.ttf", 20);
             FontUtils.icon20 = new MinecraftFontRenderer(FontUtils.icon20_);
         }

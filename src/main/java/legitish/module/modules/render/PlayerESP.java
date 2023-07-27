@@ -1,7 +1,7 @@
 package legitish.module.modules.render;
 
 import legitish.module.Module;
-import legitish.module.ModuleDesc;
+import legitish.module.modulesettings.ModuleDesc;
 import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.GameUtils;
@@ -16,6 +16,7 @@ import java.util.Iterator;
 
 @SuppressWarnings("unused")
 public class PlayerESP extends Module {
+    public static ModuleDesc desc;
     public static ModuleSliderSetting i;
     public static ModuleSliderSetting j;
     public static ModuleTickSetting f;
@@ -27,7 +28,8 @@ public class PlayerESP extends Module {
     private int rgb_c = 0;
 
     public PlayerESP() {
-        super("Player ESP", Module.category.Visual, 0);
+        super("Player ESP", category.Visual, 0);
+        this.registerSetting(desc = new ModuleDesc("Renders an overlay over players."));
         this.registerSetting(t3 = new ModuleTickSetting("2D", false));
         this.registerSetting(t1 = new ModuleTickSetting("Box", false));
         this.registerSetting(t4 = new ModuleTickSetting("Health", true));
@@ -57,7 +59,7 @@ public class PlayerESP extends Module {
                                 return;
                             }
 
-                            en = (EntityPlayer) var3.next();
+                            en = var3.next();
                         } while (en == mc.thePlayer);
                     } while (en.deathTime != 0);
                 } while (!f.isToggled() && en.isInvisible());

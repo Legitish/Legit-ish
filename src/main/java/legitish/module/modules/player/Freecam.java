@@ -21,7 +21,7 @@ public class Freecam extends Module {
     private int[] lcc = new int[]{Integer.MAX_VALUE, 0};
 
     public Freecam() {
-        super("Freecam", Module.category.Player, 0);
+        super("Freecam", category.Player, 0);
         this.registerSetting(speed = new ModuleSliderSetting("Speed", 2.5D, 0.5D, 10.0D, 0.5D));
         this.registerSetting(disableOnDamage = new ModuleTickSetting("Disable on damage", true));
     }

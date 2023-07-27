@@ -12,7 +12,7 @@ public class AutoJump extends Module {
     private boolean jumping = false;
 
     public AutoJump() {
-        super("Auto Jump", Module.category.Player, 0);
+        super("Auto Jump", category.Player, 0);
         this.registerSetting(cancelShift = new ModuleTickSetting("Cancel when shifting", true));
     }
 

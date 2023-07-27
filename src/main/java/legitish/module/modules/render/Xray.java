@@ -29,7 +29,7 @@ public class Xray extends Module {
     private List<BlockPos> ren;
 
     public Xray() {
-        super("Xray", Module.category.Visual, 0);
+        super("Xray", category.Visual, 0);
         this.registerSetting(r = new ModuleSliderSetting("Range", 20.0D, 5.0D, 50.0D, 1.0D));
         this.registerSetting(a = new ModuleTickSetting("Iron", true));
         this.registerSetting(b = new ModuleTickSetting("Gold", true));

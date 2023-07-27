@@ -1,6 +1,7 @@
 package legitish.module.modules.minigames;
 
 import legitish.module.Module;
+import legitish.module.modules.client.Notifications;
 import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.ColorUtils;
@@ -89,10 +90,10 @@ public class BedPlates extends Module {
 
     private void drawPlate(BlockPos blockPos, int index) {
         // this is probably terrible gl usage but idk how to use it anyway ¯\_(ツ)_/¯
-        float rotateX = Minecraft.getMinecraft().gameSettings.thirdPersonView == 2 ? -1.0F : 1.0F;
+        float rotateX = mc.gameSettings.thirdPersonView == 2 ? -1.0F : 1.0F;
         glPushMatrix();
         glDisable(GL_DEPTH_TEST);
-        glTranslatef((float) (blockPos.getX() - Minecraft.getMinecraft().getRenderManager().viewerPosX + 0.5), (float) (blockPos.getY() - mc.getRenderManager().viewerPosY + yShift.getInput() + 1), (float) (blockPos.getZ() - Minecraft.getMinecraft().getRenderManager().viewerPosZ + 0.5));
+        glTranslatef((float) (blockPos.getX() - mc.getRenderManager().viewerPosX + 0.5), (float) (blockPos.getY() - mc.getRenderManager().viewerPosY + yShift.getInput() + 1), (float) (blockPos.getZ() - Minecraft.getMinecraft().getRenderManager().viewerPosZ + 0.5));
         glNormal3f(0.0F, 1.0F, 0.0F);
         glRotatef(-mc.getRenderManager().playerViewY, 0.0F, 1.0F, 0.0F);
         glRotatef(mc.getRenderManager().playerViewX, rotateX, 0.0F, 0.0F);
@@ -112,7 +113,7 @@ public class BedPlates extends Module {
 
     private void findOwnBed() {
         if (this.ownBed == null) {
-            GameUtils.sendChat("Finding own bed.");
+            Notifications.sendNotification(Notifications.NotificationTypes.INFO, "Finding own bed.", 1000);
             for (int y = 2; y >= -2; --y) {
                 for (int x = 0; x <= 20; ++x) {
                     for (int z = 0; z <= 20; ++z) {

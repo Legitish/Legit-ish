@@ -1,7 +1,7 @@
 package legitish.module.modules.player;
 
 import legitish.module.Module;
-import legitish.module.ModuleDesc;
+import legitish.module.modulesettings.ModuleDesc;
 import legitish.module.ModuleManager;
 import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
@@ -31,7 +31,7 @@ public class AutoPlace extends Module {
     private BlockPos lp = null;
 
     public AutoPlace() {
-        super("Auto Place", Module.category.Player, 0);
+        super("Auto Place", category.Player, 0);
         this.registerSetting(moduleDesc = new ModuleDesc("FD: FPS/80"));
         this.registerSetting(frameDelay = new ModuleSliderSetting("Frame delay", 8.0D, 0.0D, 30.0D, 1.0D));
         this.registerSetting(holdRight = new ModuleTickSetting("Hold right", true));

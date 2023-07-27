@@ -13,7 +13,7 @@ public class Velocity extends Module {
     public static ModuleTickSetting onlyWhileTargeting, holdingS;
 
     public Velocity() {
-        super("Velocity", Module.category.Combat, 0);
+        super("Velocity", category.Combat, 0);
         this.registerSetting(horizontal = new ModuleSliderSetting("Horizontal", 90.0D, 0.0D, 100.0D, 1.0D));
         this.registerSetting(vertical = new ModuleSliderSetting("Vertical", 100.0D, 0.0D, 100.0D, 1.0D));
         this.registerSetting(chance = new ModuleSliderSetting("Chance", 100.0D, 0.0D, 100.0D, 1.0D));

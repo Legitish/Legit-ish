@@ -1,7 +1,7 @@
 package legitish.module.modules.combat;
 
 import legitish.module.Module;
-import legitish.module.ModuleDesc;
+import legitish.module.modulesettings.ModuleDesc;
 import legitish.utils.GameUtils;
 import net.minecraft.client.Minecraft;
 import net.weavemc.loader.api.event.SubscribeEvent;
@@ -11,12 +11,10 @@ import java.lang.reflect.Field;
 
 public class DelayRemover extends Module {
     // i dont think this works tbh
-    public static ModuleDesc moduleDesc;
     private Field l = null;
 
     public DelayRemover() {
-        super("Delay Remover", Module.category.Combat, 0);
-        this.registerSetting(moduleDesc = new ModuleDesc("Gives you 1.7 hitreg."));
+        super("Delay Remover", category.Combat, 0);
     }
 
     public void onEnable() {

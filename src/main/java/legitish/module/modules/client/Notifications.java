@@ -5,6 +5,7 @@ import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.AnimationUtils;
 import legitish.utils.ColorUtils;
 import legitish.utils.CooldownUtils;
+import legitish.utils.GameUtils;
 import legitish.utils.font.FontUtils;
 import legitish.utils.font.MinecraftFontRenderer;
 import legitish.utils.render.RRectUtils;
@@ -31,14 +32,18 @@ public class Notifications extends Module {
     }
 
     public static void sendNotification(NotificationTypes notificationType, String message, long duration) {
-        ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
-        notifs.add(notificationType);
-        messages.add(message);
-        durations.add(new CooldownUtils(duration));
-        durations.get(notifs.size() - 1).start();
-        animationsX.add(new AnimationUtils(sr.getScaledWidth()));
-        animationsY.add(new AnimationUtils(sr.getScaledHeight() - (notifs.size() * 30)));
-        animationsX.get(notifs.size() - 1).setAnimation(sr.getScaledWidth(), 16);
+        if (!chatNoti.isToggled()) {
+            ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
+            notifs.add(notificationType);
+            messages.add(message);
+            durations.add(new CooldownUtils(duration));
+            durations.get(notifs.size() - 1).start();
+            animationsX.add(new AnimationUtils(sr.getScaledWidth()));
+            animationsY.add(new AnimationUtils(sr.getScaledHeight() - (notifs.size() * 30)));
+            animationsX.get(notifs.size() - 1).setAnimation(sr.getScaledWidth(), 16);
+        } else {
+            GameUtils.sendChat("&7[&1LI&7-" + ((notificationType == NotificationTypes.INFO) ? "&1" : notificationType == NotificationTypes.WARN ? "&e" : "&4") + notificationType.toString() + "&7]&r " + message);
+        }
     }
 
     @SubscribeEvent
@@ -48,7 +53,7 @@ public class Notifications extends Module {
             animationsY.get(index).setAnimation(sr.getScaledHeight() - ((index + 1) * 30), 16);
             RRectUtils.drawRound(animationsX.get(index).getValue(), animationsY.get(index).getValue(), 120, 25, 3, new Color(0, 0, 0, 150));
             FontUtils.icon20.drawString(notifs.get(index) == NotificationTypes.INFO ? "G" : "R", animationsX.get(index).getValue() + 12.5, animationsY.get(index).getValue() + 12.5, MinecraftFontRenderer.CenterMode.XY, false, ColorUtils.getFontColor(2).getRGB());
-            FontUtils.regular16.wrapText(messages.get(index), animationsX.get(index).getValue() + 25, animationsY.get(index).getValue() + 12.5, MinecraftFontRenderer.CenterMode.Y, false, ColorUtils.getFontColor(2).getRGB(), 95, 5);
+            FontUtils.regular16.wrapText(messages.get(index), animationsX.get(index).getValue() + 25, animationsY.get(index).getValue() + 12.5, MinecraftFontRenderer.CenterMode.Y, false, ColorUtils.getFontColor(2).getRGB(), 95);
             if (durations.get(index).hasFinished()) {
                 notifs.remove(index);
                 messages.remove(index);

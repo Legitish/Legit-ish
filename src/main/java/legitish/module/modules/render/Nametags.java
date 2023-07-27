@@ -3,6 +3,7 @@ package legitish.module.modules.render;
 import legitish.module.Module;
 import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
+import legitish.utils.GameUtils;
 import legitish.utils.MathUtils;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -18,7 +19,7 @@ public class Nametags extends Module {
     public static ModuleTickSetting rect, showHealth, showInvis, removeTags, noScale;
 
     public Nametags() {
-        super("Nametags", Module.category.Visual, 0);
+        super("Nametags", category.Visual, 0);
         this.registerSetting(offset = new ModuleSliderSetting("Offset", 0.0D, -40.0D, 40.0D, 1.0D));
         this.registerSetting(rect = new ModuleTickSetting("Rect", true));
         this.registerSetting(showHealth = new ModuleTickSetting("Show health", true));
@@ -30,7 +31,7 @@ public class Nametags extends Module {
     @SubscribeEvent
     public void r(RenderLivingEvent.Pre e) {
         if (removeTags.isToggled()) {
-            e.setCancelled(true);
+            e.getRenderer().setRenderOutlines(true);
         } else {
             if (e.getEntity() instanceof EntityPlayer && e.getEntity() != mc.thePlayer && e.getEntity().deathTime == 0) {
                 EntityPlayer en = (EntityPlayer) e.getEntity();
@@ -42,11 +43,10 @@ public class Nametags extends Module {
                     return;
                 }
 
-                //e.setCancelled(true);
                 String str = en.getDisplayName().getFormattedText();
                 if (showHealth.isToggled()) {
                     double r = en.getHealth() / en.getMaxHealth();
-                    String h = (r < 0.3D ? "§c" : (r < 0.5D ? "§6" : (r < 0.7D ? "§e" : "§a"))) + MathUtils.round(en.getHealth(), 1);
+                    String h = GameUtils.formatColorCode(r < 0.3D ? "&c" : (r < 0.5D ? "&6" : (r < 0.7D ? "&e" : "&a"))) + MathUtils.round(en.getHealth(), 1);
                     str = str + " " + h;
                 }
 

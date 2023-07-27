@@ -1,7 +1,7 @@
 package legitish.module.modules.movement;
 
 import legitish.module.Module;
-import legitish.module.ModuleDesc;
+import legitish.module.modulesettings.ModuleDesc;
 import legitish.module.ModuleManager;
 import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
@@ -13,7 +13,7 @@ public class KeepSprint extends Module {
     public static ModuleTickSetting onlyReach;
 
     public KeepSprint() {
-        super("Keep Sprint", Module.category.Movement, 0);
+        super("Keep Sprint", category.Movement, 0);
         this.registerSetting(moduleDesc = new ModuleDesc("Default is 40% motion reduction."));
         this.registerSetting(slow = new ModuleSliderSetting("Slow %", 40.0D, 0.0D, 40.0D, 1.0D));
         this.registerSetting(onlyReach = new ModuleTickSetting("Only reduce reach hits", false));

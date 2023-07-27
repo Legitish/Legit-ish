@@ -1,7 +1,7 @@
 package legitish.module.modules.combat;
 
 import legitish.module.Module;
-import legitish.module.ModuleDesc;
+import legitish.module.modulesettings.ModuleDesc;
 import legitish.module.modulesettings.ModuleDoubleSliderSetting;
 import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
@@ -35,7 +35,7 @@ public class AutoClicker extends Module {
     private boolean n, hol;
 
     public AutoClicker() {
-        super("Autoclicker", Module.category.Combat, 0);
+        super("Autoclicker", category.Combat, 0);
         this.registerSetting(moduleDesc = new ModuleDesc("Best with delay remover."));
         this.registerSetting(CPS = new ModuleDoubleSliderSetting("CPS", 10.0D, 12.0D, 1.0D, 20.0D, 0.5D));
         this.registerSetting(jitter = new ModuleSliderSetting("Jitter", 0.0D, 0.0D, 3.0D, 0.1D));

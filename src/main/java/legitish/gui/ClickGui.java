@@ -1,9 +1,6 @@
 package legitish.gui;
 
-import legitish.gui.category.Category;
-import legitish.gui.category.CategoryManager;
-import legitish.gui.category.ModulesCategory;
-import legitish.gui.category.SettingsCategory;
+import legitish.gui.category.*;
 import legitish.main.Legitish;
 import legitish.utils.ColorUtils;
 import legitish.utils.MouseUtils;
@@ -51,7 +48,7 @@ public class ClickGui extends GuiScreen {
             mc.displayGuiScreen(null);
         }
         GLUtils.startScale((float) ((this.getX()) + (this.getX() + this.getWidth())) / 2, (float) ((this.getY()) + (this.getY() + this.getHeight())) / 2, 1);
-        if (ModulesCategory.openModSetting) {
+        if (ModulesCategory.openModSetting || ClientCategory.openModSetting) {
             RRectUtils.drawRound(this.getX() + 90, this.getY() + 25, this.getWidth() - 90D, this.getHeight() - 25, 3, ColorUtils.getBackgroundColor(4));
         } else {
             RRectUtils.drawGradientRoundCorner(this.getX() + 90, this.getY() + 25, this.getWidth() - 90D, this.getHeight() - 25, 3);
@@ -104,11 +101,13 @@ public class ClickGui extends GuiScreen {
                 if (MouseUtils.mouseInBounds(mouseX, mouseY, this.getX() + 4, this.getY() + categoryOffset, 75, 16) && mouseButton == 0) {
                     selectedCategory = c;
                     ModulesCategory.openModSetting = false;
+                    ClientCategory.openModSetting = false;
                 }
             } else {
                 if (MouseUtils.mouseInBounds(mouseX, mouseY, this.getX(), this.getY() + this.getHeight() - 30, 85, 30) && mouseButton == 0) {
                     selectedCategory = c;
                     ModulesCategory.openModSetting = false;
+                    ClientCategory.openModSetting = false;
                 }
             }
 
@@ -137,6 +136,8 @@ public class ClickGui extends GuiScreen {
         if (keyCode == 1) {
             if (ModulesCategory.openModSetting) {
                 ModulesCategory.openModSetting = false;
+            } else if (ClientCategory.openModSetting) {
+                ClientCategory.openModSetting = false;
             } else {
                 closed = true;
             }
@@ -145,6 +146,7 @@ public class ClickGui extends GuiScreen {
 
     public void onGuiClosed() {
         ModulesCategory.openModSetting = false;
+        ClientCategory.openModSetting = false;
         Legitish.configManager.saveConfig();
         Legitish.clientConfig.saveConfig();
     }

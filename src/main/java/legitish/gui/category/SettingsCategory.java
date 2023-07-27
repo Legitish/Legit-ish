@@ -17,7 +17,7 @@ public class SettingsCategory extends Category {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         ClickGui clickGUI = Legitish.clickGui;
 
-        FontUtils.regular20.drawString("soon™", clickGUI.getX() + (clickGUI.getWidth() - 90) / 2, clickGUI.getY() + (clickGUI.getHeight() - 25) / 2, MinecraftFontRenderer.CenterMode.XY, false, ColorUtils.getFontColor(2).getRGB());
+        FontUtils.regular20.drawString("soon™", clickGUI.getX() + clickGUI.getWidth() / 2 + 135, clickGUI.getY() + (clickGUI.getHeight() - 25) / 2, MinecraftFontRenderer.CenterMode.XY, false, ColorUtils.getFontColor(2).getRGB());
         StencilUtils.disableStencilBuffer();
         FontUtils.regular20.drawString("Client", clickGUI.getX() + 95, clickGUI.getY() + 8, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
     }

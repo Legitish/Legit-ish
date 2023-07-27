@@ -43,7 +43,7 @@ public class GLUtils {
             glColor4d(r, g, b, a);
             RenderGlobal.drawSelectionBoundingBox(new AxisAlignedBB(x, y, z, x + 1.0D, y + 1.0D, z + 1.0D));
             if (shade) {
-                dbb(new AxisAlignedBB(x, y, z, x + 1.0D, y + 1.0D, z + 1.0D), r, g, b);
+                drawBoundingBox(new AxisAlignedBB(x, y, z, x + 1.0D, y + 1.0D, z + 1.0D), r, g, b);
             }
 
             glEnable(3553);
@@ -64,6 +64,7 @@ public class GLUtils {
             }
 
             GlStateManager.pushMatrix();
+            //2d
             if (type == 3) {
                 glTranslated(x, y - 0.2D, z);
                 glRotated(-mc.getRenderManager().playerViewY, 0.0D, 1.0D, 0.0D);
@@ -82,8 +83,8 @@ public class GLUtils {
                 } else {
                     int st = ColorUtils.getBackgroundColor(1).getRGB();
                     int en = ColorUtils.getBackgroundColor(2).getRGB();
-                    dGR(-21, 0, -25, 74, st, en);
-                    dGR(21, 0, 25, 74, st, en);
+                    drawGradient(-21, 0, -25, 74, st, en);
+                    drawGradient(21, 0, 25, 74, st, en);
                     net.minecraft.client.gui.Gui.drawRect(-21, 0, 21, 4, en);
                     net.minecraft.client.gui.Gui.drawRect(-21, 71, 21, 74, st);
                 }
@@ -114,6 +115,7 @@ public class GLUtils {
                     float r = (float) (color >> 16 & 255) / 255.0F;
                     float g = (float) (color >> 8 & 255) / 255.0F;
                     float b = (float) (color & 255) / 255.0F;
+                    // arrow
                     if (type == 5) {
                         glTranslated(x, y - 0.2D, z);
                         glRotated(-mc.getRenderManager().playerViewY, 0.0D, 1.0D, 0.0D);
@@ -141,10 +143,11 @@ public class GLUtils {
                         glDepthMask(false);
                         glLineWidth(2.0F);
                         glColor4f(r, g, b, a);
+                        // box, shaded box
                         if (type == 1) {
                             RenderGlobal.drawSelectionBoundingBox(axis);
                         } else if (type == 2) {
-                            dbb(axis, r, g, b);
+                            drawBoundingBox(axis, r, g, b);
                         }
 
                         glEnable(3553);
@@ -159,7 +162,7 @@ public class GLUtils {
         }
     }
 
-    public static void dbb(AxisAlignedBB abb, float r, float g, float b) {
+    public static void drawBoundingBox(AxisAlignedBB abb, float r, float g, float b) {
         float a = 0.25F;
         Tessellator ts = Tessellator.getInstance();
         WorldRenderer vb = ts.getWorldRenderer();
@@ -256,7 +259,7 @@ public class GLUtils {
         }
     }
 
-    public static void dGR(int left, int top, int right, int bottom, int startColor, int endColor) {
+    public static void drawGradient(int left, int top, int right, int bottom, int startColor, int endColor) {
         int j;
         if (left < right) {
             j = left;
@@ -318,10 +321,6 @@ public class GLUtils {
         tessellator.draw();
         GlStateManager.enableTexture2D();
         GlStateManager.disableBlend();
-    }
-
-    public static void bindTexture(int texture) {
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture);
     }
 
     public static void startScale(float x, float y, float scale) {

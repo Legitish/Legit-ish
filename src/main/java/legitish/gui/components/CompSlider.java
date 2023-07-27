@@ -11,12 +11,9 @@ import legitish.utils.font.MinecraftFontRenderer;
 import legitish.utils.render.RRectUtils;
 
 public class CompSlider extends Comp {
-
     private final AnimationUtils animation = new AnimationUtils(0.0F);
     private final ModuleSliderSetting sliderSetting;
     private boolean dragging = false;
-    private double renderWidth;
-    private double renderWidth2;
 
     public CompSlider(double x, double y, Module mod, ModuleSliderSetting sliderSetting) {
         this.x = x;
@@ -31,35 +28,34 @@ public class CompSlider extends Comp {
 
         double min = sliderSetting.getMin();
         double max = sliderSetting.getMax();
-        double l = 90;
+        double width = clickGui.getWidth() - x - 5;
 
-        renderWidth = (l) * (sliderSetting.getInput() - min) / (max - min);
-        renderWidth2 = (l) * (sliderSetting.getMax() - min) / (max - min);
+        double renderWidthMin = (width) * (sliderSetting.getInput() - min) / (max - min);
 
-        animation.setAnimation((float) renderWidth, 14);
+        animation.setAnimation((float) renderWidthMin, 14);
 
-        double diff = Math.min(l, Math.max(0, mouseX - (clickGui.getX() + x - 70)));
+        double diff = Math.min(width, Math.max(0, mouseX - (clickGui.getX() + x)));
 
         if (dragging) {
             if (diff == 0) {
                 sliderSetting.setValue(sliderSetting.getMin());
             } else {
-                double newValue = MathUtils.round(((diff / l) * (max - min) + min), 2);
+                double newValue = MathUtils.round(((diff / width) * (max - min) + min), 2);
                 sliderSetting.setValue(newValue);
             }
         }
 
-        RRectUtils.drawRound((float) (clickGui.getX() + x - 70), (float) (clickGui.getY() + y + 13), (float) (renderWidth2), 6, 3, ColorUtils.getBackgroundColor(2));
-        RRectUtils.drawGradientRoundCorner((float) (clickGui.getX() + x - 70), (float) (clickGui.getY() + y + 13), animation.getValue(), 6, 3);
-        RRectUtils.drawRound((float) (clickGui.getX() + x) + animation.getValue() - 72, (float) (clickGui.getY() + y + 10), 5, 12, 2, ColorUtils.getBackgroundColor(1));
+        RRectUtils.drawGradientRoundCorner(clickGui.getX() + x, clickGui.getY() + y + 13, width, 2, 1);
+        RRectUtils.drawRound(clickGui.getX() + x + animation.getValue(), clickGui.getY() + y + 13, width - animation.getValue(), 2, 1, ColorUtils.getFontColor(2));
+        RRectUtils.drawGradientRoundCorner(clickGui.getX() + x + animation.getValue() - 2, clickGui.getY() + y + 10.75, 6, 6, 2.5);
 
-        FontUtils.regular20.drawString(sliderSetting.get() + ": " + sliderSetting.getInput(), clickGui.getX() + x - 70, clickGui.getY() + y, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
+        FontUtils.regular20.drawString(sliderSetting.get() + ": " + sliderSetting.getInput(), clickGui.getX() + x, clickGui.getY() + y, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
     }
 
     @Override
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
         super.mouseClicked(mouseX, mouseY, mouseButton);
-        if (MouseUtils.mouseInBounds(mouseX, mouseY, clickGui.getX() + x - 70, clickGui.getY() + y + 10, renderWidth2 + 3, 10) && mouseButton == 0) {
+        if (MouseUtils.mouseInBounds(mouseX, mouseY, clickGui.getX() + x - 2, clickGui.getY() + y + 10, clickGui.getWidth() - x - 1, 10) && mouseButton == 0) {
             dragging = true;
         }
     }

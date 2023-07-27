@@ -19,7 +19,7 @@ public class ChestESP extends Module {
     public static ModuleTickSetting d;
 
     public ChestESP() {
-        super("Chest ESP", Module.category.Visual, 0);
+        super("Chest ESP", category.Visual, 0);
         a = new ModuleSliderSetting("Red", 0.0D, 0.0D, 255.0D, 1.0D);
         b = new ModuleSliderSetting("Green", 0.0D, 0.0D, 255.0D, 1.0D);
         c = new ModuleSliderSetting("Blue", 255.0D, 0.0D, 255.0D, 1.0D);

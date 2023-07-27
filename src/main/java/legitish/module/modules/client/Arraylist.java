@@ -3,8 +3,10 @@ package legitish.module.modules.client;
 import legitish.main.Legitish;
 import legitish.module.Module;
 import legitish.module.ModuleManager;
+import legitish.module.modulesettings.ModuleDesc;
 import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
+import legitish.utils.AnimationUtils;
 import legitish.utils.ColorUtils;
 import legitish.utils.GameUtils;
 import legitish.utils.MouseUtils;
@@ -23,15 +25,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Arraylist extends Module {
+    // will be improving this later, already looks good
     private static final MinecraftFontRenderer mfr = FontUtils.regular20;
+    public static ModuleDesc desc;
     public static ModuleTickSetting editPosition, watermark, rectangles, shadow, background, alphabeticalSort;
     public static ModuleSliderSetting margin;
     public static MouseUtils.PositionMode positionMode;
+    private static final List<AnimationUtils> animationsX = new ArrayList<>();
     private static int hudX = 5;
     private static int hudY = 90;
 
     public Arraylist() {
-        super("Arraylist", Module.category.Visual, 0);
+        super("Arraylist", category.Client, 0);
+        this.registerSetting(desc = new ModuleDesc("Displays enabled modules."));
         this.registerSetting(watermark = new ModuleTickSetting("Watermark", true));
         this.registerSetting(shadow = new ModuleTickSetting("Text shadow", true));
         this.registerSetting(rectangles = new ModuleTickSetting("Rectangles", false));
@@ -62,7 +68,7 @@ public class Arraylist extends Module {
 
     public void guiButtonToggled(ModuleTickSetting b) {
         if (b == editPosition) {
-            editPosition.disable();
+            editPosition.setEnabled(false);
             mc.displayGuiScreen(new EditHUD());
         } else if (b == alphabeticalSort) {
             ModuleManager.sort();
@@ -80,8 +86,8 @@ public class Arraylist extends Module {
             double y = hudY;
             ModuleManager.sort();
 
-            List<Module> en = new ArrayList<>(Legitish.moduleManager.enabledModuleList());
-            if (en.isEmpty()) return;
+            List<Module> enabledModuleList = new ArrayList<>(Legitish.moduleManager.enabledModuleList());
+            if (enabledModuleList.isEmpty()) { return; }
 
             if (hudX < 0) {
                 hudX = 2;
@@ -93,9 +99,9 @@ public class Arraylist extends Module {
             }
             if (watermark.isToggled()) {
                 FontUtils.regular_bold30.drawString("LEGITISH", hudX, hudY, MinecraftFontRenderer.CenterMode.NONE, shadow.isToggled(), ColorUtils.getFontColor(1).getRGB());
-                y += 15;
+                y += FontUtils.regular_bold30.getHeight() + margin.getInput();
             }
-            for (Module m : en) {
+            for (Module m : enabledModuleList) {
                 if (m.isEnabled() && m != this && m.moduleCategory() != Module.category.Client) {
                     if (Arraylist.positionMode == MouseUtils.PositionMode.DOWNRIGHT || Arraylist.positionMode == MouseUtils.PositionMode.UPRIGHT) {
                         mfr.drawString(m.getName(), hudX + (Legitish.moduleManager.getLongestActiveModule(mfr) - mfr.getStringWidth(m.getName())), y, MinecraftFontRenderer.CenterMode.NONE, shadow.isToggled(), ColorUtils.getFontColor(1).getRGB());
@@ -156,7 +162,6 @@ public class Arraylist extends Module {
             //GLUtils.dct("Edit the HUD position by dragging.", '-', x, y, 2L, 0L, true, this.mc.fontRendererObj);
 
             this.handleInput();
-
             super.drawScreen(mX, mY, pt);
         }
 
@@ -169,7 +174,6 @@ public class Arraylist extends Module {
                 fr.drawString(s, (float) x, (float) y, Color.white.getRGB(), Arraylist.shadow.isToggled());
                 y += fr.FONT_HEIGHT + 2;
             }
-
         }
 
         protected void mouseClickMove(int mX, int mY, int b, long t) {
@@ -185,7 +189,6 @@ public class Arraylist extends Module {
                     this.laX = this.aX;
                     this.laY = this.aY;
                 }
-
             }
         }
 

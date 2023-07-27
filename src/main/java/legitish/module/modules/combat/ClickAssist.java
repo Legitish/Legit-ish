@@ -1,7 +1,7 @@
 package legitish.module.modules.combat;
 
 import legitish.module.Module;
-import legitish.module.ModuleDesc;
+import legitish.module.modulesettings.ModuleDesc;
 import legitish.module.modulesettings.ModuleSliderSetting;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.GameUtils;
@@ -23,7 +23,7 @@ public class ClickAssist extends Module {
     private boolean ignNR = false;
 
     public ClickAssist() {
-        super("ClickAssist", Module.category.Combat, 0);
+        super("ClickAssist", category.Combat, 0);
         this.registerSetting(moduleDesc = new ModuleDesc("Boost your CPS."));
         this.registerSetting(chance = new ModuleSliderSetting("Chance", 80.0D, 0.0D, 100.0D, 1.0D));
         this.registerSetting(leftClick = new ModuleTickSetting("Left click", true));

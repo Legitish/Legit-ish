@@ -1,8 +1,9 @@
 package legitish.module;
 
 import com.google.gson.JsonObject;
-import legitish.main.Legitish;
 import legitish.module.modules.client.Notifications;
+import legitish.module.modulesettings.ModuleDesc;
+import legitish.module.modulesettings.ModuleSettingsList;
 import legitish.module.modulesettings.ModuleTickSetting;
 import net.minecraft.client.Minecraft;
 import net.weavemc.loader.api.event.EventBus;
@@ -42,7 +43,9 @@ public class Module {
     }
 
     public void enable() {
-        Notifications.sendNotification(Notifications.NotificationTypes.INFO, this.moduleName + " was enabled!", 2000);
+        if (this.moduleCategory() != category.Client) {
+            Notifications.sendNotification(Notifications.NotificationTypes.INFO, this.moduleName + " was enabled!", 2000);
+        }
         this.setEnabled(true);
         ModuleManager.enabledModuleList.add(this);
         if (ModuleManager.arrayList.isEnabled()) {
@@ -53,7 +56,9 @@ public class Module {
     }
 
     public void disable() {
-        Notifications.sendNotification(Notifications.NotificationTypes.INFO, this.moduleName + " was disabled!", 2000);
+        if (this.moduleCategory() != category.Client) {
+            Notifications.sendNotification(Notifications.NotificationTypes.INFO, this.moduleName + " was disabled!", 2000);
+        }
         this.setEnabled(false);
         ModuleManager.enabledModuleList.remove(this);
         EventBus.unsubscribe(this);

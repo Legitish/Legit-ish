@@ -2,6 +2,7 @@ package legitish.module.modules.minigames;
 
 import legitish.module.Module;
 import legitish.module.ModuleManager;
+import legitish.module.modules.client.Notifications;
 import legitish.module.modules.render.Targets;
 import legitish.module.modulesettings.ModuleTickSetting;
 import legitish.utils.GameUtils;
@@ -65,7 +66,7 @@ public class MurderMystery extends Module {
                                 murderers.add(en);
                                 if (alert.isToggled()) {
                                     mc.thePlayer.playSound("note.pling", 1.0F, 1.0F);
-                                    GameUtils.sendChat(en.getName() + " is a murderer!");
+                                    Notifications.sendNotification(Notifications.NotificationTypes.WARN, en.getName() + " is a murderer!", 3000);
                                 }
 
                                 if (announceMurderer.isToggled()) {
@@ -75,7 +76,7 @@ public class MurderMystery extends Module {
                         } else if (i instanceof ItemBow && searchDetectives.isToggled() && !detectives.contains(en)) {
                             detectives.add(en);
                             if (alert.isToggled()) {
-                                GameUtils.sendChat(en.getName() + " has a bow!");
+                                Notifications.sendNotification(Notifications.NotificationTypes.WARN, en.getName() + " has a bow!", 3000);
                             }
 
                             if (announceMurderer.isToggled()) {

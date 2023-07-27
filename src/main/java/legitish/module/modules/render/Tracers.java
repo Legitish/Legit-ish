@@ -21,7 +21,7 @@ public class Tracers extends Module {
     private boolean g;
 
     public Tracers() {
-        super("Tracers", Module.category.Visual, 0);
+        super("Tracers", category.Visual, 0);
         this.registerSetting(a = new ModuleTickSetting("Show invis", true));
         this.registerSetting(f = new ModuleSliderSetting("Line Width", 1.0D, 1.0D, 5.0D, 1.0D));
         this.registerSetting(b = new ModuleSliderSetting("Red", 0.0D, 0.0D, 255.0D, 1.0D));
@@ -63,7 +63,7 @@ public class Tracers extends Module {
                                 return;
                             }
 
-                            en = (EntityPlayer) var3.next();
+                            en = var3.next();
                         } while (en == mc.thePlayer);
                     } while (en.deathTime != 0);
                 } while (!a.isToggled() && en.isInvisible());

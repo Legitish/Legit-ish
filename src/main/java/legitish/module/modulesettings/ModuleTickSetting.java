@@ -1,7 +1,6 @@
 package legitish.module.modulesettings;
 
 import com.google.gson.JsonObject;
-import legitish.module.ModuleSettingsList;
 
 public class ModuleTickSetting extends ModuleSettingsList {
     private final String name;
@@ -20,18 +19,6 @@ public class ModuleTickSetting extends ModuleSettingsList {
 
     public boolean isToggled() {
         return this.isEnabled;
-    }
-
-    public void toggle() {
-        this.isEnabled = !this.isEnabled;
-    }
-
-    public void enable() {
-        this.isEnabled = true;
-    }
-
-    public void disable() {
-        this.isEnabled = false;
     }
 
     public void setEnabled(boolean b) {

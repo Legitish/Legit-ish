@@ -8,6 +8,7 @@ public class CategoryManager {
     public CategoryManager() {
         categories.add(new ModulesCategory());
         categories.add(new ClientCategory());
+        categories.add(new ConfigCategory());
         categories.add(new SettingsCategory());
     }
 
