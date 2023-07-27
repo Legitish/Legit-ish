@@ -15,8 +15,7 @@ public class CompDoubleSlider extends Comp {
     private final AnimationUtils animationMax = new AnimationUtils(0.0F);
     private final ModuleDoubleSliderSetting doubleSliderSetting;
     private boolean dragging = false;
-    private double realMin;
-    private double realMax;
+    private double width;
     private int focus;
 
     public CompDoubleSlider(double x, double y, Module mod, ModuleDoubleSliderSetting doubleSliderSetting) {
@@ -31,10 +30,10 @@ public class CompDoubleSlider extends Comp {
         super.drawScreen(mouseX, mouseY, scrollY);
         double min = doubleSliderSetting.getMin();
         double max = doubleSliderSetting.getMax();
-        double width = clickGui.getWidth() - x - 5;
+        width = clickGui.getWidth() - x - 5;
 
-        realMin = (width) * (doubleSliderSetting.getInputMin() - min) / (max - min);
-        realMax = (width) * (doubleSliderSetting.getInputMax() - min) / (max - min);
+        double realMin = (width) * (doubleSliderSetting.getInputMin() - min) / (max - min);
+        double realMax = (width) * (doubleSliderSetting.getInputMax() - min) / (max - min);
 
         animationMin.setAnimation((float) realMin, 14);
         animationMax.setAnimation((float) realMax, 14);
@@ -77,7 +76,7 @@ public class CompDoubleSlider extends Comp {
     @Override
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
         super.mouseClicked(mouseX, mouseY, mouseButton);
-        if (MouseUtils.mouseInBounds(mouseX, mouseY, clickGui.getX() + x, clickGui.getY() + y + 10, realMax + 3, 10) && mouseButton == 0) {
+        if (MouseUtils.mouseInBounds(mouseX, mouseY, clickGui.getX() + x - 2, clickGui.getY() + y + 10, width + 4, 10) && mouseButton == 0) {
             dragging = true;
         }
     }

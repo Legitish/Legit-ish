@@ -13,6 +13,7 @@ import legitish.utils.render.RRectUtils;
 public class CompSlider extends Comp {
     private final AnimationUtils animation = new AnimationUtils(0.0F);
     private final ModuleSliderSetting sliderSetting;
+    private double width;
     private boolean dragging = false;
 
     public CompSlider(double x, double y, Module mod, ModuleSliderSetting sliderSetting) {
@@ -28,7 +29,7 @@ public class CompSlider extends Comp {
 
         double min = sliderSetting.getMin();
         double max = sliderSetting.getMax();
-        double width = clickGui.getWidth() - x - 5;
+        width = clickGui.getWidth() - x - 5;
 
         double renderWidthMin = (width) * (sliderSetting.getInput() - min) / (max - min);
 
@@ -55,7 +56,7 @@ public class CompSlider extends Comp {
     @Override
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
         super.mouseClicked(mouseX, mouseY, mouseButton);
-        if (MouseUtils.mouseInBounds(mouseX, mouseY, clickGui.getX() + x - 2, clickGui.getY() + y + 10, clickGui.getWidth() - x - 1, 10) && mouseButton == 0) {
+        if (MouseUtils.mouseInBounds(mouseX, mouseY, clickGui.getX() + x - 2, clickGui.getY() + y + 10, width + 4, 10) && mouseButton == 0) {
             dragging = true;
         }
     }

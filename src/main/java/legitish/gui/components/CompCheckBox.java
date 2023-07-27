@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.GlStateManager;
 
 public class CompCheckBox extends Comp {
     private final AnimationUtils animation = new AnimationUtils(0.0F);
-    private final AnimationUtils animation2 = new AnimationUtils(0.0F);
     private final ModuleTickSetting tickSetting;
 
     public CompCheckBox(double x, double y, Module module, ModuleTickSetting tickSetting) {
@@ -26,9 +25,8 @@ public class CompCheckBox extends Comp {
     @Override
     public void drawScreen(int mouseX, int mouseY, double scrollY) {
         animation.setAnimation(tickSetting.isToggled() ? 1 : 0, 10);
-        animation2.setAnimation(tickSetting.isToggled() ? 255 : 0, 12);
 
-        RRectUtils.drawRound(clickGui.getX() + x, clickGui.getY() + y, 10, 10, 3, ColorUtils.getBackgroundColor(2));
+        RRectUtils.drawRound(clickGui.getX() + x, clickGui.getY() + y, 10, 10, 3, ColorUtils.getFontColor(2));
 
         GLUtils.startScale((float) ((clickGui.getX() + x + clickGui.getX() + x + 10) / 2), (float) (clickGui.getY() + y + clickGui.getY() + y + 10) / 2, (float) animation.getValue());
         RRectUtils.drawGradientRoundCorner(clickGui.getX() + x, clickGui.getY() + y, 10, 10, 3);

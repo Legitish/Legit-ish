@@ -40,7 +40,7 @@ public class CompBind extends Comp {
         if (this.isBinding) {
             if (keyCode == 11) {
                 if (this.module instanceof Gui) {
-                    this.module.setbind(54);
+                    this.module.setbind(38);
                 } else {
                     this.module.setbind(0);
                 }

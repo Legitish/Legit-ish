@@ -25,6 +25,15 @@ public class ClientCategory extends Category {
         super("Client");
     }
 
+    public void initGui() {
+        ClickGui clickGUI = Legitish.clickGui;
+        int offset = 30;
+        for (Module module : Legitish.moduleManager.inCategory(Module.category.Client)) {
+            bindComps.add(new CompBind(clickGUI.getX() + clickGUI.getWidth() - 26, clickGUI.getY() + offset, module));
+            offset += 25;
+        }
+    }
+
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         int offset = 30;
         ClickGui clickGUI = Legitish.clickGui;
