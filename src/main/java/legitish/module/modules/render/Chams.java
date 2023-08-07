@@ -1,0 +1,29 @@
+package legitish.module.modules.render;
+
+import legitish.events.Subscribe;
+import legitish.events.impl.RenderLivingEvent;
+import legitish.module.Module;
+
+import static org.lwjgl.opengl.GL11.*;
+
+public class Chams extends Module {
+    public Chams() {
+        super("Chams", category.Visual, 0);
+    }
+
+    @SuppressWarnings("unused")
+    @Subscribe(eventType = RenderLivingEvent.class)
+    public void renderChams(RenderLivingEvent event) {
+        if (event.type == RenderLivingEvent.Type.PRE) {
+            if (event.entity != mc.thePlayer) {
+                glEnable(GL_POLYGON_OFFSET_FILL);
+                glPolygonOffset(1.0F, -1100000.0F);
+            }
+        } else if (event.type == RenderLivingEvent.Type.POST) {
+            if (event.entity != mc.thePlayer) {
+                glDisable(GL_POLYGON_OFFSET_FILL);
+                glPolygonOffset(1.0F, 1100000.0F);
+            }
+        }
+    }
+}

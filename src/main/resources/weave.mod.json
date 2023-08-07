@@ -1,0 +1,8 @@
+{
+  "mixinConfigs": [
+    "legitish.mixins.json"
+  ],
+  "entrypoints": [
+    "legitish.main.Init"
+  ]
+}

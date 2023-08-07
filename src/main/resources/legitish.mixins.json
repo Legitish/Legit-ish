@@ -1,0 +1,12 @@
+{
+  "compatibilityLevel": "JAVA_8",
+  "package": "legitish.events.mixins",
+  "mixins": [
+    "EntityLivingBaseMixin",
+    "EntityRendererMixin",
+    "GuiIngameMixin",
+    "MinecraftMixin",
+    "RendererLivingEntityMixin",
+    "RenderGlobalMixin"
+  ]
+}
