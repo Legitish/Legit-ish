@@ -19,10 +19,7 @@ import static net.minecraft.client.renderer.GlStateManager.*;
 import static org.lwjgl.opengl.GL11.*;
 
 public class GLUtils {
-    // fixing this never >:(
     private static final Minecraft mc = Minecraft.getMinecraft();
-    // Can someone explain to me the difference between putting this in a function vs putting it outside? I feel like it's
-    // the updating but if it isnt then I cant be bothered to change it
 
     public static void HighlightBlock(BlockPos bp, int color, boolean shade) {
         if (bp != null) {
