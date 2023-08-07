@@ -16,7 +16,7 @@ Press `L` in-game to open the ClickGUI.
 To unbind a module press `zero`. (Will improve this later)
 
 ## Building with Gradle
-`git clone` the project and run 
+`git clone` the project with
 ```bash
 git clone https://github.com/legitish/Legit-ish-Weave.git
 ```
