@@ -11,8 +11,9 @@
 3. Tick the Enable Weave setting.
 
 ## Usage
-Press L in-game to open the ClickGUI. 
-To unbind a module press zero
+Press `L` in-game to open the ClickGUI. 
+
+To unbind a module press `zero`. (Will improve this later)
 
 ## Building with Gradle
 `git clone` the project and run 
