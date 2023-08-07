@@ -2,11 +2,11 @@
 
 ## Installation
 ### Using Weave Manager
-1. Download and install Weave Manager from https://github.com/exejar/Weave-Manager/releases
+1. Download and install [Weave-Manager](https://github.com/exejar/Weave-Manager/releases)
 2. In Weave Manager, click Open Mods Folder and drop Legit-ish in the Weave mod folder.
 
 ### Using LCQT
-1. Download and run Youded-byte's LCQT fork from https://github.com/Youded-byte/lunar-client-qt/releases
+1. Download and run [Youded-byte's LCQT fork](https://github.com/Youded-byte/lunar-client-qt/releases)
 2. In the Mods tab, click Add and select Legit-ish.
 3. Tick the Enable Weave setting.
 
