@@ -17,6 +17,8 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -29,7 +31,7 @@ public class AutoClicker extends Module {
     public static ModuleDesc desc;
     public static ModuleDoubleSliderSetting CPS;
     public static ModuleSliderSetting jitter;
-    public static ModuleTickSetting weaponOnly, breakBlocks, leftClick, rightClick, inventoryFill;
+    public static ModuleTickSetting weaponOnly, blocksOnly, breakBlocks, leftClick, rightClick, inventoryFill;
     private Random rand = null;
     private Method gs;
     private long i, j, k, l;
@@ -45,6 +47,7 @@ public class AutoClicker extends Module {
         this.registerSetting(rightClick = new ModuleTickSetting("Right click", false));
         this.registerSetting(inventoryFill = new ModuleTickSetting("Inventory fill", false));
         this.registerSetting(weaponOnly = new ModuleTickSetting("Weapon only", false));
+        this.registerSetting(blocksOnly = new ModuleTickSetting("Blocks only", false));
         this.registerSetting(breakBlocks = new ModuleTickSetting("Break blocks", false));
 
         try {
@@ -89,6 +92,9 @@ public class AutoClicker extends Module {
                 if (leftClick.isToggled() && Mouse.isButtonDown(0)) {
                     this.autoClick(mc.gameSettings.keyBindAttack.getKeyCode(), 0);
                 } else if (rightClick.isToggled() && Mouse.isButtonDown(1)) {
+                    if (blocksOnly.isToggled() && !(mc.thePlayer.getHeldItem().getItem() instanceof ItemBlock)) {
+                        return;
+                    }
                     this.autoClick(mc.gameSettings.keyBindUseItem.getKeyCode(), 1);
                 } else {
                     this.i = 0L;
