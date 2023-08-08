@@ -18,7 +18,6 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -28,7 +27,6 @@ import java.lang.reflect.Method;
 import java.util.Random;
 
 public class AutoClicker extends Module {
-    public static ModuleDesc desc;
     public static ModuleDoubleSliderSetting CPS;
     public static ModuleSliderSetting jitter;
     public static ModuleTickSetting weaponOnly, blocksOnly, breakBlocks, leftClick, rightClick, inventoryFill;
@@ -40,7 +38,7 @@ public class AutoClicker extends Module {
 
     public AutoClicker() {
         super("Autoclicker", category.Combat, 0);
-        this.registerSetting(desc = new ModuleDesc("Clicks for you."));
+        this.registerSetting(new ModuleDesc("Clicks for you."));
         this.registerSetting(CPS = new ModuleDoubleSliderSetting("CPS", 10.0D, 12.0D, 1.0D, 20.0D, 0.5D));
         this.registerSetting(jitter = new ModuleSliderSetting("Jitter", 0.0D, 0.0D, 3.0D, 0.1D));
         this.registerSetting(leftClick = new ModuleTickSetting("Left click", true));
@@ -84,17 +82,18 @@ public class AutoClicker extends Module {
     public void onTick(PlayerTickEvent event) {
         if (GameUtils.isPlayerInGame() && !mc.thePlayer.isEating()) {
             if (mc.currentScreen == null && mc.inGameHasFocus) {
-                if (weaponOnly.isToggled() && !GameUtils.getWeapon()) {
-                    return;
-                }
-
                 Mouse.poll();
                 if (leftClick.isToggled() && Mouse.isButtonDown(0)) {
+                    if (weaponOnly.isToggled() && !GameUtils.getWeapon()) {
+                        return;
+                    }
+
                     this.autoClick(mc.gameSettings.keyBindAttack.getKeyCode(), 0);
                 } else if (rightClick.isToggled() && Mouse.isButtonDown(1)) {
                     if (blocksOnly.isToggled() && !(mc.thePlayer.getHeldItem().getItem() instanceof ItemBlock)) {
                         return;
                     }
+
                     this.autoClick(mc.gameSettings.keyBindUseItem.getKeyCode(), 1);
                 } else {
                     this.i = 0L;
