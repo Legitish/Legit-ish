@@ -13,9 +13,9 @@ import java.util.ArrayList;
 
 public class Module {
     protected static Minecraft mc;
+    protected final ArrayList<ModuleSettingsList> settings;
     private final String moduleName;
     private final Module.category moduleCategory;
-    protected final ArrayList<ModuleSettingsList> settings;
     private boolean isToggled = false;
     private boolean enabled;
     private int keycode;

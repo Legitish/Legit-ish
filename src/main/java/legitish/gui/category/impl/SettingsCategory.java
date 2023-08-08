@@ -9,15 +9,20 @@ import legitish.module.ModuleManager;
 import legitish.module.modulesettings.ModuleSettingsList;
 import legitish.module.modulesettings.impl.*;
 import legitish.utils.ColorUtils;
+import legitish.utils.MouseUtils;
 import legitish.utils.font.FontUtils;
 import legitish.utils.font.MinecraftFontRenderer;
 import legitish.utils.render.StencilUtils;
+import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
 
 
 public class SettingsCategory extends Category {
     public final ArrayList<Comp> comps = new ArrayList<>();
+    final MinecraftFontRenderer mfr = FontUtils.regular16;
+    private boolean isBinding = false;
+    private double width;
 
     public SettingsCategory() {
         super("Settings");
@@ -74,6 +79,9 @@ public class SettingsCategory extends Category {
         for (Comp comp : comps) {
             comp.drawScreen(mouseX, mouseY, 0);
         }
+        final String bindText = this.isBinding ? "Press a key" : Keyboard.getKeyName(ModuleManager.gui.getKeycode()).equalsIgnoreCase("none") ? "-" : Keyboard.getKeyName((ModuleManager.gui.getKeycode()));
+        width = mfr.getStringWidth(bindText) < 14 ? 14 : mfr.getStringWidth(bindText) + 4;
+        mfr.drawString(bindText, clickGUI.getX() + 150 - width + width / 2 - 2, clickGUI.getY() + 40, MinecraftFontRenderer.CenterMode.X, false, ColorUtils.getFontColor(2).getRGB());
 
         StencilUtils.disableStencilBuffer();
         FontUtils.regular20.drawString("Settings", clickGUI.getX() + 95, clickGUI.getY() + 8, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
@@ -81,5 +89,24 @@ public class SettingsCategory extends Category {
 
     @Override
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
+        ClickGui clickGUI = Legitish.clickGui;
+        for (Comp comp : comps) {
+            comp.mouseClicked(mouseX, mouseY, mouseButton);
+        }
+        if (MouseUtils.mouseInBounds(mouseX, mouseY, clickGUI.getX() + 95 - width + width / 2 - 2, clickGUI.getY() + 8, width + 5, 20) && mouseButton == 0) {
+            this.isBinding = !this.isBinding;
+        }
+    }
+
+    @Override
+    public void keyTyped(char typedChar, int keyCode) {
+        if (this.isBinding) {
+            if (keyCode == 11) {
+                ModuleManager.gui.setbind(38);
+            } else {
+                ModuleManager.gui.setbind(keyCode);
+            }
+            this.isBinding = false;
+        }
     }
 }

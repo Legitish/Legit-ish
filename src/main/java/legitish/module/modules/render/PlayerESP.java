@@ -45,7 +45,7 @@ public class PlayerESP extends Module {
         this.rgb_c = (new Color(0, 255, 0).getRGB());
     }
 
-    @Subscribe(eventType = RenderWorldEvent.class)
+    @Subscribe(eventClass = RenderWorldEvent.class)
     public void findTargets(RenderWorldEvent renderWorldEvent) {
         if (GameUtils.isPlayerInGame()) {
             int rgb = this.rgb_c;

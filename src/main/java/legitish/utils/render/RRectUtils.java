@@ -9,9 +9,9 @@ import org.lwjgl.opengl.GL11;
 import java.awt.*;
 
 public class RRectUtils {
-    private static final ShaderUtils roundedGradientShader = new ShaderUtils("legitish/shaders/rrectGradient.frag");
     public static final ShaderUtils roundedShader = new ShaderUtils("legitish/shaders/rrect.frag");
     public static final ShaderUtils roundedOutlineShader = new ShaderUtils("legitish/shaders/rrectOutline.frag");
+    private static final ShaderUtils roundedGradientShader = new ShaderUtils("legitish/shaders/rrectGradient.frag");
 
     public static void drawGradientRoundCorner(double x, double y, double width, double height, double radius) {
         ColorUtils.resetColor();

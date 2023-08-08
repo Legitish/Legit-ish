@@ -1,7 +1,7 @@
 package legitish.module.modules.movement;
 
 import legitish.events.Subscribe;
-import legitish.events.impl.ClientTickEvent;
+import legitish.events.impl.PlayerTickEvent;
 import legitish.module.Module;
 import legitish.module.modulesettings.impl.ModuleDesc;
 import legitish.module.modulesettings.impl.ModuleTickSetting;
@@ -20,8 +20,8 @@ public class Sprint extends Module {
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(eventType = ClientTickEvent.class)
-    public void onTick(ClientTickEvent event) {
+    @Subscribe(eventClass = PlayerTickEvent.class)
+    public void onTick(PlayerTickEvent event) {
         if (GameUtils.isPlayerInGame() && mc.inGameHasFocus) {
             EntityPlayerSP p = mc.thePlayer;
             if (omniSprint.isToggled()) {

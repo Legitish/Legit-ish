@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class EntityRendererMixin {
     final EventBus eventBus = Legitish.getEventBus();
 
-    @Inject(method = "renderWorldPass", at = @At("RETURN"))
-    public void injectRenderWorldEvent(final CallbackInfo callbackInfo) {
+    @Inject(method = "renderHand(FI)V", at = @At("HEAD"))
+    public void injectRenderWorldEventPre(final CallbackInfo callbackInfo) {
         eventBus.call(new RenderWorldEvent());
     }
 }

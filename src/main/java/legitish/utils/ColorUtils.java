@@ -6,9 +6,6 @@ import java.awt.*;
 import java.util.regex.Pattern;
 
 public class ColorUtils {
-    // fixing this never >:(
-    private static final Pattern COLOR_PATTERN = Pattern.compile("(?i)§[0-9A-FK-OR]");
-
     public static final AnimationUtils[] animation = {
             new AnimationUtils(0.0F), new AnimationUtils(0.0F), new AnimationUtils(0.0F),
             new AnimationUtils(0.0F), new AnimationUtils(0.0F), new AnimationUtils(0.0F),
@@ -17,6 +14,8 @@ public class ColorUtils {
             new AnimationUtils(0.0F), new AnimationUtils(0.0F), new AnimationUtils(0.0F),
             new AnimationUtils(0.0F), new AnimationUtils(0.0F), new AnimationUtils(0.0F)
     };
+    // fixing this never >:(
+    private static final Pattern COLOR_PATTERN = Pattern.compile("(?i)§[0-9A-FK-OR]");
 
     public static Color getBackgroundColor(int id) {
         Color color = new Color(255, 0, 255);

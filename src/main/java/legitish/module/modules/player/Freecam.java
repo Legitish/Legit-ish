@@ -2,6 +2,7 @@ package legitish.module.modules.player;
 
 import legitish.events.Subscribe;
 import legitish.events.impl.MouseEvent;
+import legitish.events.impl.PlayerTickEvent;
 import legitish.events.impl.RenderWorldEvent;
 import legitish.module.Module;
 import legitish.module.modulesettings.impl.ModuleDesc;
@@ -67,7 +68,9 @@ public class Freecam extends Module {
 
     }
 
-    public void update() {
+    @SuppressWarnings("unused")
+    @Subscribe(eventClass = PlayerTickEvent.class)
+    public void onTick(PlayerTickEvent event) {
         if (disableOnDamage.isToggled() && mc.thePlayer.hurtTime != 0) {
             this.disable();
         } else {
@@ -76,7 +79,7 @@ public class Freecam extends Module {
             mc.thePlayer.moveStrafing = 0.0F;
             en.rotationYaw = en.rotationYawHead = mc.thePlayer.rotationYaw;
             en.rotationPitch = mc.thePlayer.rotationPitch;
-            double speed = 0.215D * 0.04D * Freecam.speed.getInput();
+            double speed = 0.215D * Freecam.speed.getInput();
             EntityOtherPlayerMP freecam;
             double rad;
             double dx;
@@ -141,7 +144,7 @@ public class Freecam extends Module {
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(eventType = RenderWorldEvent.class)
+    @Subscribe(eventClass = RenderWorldEvent.class)
     public void renderPlayer(RenderWorldEvent event) {
         if (GameUtils.isPlayerInGame()) {
             mc.thePlayer.renderArmPitch = mc.thePlayer.prevRenderArmPitch = 700.0F;
@@ -150,7 +153,7 @@ public class Freecam extends Module {
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(eventType = MouseEvent.class)
+    @Subscribe(eventClass = MouseEvent.class)
     public void cancelMouseClicks(MouseEvent event) {
         if (GameUtils.isPlayerInGame()) {
             event.setCancelled(true);

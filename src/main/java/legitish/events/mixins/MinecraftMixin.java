@@ -3,6 +3,7 @@ package legitish.events.mixins;
 import legitish.events.EventBus;
 import legitish.events.impl.ClientTickEvent;
 import legitish.events.impl.MouseEvent;
+import legitish.events.impl.PlayerTickEvent;
 import legitish.main.Legitish;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,9 +15,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MinecraftMixin {
     final EventBus eventBus = Legitish.getEventBus();
 
-    @Inject(method = "runTick", at = @At("RETURN"))
-    public void injectTickEventPost(final CallbackInfo callbackInfo) {
+    @Inject(method = "runTick", at = @At("HEAD"))
+    public void injectClientTickEvent(final CallbackInfo callbackInfo) {
         eventBus.call(new ClientTickEvent());
+    }
+
+    @Inject(method = "runTick", at = @At("RETURN"))
+    public void injectPlayerTickEvent(final CallbackInfo callbackInfo) {
+        eventBus.call(new PlayerTickEvent());
     }
 
     @Inject(method = "clickMouse", at = @At("HEAD"), cancellable = true)

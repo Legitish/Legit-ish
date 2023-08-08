@@ -68,7 +68,7 @@ public class AutoPlace extends Module {
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(eventType = DrawBlockHighlightEvent.class)
+    @Subscribe(eventClass = DrawBlockHighlightEvent.class)
     public void onHighlight(DrawBlockHighlightEvent event) {
         if (GameUtils.isPlayerInGame()) {
             if (mc.currentScreen == null && !mc.thePlayer.capabilities.isFlying) {

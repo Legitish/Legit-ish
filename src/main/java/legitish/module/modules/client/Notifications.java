@@ -50,7 +50,7 @@ public class Notifications extends Module {
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(eventType = RenderGameOverlayEvent.class)
+    @Subscribe(eventClass = RenderGameOverlayEvent.class)
     public void onTick(RenderGameOverlayEvent event) {
         ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
         for (int index = 0; index < notifs.size(); index++) {

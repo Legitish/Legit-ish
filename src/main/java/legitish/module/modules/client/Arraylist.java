@@ -77,7 +77,7 @@ public class Arraylist extends Module {
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(eventType = RenderGameOverlayEvent.class)
+    @Subscribe(eventClass = RenderGameOverlayEvent.class)
     public void renderArraylist(RenderGameOverlayEvent event) {
         if (GameUtils.isPlayerInGame()) {
             if (mc.currentScreen != null || mc.gameSettings.showDebugInfo) {

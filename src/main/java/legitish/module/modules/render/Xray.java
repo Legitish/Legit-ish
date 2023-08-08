@@ -78,7 +78,7 @@ public class Xray extends Module {
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(eventType = RenderWorldEvent.class)
+    @Subscribe(eventClass = RenderWorldEvent.class)
     public void renderBlockList(RenderWorldEvent event) {
         if (GameUtils.isPlayerInGame() && !this.ren.isEmpty()) {
             List<BlockPos> tRen = new ArrayList<>(this.ren);

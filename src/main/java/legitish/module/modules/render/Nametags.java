@@ -9,12 +9,13 @@ import legitish.module.modulesettings.impl.ModuleSliderSetting;
 import legitish.module.modulesettings.impl.ModuleTickSetting;
 import legitish.utils.GameUtils;
 import legitish.utils.MathUtils;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.opengl.GL11;
+
+import static net.minecraft.client.renderer.GlStateManager.*;
 
 public class Nametags extends Module {
     public static ModuleDesc desc;
@@ -33,7 +34,7 @@ public class Nametags extends Module {
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(eventType = RenderNameplateEvent.class)
+    @Subscribe(eventClass = RenderNameplateEvent.class)
     public void renderNameplates(RenderNameplateEvent event) {
         if (removeTags.isToggled()) {
             event.setCancelled(true);
@@ -56,27 +57,27 @@ public class Nametags extends Module {
                     str = str + " " + h;
                 }
 
-                GlStateManager.pushMatrix();
-                GlStateManager.translate((float) event.x + 0.0F, (float) event.y + en.height + 0.5F, (float) event.z);
+                pushMatrix();
+                translate((float) event.x + 0.0F, (float) event.y + en.height + 0.5F, (float) event.z);
                 GL11.glNormal3f(0.0F, 1.0F, 0.0F);
-                GlStateManager.rotate(-mc.getRenderManager().playerViewY, 0.0F, 1.0F, 0.0F);
-                GlStateManager.rotate(mc.getRenderManager().playerViewX, 1.0F, 0.0F, 0.0F);
+                rotate(-mc.getRenderManager().playerViewY, 0.0F, 1.0F, 0.0F);
+                rotate(mc.getRenderManager().playerViewX, 1.0F, 0.0F, 0.0F);
                 float scale = (float) (0.02666667 * (noScale.isToggled() ? Math.sqrt(mc.thePlayer.getDistanceToEntity(event.entity)) * 0.5 : 1));
-                GlStateManager.scale(-scale, -scale, scale);
+                scale(-scale, -scale, scale);
                 if (en.isSneaking()) {
-                    GlStateManager.translate(0.0F, 9.374999F, 0.0F);
+                    translate(0.0F, 9.374999F, 0.0F);
                 }
 
-                GlStateManager.disableLighting();
-                GlStateManager.depthMask(false);
-                GlStateManager.disableDepth();
-                GlStateManager.enableBlend();
-                GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+                disableLighting();
+                depthMask(false);
+                disableDepth();
+                enableBlend();
+                tryBlendFuncSeparate(770, 771, 1, 0);
                 Tessellator tessellator = Tessellator.getInstance();
                 WorldRenderer worldrenderer = tessellator.getWorldRenderer();
                 int i = (int) (-offset.getInput());
                 int j = mc.fontRendererObj.getStringWidth(str) / 2;
-                GlStateManager.disableTexture2D();
+                disableTexture2D();
                 if (rect.isToggled()) {
                     worldrenderer.begin(7, DefaultVertexFormats.POSITION_COLOR);
                     worldrenderer.pos(-j - 1, -1 + i, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
@@ -86,14 +87,14 @@ public class Nametags extends Module {
                     tessellator.draw();
                 }
 
-                GlStateManager.enableTexture2D();
+                enableTexture2D();
                 mc.fontRendererObj.drawString(str, -mc.fontRendererObj.getStringWidth(str) / 2, i, -1);
-                GlStateManager.enableDepth();
-                GlStateManager.depthMask(true);
-                GlStateManager.enableLighting();
-                GlStateManager.disableBlend();
-                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-                GlStateManager.popMatrix();
+                enableDepth();
+                depthMask(true);
+                enableLighting();
+                disableBlend();
+                color(1.0F, 1.0F, 1.0F, 1.0F);
+                popMatrix();
             }
 
         }

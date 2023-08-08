@@ -17,7 +17,6 @@ import legitish.utils.render.StencilUtils;
 import java.util.ArrayList;
 
 public class ClientCategory extends Category {
-    public static boolean openModSetting;
     public final ArrayList<Comp> comps = new ArrayList<>();
     public final ArrayList<Comp> bindComps = new ArrayList<>();
     private Module selectedMod;
@@ -39,7 +38,7 @@ public class ClientCategory extends Category {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         int offset = 30;
         ClickGui clickGUI = Legitish.clickGui;
-        if (!openModSetting) {
+        if (!clickGUI.openModSetting) {
             for (Module module : Legitish.moduleManager.inCategory(Module.category.Client)) {
                 RRectUtils.drawRound(clickGUI.getX() + 95, clickGUI.getY() + offset, clickGUI.getWidth() - 100, 20, 3, ColorUtils.getBackgroundColor(4));
                 FontUtils.regular20.drawString(module.getName(), clickGUI.getX() + 105, clickGUI.getY() + offset + 8, MinecraftFontRenderer.CenterMode.NONE, false, module.isEnabled() ? ColorUtils.getBackgroundColor(1).getRGB() : ColorUtils.getFontColor(2).getRGB());
@@ -71,14 +70,14 @@ public class ClientCategory extends Category {
             comp.mouseClicked(mouseX, mouseY, mouseButton);
         }
         for (Module mod : Legitish.moduleManager.inCategory(Module.category.Client)) {
-            if (MouseUtils.mouseInBounds(mouseX, mouseY, clickGUI.getX() + clickGUI.getWidth() - 23.5, clickGUI.getY() + offset, 23.5, 20) && canToggle && !openModSetting && mouseButton == 0) {
+            if (MouseUtils.mouseInBounds(mouseX, mouseY, clickGUI.getX() + clickGUI.getWidth() - 23.5, clickGUI.getY() + offset, 23.5, 20) && canToggle && !clickGUI.openModSetting && mouseButton == 0) {
                 int settingOffset = 30;
                 comps.clear();
                 if (!mod.getSettings().isEmpty()) {
                     int alternate = 0;
                     for (ModuleSettingsList settingsList : mod.getSettings()) {
                         selectedMod = mod;
-                        openModSetting = true;
+                        clickGUI.openModSetting = true;
                         if (!(settingsList instanceof ModuleTickSetting)) {
                             settingOffset += alternate == 1 ? 15 : 0;
                             alternate = alternate == 1 ? 0 : alternate;
@@ -119,14 +118,14 @@ public class ClientCategory extends Category {
             }
 
             if (MouseUtils.mouseInBounds(mouseX, mouseY, clickGUI.getX() + 95, clickGUI.getY() + offset, clickGUI.getWidth() - 200, 26) && canToggle) {
-                if (mouseButton == 0 && !openModSetting) {
+                if (mouseButton == 0 && !clickGUI.openModSetting) {
                     mod.toggle();
                 }
             }
             offset += 25;
         }
 
-        if (openModSetting) {
+        if (clickGUI.openModSetting) {
             for (Comp comp : comps) {
                 comp.mouseClicked(mouseX, mouseY, mouseButton);
             }
@@ -142,7 +141,8 @@ public class ClientCategory extends Category {
 
     @Override
     public void keyTyped(char typedChar, int keyCode) {
-        if (!openModSetting) {
+        ClickGui clickGUI = Legitish.clickGui;
+        if (!clickGUI.openModSetting) {
             for (Comp comp : bindComps) {
                 comp.keyTyped(typedChar, keyCode);
             }

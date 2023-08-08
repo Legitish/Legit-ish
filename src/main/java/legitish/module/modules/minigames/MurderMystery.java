@@ -37,7 +37,7 @@ public class MurderMystery extends Module {
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(eventType = RenderWorldEvent.class)
+    @Subscribe(eventClass = RenderWorldEvent.class)
     public void findPlayers(RenderWorldEvent renderWorldEvent) {
         if (GameUtils.isPlayerInGame()) {
             if (ModuleManager.playerESP.isEnabled()) {

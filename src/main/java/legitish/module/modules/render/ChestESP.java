@@ -22,7 +22,7 @@ public class ChestESP extends Module {
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(eventType = RenderWorldEvent.class)
+    @Subscribe(eventClass = RenderWorldEvent.class)
     public void renderESP(RenderWorldEvent event) {
         if (GameUtils.isPlayerInGame()) {
             int rgb = (new Color(255, 255, 255)).getRGB();

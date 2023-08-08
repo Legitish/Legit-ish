@@ -2,7 +2,6 @@ package legitish.gui;
 
 import legitish.gui.category.Category;
 import legitish.gui.category.CategoryManager;
-import legitish.gui.category.impl.ClientCategory;
 import legitish.gui.category.impl.ModulesCategory;
 import legitish.gui.category.impl.SettingsCategory;
 import legitish.main.Legitish;
@@ -18,9 +17,9 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 
 public class ClickGui extends GuiScreen {
-    public boolean closed;
-    public Category selectedCategory;
     public final CategoryManager categoryManager;
+    public Category selectedCategory;
+    public boolean openModSetting = false;
     private double x = 100;
     private double y = 100;
     private int currentCategoryY;
@@ -31,8 +30,6 @@ public class ClickGui extends GuiScreen {
     }
 
     public void initMain() {
-        closed = false;
-
         for (Category c : categoryManager.getCategories()) {
             c.initGui();
         }
@@ -47,12 +44,8 @@ public class ClickGui extends GuiScreen {
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         int categoryOffset = 35;
-
-        if (closed) {
-            mc.displayGuiScreen(null);
-        }
         GLUtils.startScale((float) ((this.getX()) + (this.getX() + this.getWidth())) / 2, (float) ((this.getY()) + (this.getY() + this.getHeight())) / 2, 1);
-        if (ModulesCategory.openModSetting || ClientCategory.openModSetting) {
+        if (openModSetting) {
             RRectUtils.drawRound(this.getX() + 90, this.getY() + 25, this.getWidth() - 90D, this.getHeight() - 25, 3, ColorUtils.getBackgroundColor(4));
         } else {
             RRectUtils.drawGradientRoundCorner(this.getX() + 90, this.getY() + 25, this.getWidth() - 90D, this.getHeight() - 25, 3);
@@ -104,14 +97,12 @@ public class ClickGui extends GuiScreen {
             if (!c.equals(categoryManager.getCategoryByClass(SettingsCategory.class))) {
                 if (MouseUtils.mouseInBounds(mouseX, mouseY, this.getX() + 4, this.getY() + categoryOffset, 75, 16) && mouseButton == 0) {
                     selectedCategory = c;
-                    ModulesCategory.openModSetting = false;
-                    ClientCategory.openModSetting = false;
+                    openModSetting = false;
                 }
             } else {
                 if (MouseUtils.mouseInBounds(mouseX, mouseY, this.getX(), this.getY() + this.getHeight() - 30, 85, 30) && mouseButton == 0) {
                     selectedCategory = c;
-                    ModulesCategory.openModSetting = false;
-                    ClientCategory.openModSetting = false;
+                    openModSetting = true;
                 }
             }
 
@@ -138,19 +129,16 @@ public class ClickGui extends GuiScreen {
             }
         }
         if (keyCode == 1) {
-            if (ModulesCategory.openModSetting) {
-                ModulesCategory.openModSetting = false;
-            } else if (ClientCategory.openModSetting) {
-                ClientCategory.openModSetting = false;
+            if (openModSetting) {
+                openModSetting = false;
             } else {
-                closed = true;
+                mc.displayGuiScreen(null);
             }
         }
     }
 
     public void onGuiClosed() {
-        ModulesCategory.openModSetting = false;
-        ClientCategory.openModSetting = false;
+        openModSetting = false;
         Legitish.configManager.saveConfig();
         Legitish.clientConfig.saveConfig();
     }

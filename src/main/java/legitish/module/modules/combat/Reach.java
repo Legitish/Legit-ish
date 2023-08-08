@@ -131,7 +131,7 @@ public class Reach extends Module {
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(eventType = MouseEvent.class)
+    @Subscribe(eventClass = MouseEvent.class)
     public void e(MouseEvent event) {
         if (GameUtils.isPlayerInGame() && event.button == MouseEvent.Button.LEFT && (!ModuleManager.autoClicker.isEnabled() || !AutoClicker.leftClick.isToggled() || !Mouse.isButtonDown(0))) {
             call();

@@ -1,7 +1,7 @@
 package legitish.module.modules.player;
 
 import legitish.events.Subscribe;
-import legitish.events.impl.ClientTickEvent;
+import legitish.events.impl.PlayerTickEvent;
 import legitish.module.Module;
 import legitish.module.modulesettings.impl.ModuleDesc;
 import legitish.module.modulesettings.impl.ModuleTickSetting;
@@ -24,8 +24,8 @@ public class AutoJump extends Module {
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(eventType = ClientTickEvent.class)
-    public void onTick(ClientTickEvent tickEvent) {
+    @Subscribe(eventClass = PlayerTickEvent.class)
+    public void onTick(PlayerTickEvent tickEvent) {
         if (GameUtils.isPlayerInGame()) {
             if (mc.thePlayer.onGround && (!cancelShift.isToggled() || !mc.thePlayer.isSneaking())) {
                 if (mc.theWorld.getCollidingBoundingBoxes(mc.thePlayer, mc.thePlayer.getEntityBoundingBox().offset(mc.thePlayer.motionX / 3.0D, -1.0D, mc.thePlayer.motionZ / 3.0D)).isEmpty()) {

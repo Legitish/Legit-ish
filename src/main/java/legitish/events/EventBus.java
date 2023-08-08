@@ -19,7 +19,7 @@ public class EventBus {
 
         for (Method method : methods) {
             if (method.isAnnotationPresent(Subscribe.class) && method.getParameterCount() == 1) {
-                Class<? extends Event> eventType = method.getAnnotation(Subscribe.class).eventType();
+                Class<? extends Event> eventType = method.getAnnotation(Subscribe.class).eventClass();
                 if (Event.class.isAssignableFrom(eventType)) {
                     eventListeners.computeIfAbsent(eventType, key -> new ArrayList<>()).add(new EventSubscribers(subscriber, method));
                 }
@@ -51,6 +51,7 @@ public class EventBus {
     private static class EventSubscribers {
         private final Object subscriber;
         private final Method method;
+
         private EventSubscribers(Object subscriber, Method method) {
             this.subscriber = subscriber;
             this.method = method;

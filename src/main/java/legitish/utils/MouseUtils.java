@@ -1,12 +1,11 @@
 package legitish.utils;
 
+import legitish.events.Subscribe;
+import legitish.events.impl.MouseEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.StringUtils;
-import net.weavemc.loader.api.event.MouseEvent;
-import net.weavemc.loader.api.event.SubscribeEvent;
 import org.lwjgl.input.Mouse;
 
-import java.awt.*;
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import java.util.List;
 
 public class MouseUtils {
     public static final Minecraft mc = Minecraft.getMinecraft();
-    private static Robot robot;
     private static final List<Long> a = new ArrayList<>();
     private static final List<Long> b = new ArrayList<>();
     public static long LL = 0L;
@@ -43,16 +41,14 @@ public class MouseUtils {
         }
     }
 
-    // Remind me to replace this with Java's bot because I'm pretty sure it works better.
+    // Fixing this some other time.
     public static void sendClick(int button, boolean press) {
         if (g != null && f != null && h != null) {
-            MouseEvent m = new MouseEvent();
-
             try {
                 g.setAccessible(true);
-                g.set(m, button);
+                //g.set(m, button);
                 f.setAccessible(true);
-                f.set(m, press);
+                //f.set(m, press);
                 h.setAccessible(true);
                 ByteBuffer bf = (ByteBuffer) h.get(null);
                 h.setAccessible(false);
@@ -143,14 +139,13 @@ public class MouseUtils {
         return b.size();
     }
 
-    @SubscribeEvent
-    public void onMouseUpdate(MouseEvent d) {
-        if (d.getButtonState()) {
-            if (d.getButton() == 0) {
-                aL();
-            } else if (d.getButton() == 1) {
-                aR();
-            }
+    @SuppressWarnings("unused")
+    @Subscribe(eventClass = MouseEvent.class)
+    public void onMouseUpdate(MouseEvent event) {
+        if (event.button == MouseEvent.Button.LEFT) {
+            aL();
+        } else if (event.button == MouseEvent.Button.RIGHT) {
+            aR();
         }
     }
 

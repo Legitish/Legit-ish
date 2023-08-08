@@ -12,7 +12,7 @@ public class Chams extends Module {
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(eventType = RenderLivingEvent.class)
+    @Subscribe(eventClass = RenderLivingEvent.class)
     public void renderChams(RenderLivingEvent event) {
         if (event.type == RenderLivingEvent.Type.PRE) {
             if (event.entity != mc.thePlayer) {

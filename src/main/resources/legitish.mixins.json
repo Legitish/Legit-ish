@@ -3,6 +3,7 @@
   "package": "legitish.events.mixins",
   "mixins": [
     "EntityLivingBaseMixin",
+    "EntityPlayerSPMixin",
     "EntityRendererMixin",
     "GuiIngameMixin",
     "MinecraftMixin",

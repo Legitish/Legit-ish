@@ -5,8 +5,8 @@ import legitish.main.Legitish;
 import legitish.module.Module;
 
 public class Comp {
-    public double x, y, width;
     public final ClickGui clickGui = Legitish.clickGui;
+    public double x, y, width;
     public Module module;
 
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {

@@ -44,7 +44,7 @@ public class Legitish {
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(eventType = ClientTickEvent.class)
+    @Subscribe(eventClass = ClientTickEvent.class)
     public void clientTimer(ClientTickEvent event) {
         if (GameUtils.isPlayerInGame()) {
             for (Module module : moduleManager.moduleList()) {

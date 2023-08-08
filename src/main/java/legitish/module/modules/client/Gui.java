@@ -2,14 +2,9 @@ package legitish.module.modules.client;
 
 import legitish.main.Legitish;
 import legitish.module.Module;
-import legitish.module.modulesettings.impl.ModuleDesc;
-import legitish.module.modulesettings.impl.ModuleSliderSetting;
 import legitish.utils.GameUtils;
 
 public class Gui extends Module {
-    public static ModuleSliderSetting a;
-    public static ModuleDesc b;
-
     public Gui() {
         super("Gui", category.Client, 38);
     }

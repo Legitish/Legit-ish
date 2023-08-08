@@ -1,9 +1,16 @@
 package legitish.module;
 
-import legitish.module.modules.client.*;
+import legitish.module.modules.client.Arraylist;
+import legitish.module.modules.client.Gui;
+import legitish.module.modules.client.Notifications;
+import legitish.module.modules.client.Targets;
 import legitish.module.modules.combat.*;
-import legitish.module.modules.minigames.*;
-import legitish.module.modules.movement.*;
+import legitish.module.modules.minigames.BedPlates;
+import legitish.module.modules.minigames.BedwarsAlerts;
+import legitish.module.modules.minigames.MurderMystery;
+import legitish.module.modules.movement.KeepSprint;
+import legitish.module.modules.movement.NoSlow;
+import legitish.module.modules.movement.Sprint;
 import legitish.module.modules.player.*;
 import legitish.module.modules.render.*;
 import legitish.utils.font.FontUtils;
@@ -13,9 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ModuleManager {
-    public static Module fastPlace, targets, autoClicker, reach, arrayList, playerESP, gui, notifications;
     public static final List<Module> moduleList = new ArrayList<>();
     public static final List<Module> enabledModuleList = new ArrayList<>();
+    public static Module fastPlace, targets, autoClicker, reach, arrayList, playerESP, gui, notifications, noSlow;
 
     public static void sort() {
         enabledModuleList.sort((o1, o2) -> (int) (FontUtils.regular16.getStringWidth(o2.getName()) - FontUtils.regular16.getStringWidth(o1.getName())));
@@ -35,6 +42,7 @@ public class ModuleManager {
         this.addModule(new MurderMystery());
         // Movement
         this.addModule(new KeepSprint());
+        this.addModule(noSlow = new NoSlow());
         this.addModule(new Sprint());
         // Player
         this.addModule(new AutoJump());

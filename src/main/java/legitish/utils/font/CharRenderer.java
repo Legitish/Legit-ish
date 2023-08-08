@@ -11,10 +11,10 @@ public class CharRenderer {
     // Credit to EldoDebug for this one :clown:
     final float imgSize = 1024;
     final CharData[] charData = new CharData[256];
+    final int charOffset = 0;
     Font font;
     boolean antiAlias, fractionalMetrics;
     int fontHeight = -1;
-    final int charOffset = 0;
     DynamicTexture tex;
 
     public CharRenderer(Font font, boolean antiAlias, boolean fractionalMetrics) {

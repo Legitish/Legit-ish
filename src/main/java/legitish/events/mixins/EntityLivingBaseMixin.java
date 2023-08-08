@@ -14,7 +14,12 @@ public class EntityLivingBaseMixin {
     final EventBus eventBus = Legitish.getEventBus();
 
     @Inject(method = "onUpdate", at = @At("HEAD"))
-    public void injectLivingUpdateEvent(final CallbackInfo callbackInfo) {
-        eventBus.call(new LivingUpdateEvent());
+    public void injectLivingUpdateEventPre(final CallbackInfo callbackInfo) {
+        eventBus.call(new LivingUpdateEvent(LivingUpdateEvent.Type.PRE));
+    }
+
+    @Inject(method = "onUpdate", at = @At("RETURN"))
+    public void injectLivingUpdateEventPost(final CallbackInfo callbackInfo) {
+        eventBus.call(new LivingUpdateEvent(LivingUpdateEvent.Type.POST));
     }
 }

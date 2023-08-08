@@ -21,7 +21,6 @@ public class Tracers extends Module {
     public static ModuleSliderSetting c;
     public static ModuleSliderSetting d;
     public static ModuleSliderSetting f;
-    private boolean g;
 
     public Tracers() {
         super("Tracers", category.Visual, 0);
@@ -33,27 +32,8 @@ public class Tracers extends Module {
         this.registerSetting(d = new ModuleSliderSetting("Blue", 0.0D, 0.0D, 255.0D, 1.0D));
     }
 
-    public void onEnable() {
-        this.g = mc.gameSettings.viewBobbing;
-        if (this.g) {
-            mc.gameSettings.viewBobbing = false;
-        }
-
-    }
-
-    public void onDisable() {
-        mc.gameSettings.viewBobbing = this.g;
-    }
-
-    public void update() {
-        if (mc.gameSettings.viewBobbing) {
-            mc.gameSettings.viewBobbing = false;
-        }
-
-    }
-
     @SuppressWarnings("unused")
-    @Subscribe(eventType = RenderWorldEvent.class)
+    @Subscribe(eventClass = RenderWorldEvent.class)
     public void findTargets(RenderWorldEvent event) {
         if (GameUtils.isPlayerInGame()) {
             int rgb = (new Color((int) b.getInput(), (int) c.getInput(), (int) d.getInput())).getRGB();

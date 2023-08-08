@@ -49,7 +49,7 @@ public class ClickAssist extends Module {
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(eventType = MouseEvent.class)
+    @Subscribe(eventClass = MouseEvent.class)
     public void onMouseUpdate(MouseEvent ev) {
         if (chance.getInput() != 0.0D && GameUtils.isPlayerInGame()) {
             if (mc.currentScreen == null && !mc.thePlayer.isEating()) {

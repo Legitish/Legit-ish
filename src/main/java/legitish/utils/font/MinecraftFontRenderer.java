@@ -16,8 +16,8 @@ public class MinecraftFontRenderer extends CharRenderer {
     final CharData[] italicChars = new CharData[256];
     final CharData[] boldItalicChars = new CharData[256];
     final int[] colorCode = new int[32];
-    DynamicTexture texBold, texItalic, texItalicBold;
     final String colorcodeIdentifiers = "0123456789abcdefklmnor";
+    DynamicTexture texBold, texItalic, texItalicBold;
 
     public MinecraftFontRenderer(Font font) {
         super(font, true, true);

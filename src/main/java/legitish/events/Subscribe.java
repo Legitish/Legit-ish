@@ -8,5 +8,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface Subscribe {
-    Class<? extends Event> eventType();
+    Class<? extends Event> eventClass();
 }

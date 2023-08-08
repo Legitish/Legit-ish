@@ -73,7 +73,7 @@ public class BedPlates extends Module {
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(eventType = RenderWorldEvent.class)
+    @Subscribe(eventClass = RenderWorldEvent.class)
     public void renderBlockList(RenderWorldEvent event) {
         if (GameUtils.isPlayerInGame() && !this.beds.isEmpty()) {
             int index = 0;

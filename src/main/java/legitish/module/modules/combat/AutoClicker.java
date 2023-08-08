@@ -1,7 +1,7 @@
 package legitish.module.modules.combat;
 
 import legitish.events.Subscribe;
-import legitish.events.impl.ClientTickEvent;
+import legitish.events.impl.PlayerTickEvent;
 import legitish.module.Module;
 import legitish.module.modulesettings.impl.ModuleDesc;
 import legitish.module.modulesettings.impl.ModuleDoubleSliderSetting;
@@ -77,8 +77,8 @@ public class AutoClicker extends Module {
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(eventType = ClientTickEvent.class)
-    public void onTick(ClientTickEvent event) {
+    @Subscribe(eventClass = PlayerTickEvent.class)
+    public void onTick(PlayerTickEvent event) {
         if (GameUtils.isPlayerInGame() && !mc.thePlayer.isEating()) {
             if (mc.currentScreen == null && mc.inGameHasFocus) {
                 if (weaponOnly.isToggled() && !GameUtils.getWeapon()) {

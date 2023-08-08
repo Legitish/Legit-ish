@@ -25,9 +25,9 @@ public class Velocity extends Module {
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(eventType = LivingUpdateEvent.class)
+    @Subscribe(eventClass = LivingUpdateEvent.class)
     public void onTick(LivingUpdateEvent event) {
-        if (GameUtils.isPlayerInGame() && mc.thePlayer.maxHurtTime > 0 && mc.thePlayer.hurtTime == mc.thePlayer.maxHurtTime) {
+        if (GameUtils.isPlayerInGame() && mc.thePlayer.maxHurtTime > 0 && mc.thePlayer.hurtTime == mc.thePlayer.maxHurtTime && event.type == LivingUpdateEvent.Type.PRE) {
             if (onlyWhileTargeting.isToggled() && (mc.objectMouseOver == null || mc.objectMouseOver.entityHit == null)) {
                 return;
             }
