@@ -44,7 +44,7 @@ public abstract class EntityPlayerSPMixin extends AbstractClientPlayer {
     public abstract void setSprinting(boolean p_setSprinting_1_);
 
     @Shadow
-    protected abstract boolean pushOutOfBlocks(double p_pushOutOfBlocks_1_, double p_pushOutOfBlocks_3_, double p_pushOutOfBlocks_5_);
+    public abstract boolean pushOutOfBlocks(double p_pushOutOfBlocks_1_, double p_pushOutOfBlocks_3_, double p_pushOutOfBlocks_5_);
 
     @Shadow
     public abstract void sendPlayerAbilities();
