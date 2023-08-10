@@ -15,7 +15,6 @@ import java.awt.*;
 import java.util.Iterator;
 
 public class Tracers extends Module {
-    public static ModuleDesc desc;
     public static ModuleTickSetting a;
     public static ModuleSliderSetting b;
     public static ModuleSliderSetting c;
@@ -24,7 +23,7 @@ public class Tracers extends Module {
 
     public Tracers() {
         super("Tracers", category.Visual, 0);
-        this.registerSetting(desc = new ModuleDesc("Draws a line to enemies."));
+        this.registerSetting(new ModuleDesc("Draws a line to enemies."));
         this.registerSetting(a = new ModuleTickSetting("Show invis", true));
         this.registerSetting(f = new ModuleSliderSetting("Line Width", 1.0D, 1.0D, 5.0D, 1.0D));
         this.registerSetting(b = new ModuleSliderSetting("Red", 0.0D, 0.0D, 255.0D, 1.0D));

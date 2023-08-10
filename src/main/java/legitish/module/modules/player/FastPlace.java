@@ -13,14 +13,13 @@ import net.minecraft.item.ItemStack;
 import java.lang.reflect.Field;
 
 public class FastPlace extends Module {
-    public static ModuleDesc desc;
     public static ModuleSliderSetting delay;
     public static ModuleTickSetting blocksOnly;
     public static Field field = null;
 
     public FastPlace() {
         super("Fast Place", category.Player, 0);
-        this.registerSetting(desc = new ModuleDesc("Places blocks faster."));
+        this.registerSetting(new ModuleDesc("Places blocks faster."));
         this.registerSetting(delay = new ModuleSliderSetting("Delay", 0.0D, 0.0D, 4.0D, 1.0D));
         this.registerSetting(blocksOnly = new ModuleTickSetting("Blocks only", true));
         try {

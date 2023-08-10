@@ -28,7 +28,6 @@ public class Arraylist extends Module {
     // will be improving this later, already looks good
     private static final MinecraftFontRenderer mfr = FontUtils.regular20;
     private static final List<AnimationUtils> animationsX = new ArrayList<>();
-    public static ModuleDesc desc;
     public static ModuleTickSetting editPosition, watermark, rectangles, shadow, background, alphabeticalSort;
     public static ModuleSliderSetting margin;
     public static MouseUtils.PositionMode positionMode;
@@ -37,7 +36,7 @@ public class Arraylist extends Module {
 
     public Arraylist() {
         super("Arraylist", category.Client, 0);
-        this.registerSetting(desc = new ModuleDesc("Displays enabled modules."));
+        this.registerSetting(new ModuleDesc("Displays enabled modules."));
         this.registerSetting(watermark = new ModuleTickSetting("Watermark", true));
         this.registerSetting(shadow = new ModuleTickSetting("Text shadow", true));
         this.registerSetting(rectangles = new ModuleTickSetting("Rectangles", false));

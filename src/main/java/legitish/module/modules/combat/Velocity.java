@@ -10,13 +10,12 @@ import legitish.utils.GameUtils;
 import org.lwjgl.input.Keyboard;
 
 public class Velocity extends Module {
-    public static ModuleDesc desc;
     public static ModuleSliderSetting horizontal, vertical, chance;
     public static ModuleTickSetting onlyWhileTargeting, holdingS;
 
     public Velocity() {
         super("Velocity", category.Combat, 0);
-        this.registerSetting(desc = new ModuleDesc("Modifies your knockback."));
+        this.registerSetting(new ModuleDesc("Modifies your knockback."));
         this.registerSetting(horizontal = new ModuleSliderSetting("Horizontal", 90.0D, 0.0D, 100.0D, 1.0D));
         this.registerSetting(vertical = new ModuleSliderSetting("Vertical", 100.0D, 0.0D, 100.0D, 1.0D));
         this.registerSetting(chance = new ModuleSliderSetting("Chance", 100.0D, 0.0D, 100.0D, 1.0D));

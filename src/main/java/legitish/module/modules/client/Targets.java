@@ -9,12 +9,11 @@ import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class Targets extends Module {
-    public static ModuleDesc desc;
     public static ModuleTickSetting bots, removeDead;
 
     public Targets() {
         super("Targets", category.Client, 0);
-        this.registerSetting(desc = new ModuleDesc("Sets targets for certain modules."));
+        this.registerSetting(new ModuleDesc("Sets targets for certain modules."));
         this.registerSetting(bots = new ModuleTickSetting("Don't target bots", true));
         this.registerSetting(removeDead = new ModuleTickSetting("Remove dead", true));
     }

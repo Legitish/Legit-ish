@@ -15,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import org.lwjgl.input.Keyboard;
 
 public class SafeWalk extends Module {
-    public static ModuleDesc desc;
     public static ModuleTickSetting shift, shiftOnJump, blocksOnly, lookDown, onHold;
     public static ModuleDoubleSliderSetting pitchRange, shiftTime;
     private static boolean shouldBridge = false;
@@ -24,7 +23,7 @@ public class SafeWalk extends Module {
 
     public SafeWalk() {
         super("Safe Walk", category.Player, 0);
-        this.registerSetting(desc = new ModuleDesc("Prevents you from falling off edges."));
+        this.registerSetting(new ModuleDesc("Prevents you from falling off edges."));
         this.registerSetting(shift = new ModuleTickSetting("Shift", false));
         this.registerSetting(shiftOnJump = new ModuleTickSetting("Shift on jump", false));
         this.registerSetting(shiftTime = new ModuleDoubleSliderSetting("Shift time", 125.0D, 175.0D, 0.0D, 300.0D, 5.0D));

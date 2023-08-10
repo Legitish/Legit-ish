@@ -22,13 +22,12 @@ import org.lwjgl.input.Mouse;
 import java.util.List;
 
 public class Reach extends Module {
-    public static ModuleDesc desc;
     public static ModuleDoubleSliderSetting reach;
     public static ModuleTickSetting weaponOnly, movingOnly, sprintOnly, hitThroughBlocks;
 
     public Reach() {
         super("Reach", category.Combat, 0);
-        this.registerSetting(desc = new ModuleDesc("Increases your reach."));
+        this.registerSetting(new ModuleDesc("Increases your reach."));
         this.registerSetting(reach = new ModuleDoubleSliderSetting("Reach", 3.0D, 3.15D, 3.0D, 6.0D, 0.05D));
         this.registerSetting(weaponOnly = new ModuleTickSetting("Weapon only", false));
         this.registerSetting(movingOnly = new ModuleTickSetting("Moving only", false));

@@ -8,7 +8,6 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 public class CharRenderer {
-    // Credit to EldoDebug for this one :clown:
     final float imgSize = 1024;
     final CharData[] charData = new CharData[256];
     final int charOffset = 0;

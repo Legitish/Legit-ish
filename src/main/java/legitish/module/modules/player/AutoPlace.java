@@ -23,7 +23,6 @@ import net.weavemc.loader.api.event.TickEvent;
 import org.lwjgl.input.Mouse;
 
 public class AutoPlace extends Module {
-    public static ModuleDesc desc;
     public static ModuleTickSetting holdRight;
     public static ModuleSliderSetting frameDelay;
     private double lfd = 0.0D;
@@ -34,7 +33,7 @@ public class AutoPlace extends Module {
 
     public AutoPlace() {
         super("Auto Place", category.Player, 0);
-        this.registerSetting(desc = new ModuleDesc("Automatically places blocks under you."));
+        this.registerSetting(new ModuleDesc("Automatically places blocks under you."));
         this.registerSetting(frameDelay = new ModuleSliderSetting("Frame delay (fps/80)", 8.0D, 0.0D, 30.0D, 1.0D));
         this.registerSetting(holdRight = new ModuleTickSetting("Hold right", true));
     }

@@ -10,13 +10,10 @@ import net.weavemc.loader.api.event.TickEvent;
 import java.lang.reflect.Field;
 
 public class DelayRemover extends Module {
-    public static ModuleDesc desc;
-    // i dont think this works tbh
     private Field l = null;
 
     public DelayRemover() {
         super("Delay Remover", category.Combat, 0);
-        this.registerSetting(desc = new ModuleDesc("Gives you 1.7 hitreg."));
     }
 
     public void onEnable() {
@@ -41,7 +38,8 @@ public class DelayRemover extends Module {
 
             try {
                 this.l.set(mc, 0);
-            } catch (IllegalAccessException | IndexOutOfBoundsException ignored) {
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
         }
 

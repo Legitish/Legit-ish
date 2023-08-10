@@ -84,7 +84,7 @@ public class SettingsCategory extends Category {
         mfr.drawString(bindText, clickGUI.getX() + 150 - width + width / 2 - 2, clickGUI.getY() + 40, MinecraftFontRenderer.CenterMode.X, false, ColorUtils.getFontColor(2).getRGB());
 
         StencilUtils.disableStencilBuffer();
-        FontUtils.regular20.drawString("Settings", clickGUI.getX() + 95, clickGUI.getY() + 8, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
+        FontUtils.regular20.drawString("ClickGUI Settings", clickGUI.getX() + 95, clickGUI.getY() + 8, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
     }
 
     @Override
@@ -101,7 +101,7 @@ public class SettingsCategory extends Category {
     @Override
     public void keyTyped(char typedChar, int keyCode) {
         if (this.isBinding) {
-            if (keyCode == 11) {
+            if (keyCode == 11 || keyCode == 1) {
                 ModuleManager.gui.setbind(38);
             } else {
                 ModuleManager.gui.setbind(keyCode);

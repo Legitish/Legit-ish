@@ -14,11 +14,10 @@ import java.awt.*;
 import java.util.Iterator;
 
 public class ChestESP extends Module {
-    public static ModuleDesc desc;
 
     public ChestESP() {
         super("Chest ESP", category.Visual, 0);
-        this.registerSetting(desc = new ModuleDesc("Renders an overlay over chests."));
+        this.registerSetting(new ModuleDesc("Renders an overlay over chests."));
     }
 
     @SuppressWarnings("unused")

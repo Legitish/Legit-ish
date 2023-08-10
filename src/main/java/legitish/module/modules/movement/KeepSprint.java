@@ -8,13 +8,12 @@ import legitish.module.modulesettings.impl.ModuleTickSetting;
 import net.minecraft.entity.Entity;
 
 public class KeepSprint extends Module {
-    public static ModuleDesc desc;
     public static ModuleSliderSetting slow;
     public static ModuleTickSetting onlyReach;
 
     public KeepSprint() {
         super("Keep Sprint", category.Movement, 0);
-        this.registerSetting(desc = new ModuleDesc("Reduces slowdown when attacking."));
+        this.registerSetting(new ModuleDesc("Reduces slowdown when attacking."));
         this.registerSetting(slow = new ModuleSliderSetting("Slow %", 40.0D, 0.0D, 40.0D, 1.0D));
         this.registerSetting(onlyReach = new ModuleTickSetting("Only reduce reach hits", false));
     }

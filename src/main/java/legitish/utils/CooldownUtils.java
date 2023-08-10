@@ -23,4 +23,8 @@ public class CooldownUtils {
     public long getTimeLeft() {
         return duration - (System.currentTimeMillis() - start);
     }
+
+    public long getElapsedTime() {
+        return System.currentTimeMillis() - start;
+    }
 }

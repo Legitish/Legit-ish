@@ -15,13 +15,12 @@ import org.lwjgl.input.Mouse;
 import java.util.Iterator;
 
 public class AimAssist extends Module {
-    public static ModuleDesc desc;
     public static ModuleSliderSetting speed, fov, distance;
     public static ModuleTickSetting clickAim, weaponOnly, aimInvis, blatantMode;
 
     public AimAssist() {
         super("Aim Assist", category.Combat, 0);
-        this.registerSetting(desc = new ModuleDesc("Aims at enemies."));
+        this.registerSetting(new ModuleDesc("Aims at enemies."));
         this.registerSetting(speed = new ModuleSliderSetting("Speed", 45.0D, 1.0D, 100.0D, 1.0D));
         this.registerSetting(fov = new ModuleSliderSetting("FOV", 90.0D, 15.0D, 180.0D, 1.0D));
         this.registerSetting(distance = new ModuleSliderSetting("Distance", 4.5D, 1.0D, 10.0D, 0.5D));

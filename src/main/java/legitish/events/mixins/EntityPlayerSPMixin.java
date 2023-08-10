@@ -1,6 +1,9 @@
 package legitish.events.mixins;
 
 import com.mojang.authlib.GameProfile;
+import legitish.events.EventBus;
+import legitish.events.impl.SwingEvent;
+import legitish.main.Legitish;
 import legitish.module.ModuleManager;
 import legitish.module.modules.movement.NoSlow;
 import net.minecraft.client.Minecraft;
@@ -19,6 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(EntityPlayerSP.class)
 public abstract class EntityPlayerSPMixin extends AbstractClientPlayer {
+    final EventBus eventBus = Legitish.getEventBus();
     @Shadow
     public int sprintingTicksLeft;
     @Shadow
@@ -62,7 +66,7 @@ public abstract class EntityPlayerSPMixin extends AbstractClientPlayer {
     public abstract boolean isSneaking();
 
     @Inject(method = "onLivingUpdate", at = @At("HEAD"), cancellable = true)
-    public void injectNoSlow(final CallbackInfo callbackInfo) {
+    public void injectSlowdownEvent(final CallbackInfo callbackInfo) {
         if (this.sprintingTicksLeft > 0) {
             --this.sprintingTicksLeft;
 
@@ -215,5 +219,15 @@ public abstract class EntityPlayerSPMixin extends AbstractClientPlayer {
             this.sendPlayerAbilities();
         }
         callbackInfo.cancel();
+    }
+
+    @Inject(method = "swingItem", at = @At("HEAD"))
+    public void injectSwingEventPre(final CallbackInfo callbackInfo) {
+        eventBus.call(new SwingEvent(SwingEvent.Type.PRE));
+    }
+
+    @Inject(method = "swingItem", at = @At("RETURN"))
+    public void injectSwingEventPost(final CallbackInfo callbackInfo) {
+        eventBus.call(new SwingEvent(SwingEvent.Type.POST));
     }
 }

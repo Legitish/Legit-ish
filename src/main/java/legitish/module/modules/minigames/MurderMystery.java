@@ -25,12 +25,11 @@ import java.util.List;
 public class MurderMystery extends Module {
     private static final List<EntityPlayer> murderers = new ArrayList<>();
     private static final List<EntityPlayer> detectives = new ArrayList<>();
-    public static ModuleDesc desc;
     public static ModuleTickSetting alert, searchDetectives, announceMurderer;
 
     public MurderMystery() {
         super("Murder Mystery", category.Visual, 0);
-        this.registerSetting(desc = new ModuleDesc("Detects murderers and detectives in Murder Mystery."));
+        this.registerSetting(new ModuleDesc("Detects murderers and detectives in Murder Mystery."));
         this.registerSetting(alert = new ModuleTickSetting("Alert", true));
         this.registerSetting(searchDetectives = new ModuleTickSetting("Search detectives", true));
         this.registerSetting(announceMurderer = new ModuleTickSetting("Announce murderer", false));

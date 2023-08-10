@@ -16,7 +16,6 @@ import org.lwjgl.input.Keyboard;
 import java.awt.*;
 
 public class Freecam extends Module {
-    public static ModuleDesc desc;
     public static ModuleSliderSetting speed;
     public static ModuleTickSetting disableOnDamage;
     public static EntityOtherPlayerMP en = null;
@@ -25,7 +24,7 @@ public class Freecam extends Module {
 
     public Freecam() {
         super("Freecam", category.Player, 0);
-        this.registerSetting(desc = new ModuleDesc("Allows you to move your camera outside of the player."));
+        this.registerSetting(new ModuleDesc("Allows you to move your camera outside of the player."));
         this.registerSetting(speed = new ModuleSliderSetting("Speed", 2.5D, 0.5D, 10.0D, 0.5D));
         this.registerSetting(disableOnDamage = new ModuleTickSetting("Disable on damage", true));
     }

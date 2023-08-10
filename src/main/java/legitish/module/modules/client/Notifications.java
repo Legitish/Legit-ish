@@ -25,12 +25,11 @@ public class Notifications extends Module {
     private static final List<CooldownUtils> durations = new ArrayList<>();
     private static final List<AnimationUtils> animationsX = new ArrayList<>();
     private static final List<AnimationUtils> animationsY = new ArrayList<>();
-    public static ModuleDesc desc;
     public static ModuleTickSetting chatNoti;
 
     public Notifications() {
         super("Notifications", category.Client, 0);
-        this.registerSetting(desc = new ModuleDesc("Displays notifications for certain events."));
+        this.registerSetting(new ModuleDesc("Displays notifications for certain events."));
         this.registerSetting(chatNoti = new ModuleTickSetting("Show in chat", false));
     }
 

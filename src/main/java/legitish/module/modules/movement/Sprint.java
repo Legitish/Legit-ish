@@ -10,12 +10,11 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.settings.KeyBinding;
 
 public class Sprint extends Module {
-    public static ModuleDesc desc;
     public static ModuleTickSetting omniSprint;
 
     public Sprint() {
         super("Sprint", category.Movement, 0);
-        this.registerSetting(desc = new ModuleDesc("Sprints automatically."));
+        this.registerSetting(new ModuleDesc("Sprints automatically."));
         this.registerSetting(omniSprint = new ModuleTickSetting("OmniSprint", false));
     }
 

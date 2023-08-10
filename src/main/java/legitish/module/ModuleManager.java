@@ -32,9 +32,11 @@ public class ModuleManager {
         // Combat
         this.addModule(autoClicker = new AutoClicker());
         this.addModule(new AimAssist());
+        //this.addModule(new AutoBlock());
         this.addModule(new ClickAssist());
         this.addModule(new DelayRemover());
         this.addModule(reach = new Reach());
+        this.addModule(new SprintReset());
         this.addModule(new Velocity());
         // Minigames
         this.addModule(new BedwarsAlerts());
@@ -56,6 +58,7 @@ public class ModuleManager {
         this.addModule(new Nametags());
         this.addModule(playerESP = new PlayerESP());
         this.addModule(new Tracers());
+        this.addModule(new Xray());
         // Client
         this.addModule(arrayList = new Arraylist());
         this.addModule(gui = new Gui());

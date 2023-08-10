@@ -17,7 +17,6 @@ import java.util.Iterator;
 
 @SuppressWarnings("unused")
 public class PlayerESP extends Module {
-    public static ModuleDesc desc;
     public static ModuleSliderSetting i;
     public static ModuleSliderSetting j;
     public static ModuleTickSetting f;
@@ -30,7 +29,7 @@ public class PlayerESP extends Module {
 
     public PlayerESP() {
         super("Player ESP", category.Visual, 0);
-        this.registerSetting(desc = new ModuleDesc("Renders an overlay over players."));
+        this.registerSetting(new ModuleDesc("Renders an overlay over players."));
         this.registerSetting(box2d = new ModuleTickSetting("2D", false));
         this.registerSetting(box3d = new ModuleTickSetting("Box", false));
         this.registerSetting(health = new ModuleTickSetting("Health", true));

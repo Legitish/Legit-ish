@@ -18,13 +18,12 @@ import org.lwjgl.opengl.GL11;
 import static net.minecraft.client.renderer.GlStateManager.*;
 
 public class Nametags extends Module {
-    public static ModuleDesc desc;
     public static ModuleSliderSetting offset;
     public static ModuleTickSetting rect, showHealth, showInvis, removeTags, noScale;
 
     public Nametags() {
         super("Nametags", category.Visual, 0);
-        this.registerSetting(desc = new ModuleDesc("Improves vanilla nametags."));
+        this.registerSetting(new ModuleDesc("Improves vanilla nametags."));
         this.registerSetting(offset = new ModuleSliderSetting("Offset", 0.0D, -40.0D, 40.0D, 1.0D));
         this.registerSetting(rect = new ModuleTickSetting("Rect", true));
         this.registerSetting(showHealth = new ModuleTickSetting("Show health", true));

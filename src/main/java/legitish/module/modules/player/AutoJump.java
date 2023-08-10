@@ -9,13 +9,12 @@ import legitish.utils.GameUtils;
 import net.minecraft.client.settings.KeyBinding;
 
 public class AutoJump extends Module {
-    public static ModuleDesc desc;
     public static ModuleTickSetting cancelShift;
     private boolean jumping = false;
 
     public AutoJump() {
         super("Auto Jump", category.Player, 0);
-        this.registerSetting(desc = new ModuleDesc("Jumps at the edge of a block."));
+        this.registerSetting(new ModuleDesc("Jumps at the edge of a block."));
         this.registerSetting(cancelShift = new ModuleTickSetting("Cancel when shifting", true));
     }
 

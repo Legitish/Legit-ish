@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.TimerTask;
 
 public class Xray extends Module {
-    public static ModuleDesc desc;
     public static ModuleSliderSetting r;
     public static ModuleTickSetting a;
     public static ModuleTickSetting b;
@@ -32,7 +31,7 @@ public class Xray extends Module {
 
     public Xray() {
         super("Xray", category.Visual, 0);
-        this.registerSetting(desc = new ModuleDesc("Highlights certain blocks."));
+        this.registerSetting(new ModuleDesc("Highlights certain blocks."));
         this.registerSetting(r = new ModuleSliderSetting("Range", 20.0D, 5.0D, 50.0D, 1.0D));
         this.registerSetting(a = new ModuleTickSetting("Iron", true));
         this.registerSetting(b = new ModuleTickSetting("Gold", true));

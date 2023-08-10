@@ -26,7 +26,6 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class BedPlates extends Module {
     private static final Minecraft mc = Minecraft.getMinecraft();
-    public static ModuleDesc desc;
     public static ModuleSliderSetting updateRate, yShift, layers;
     public static ModuleTickSetting bedwarsOnly;
     private final CooldownUtils updateCooldown = new CooldownUtils(0);
@@ -37,7 +36,7 @@ public class BedPlates extends Module {
 
     public BedPlates() {
         super("Bed Plates", Module.category.Visual, 0);
-        this.registerSetting(desc = new ModuleDesc("Renders a plate over beds."));
+        this.registerSetting(new ModuleDesc("Renders a plate over beds."));
         this.registerSetting(yShift = new ModuleSliderSetting("Y-shift", 2, -5, 10, 1));
         this.registerSetting(updateRate = new ModuleSliderSetting("Update rate (ms)", 1000, 250, 5000, 250));
         this.registerSetting(layers = new ModuleSliderSetting("Layers", 3, 1, 10, 1));

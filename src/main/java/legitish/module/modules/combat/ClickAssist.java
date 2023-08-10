@@ -15,7 +15,6 @@ import org.lwjgl.input.Mouse;
 import java.awt.*;
 
 public class ClickAssist extends Module {
-    public static ModuleDesc desc;
     public static ModuleSliderSetting chance;
     public static ModuleTickSetting leftClick, rightClick, blocksOnly, weaponOnly, onlyTargeting, cpsMin;
     private Robot robot;
@@ -24,7 +23,7 @@ public class ClickAssist extends Module {
 
     public ClickAssist() {
         super("ClickAssist", category.Combat, 0);
-        this.registerSetting(desc = new ModuleDesc("Boosts your CPS."));
+        this.registerSetting(new ModuleDesc("Boosts your CPS."));
         this.registerSetting(chance = new ModuleSliderSetting("Chance", 80.0D, 0.0D, 100.0D, 1.0D));
         this.registerSetting(leftClick = new ModuleTickSetting("Left click", true));
         this.registerSetting(weaponOnly = new ModuleTickSetting("Weapon only", true));

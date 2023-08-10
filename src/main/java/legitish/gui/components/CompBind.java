@@ -38,13 +38,7 @@ public class CompBind extends Comp {
     @Override
     public void keyTyped(char typedChar, int keyCode) {
         if (this.isBinding) {
-            if (keyCode == 11) {
-                if (this.module instanceof Gui) {
-                    this.module.setbind(38);
-                } else {
-                    this.module.setbind(0);
-                }
-            } else {
+            if (keyCode != 1) {
                 this.module.setbind(keyCode);
             }
             this.isBinding = false;
