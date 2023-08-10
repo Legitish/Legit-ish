@@ -47,22 +47,12 @@ public class MurderMystery extends Module {
                 murderers.clear();
                 detectives.clear();
             } else {
-                Iterator<EntityPlayer> var2 = mc.theWorld.playerEntities.iterator();
-
-                while (true) {
-                    EntityPlayer en;
-                    do {
-                        do {
-                            do {
-                                if (!var2.hasNext()) {
-                                    return;
-                                }
-
-                                en = var2.next();
-                            } while (en == mc.thePlayer);
-                        } while (en.isInvisible());
-                    } while (Targets.bot(en));
-
+                for (EntityPlayer en : mc.theWorld.playerEntities) {
+                    if (!Targets.isTarget(en)) {
+                        continue;
+                    } else if (en.isInvisible()) {
+                        continue;
+                    }
                     if (en.getHeldItem() != null && en.getHeldItem().hasDisplayName()) {
                         Item i = en.getHeldItem().getItem();
                         if (i instanceof ItemSword || i instanceof ItemAxe || en.getHeldItem().getDisplayName().contains("aKnife")) {

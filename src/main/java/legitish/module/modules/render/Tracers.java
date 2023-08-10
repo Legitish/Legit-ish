@@ -36,25 +36,13 @@ public class Tracers extends Module {
     public void findTargets(RenderWorldEvent event) {
         if (GameUtils.isPlayerInGame()) {
             int rgb = (new Color((int) b.getInput(), (int) c.getInput(), (int) d.getInput())).getRGB();
-            Iterator<EntityPlayer> var3 = mc.theWorld.playerEntities.iterator();
-
-            while (true) {
-                EntityPlayer en;
-                do {
-                    do {
-                        do {
-                            if (!var3.hasNext()) {
-                                return;
-                            }
-
-                            en = var3.next();
-                        } while (en == mc.thePlayer);
-                    } while (en.deathTime != 0);
-                } while (!a.isToggled() && en.isInvisible());
-
-                if (!Targets.bot(en)) {
-                    GLUtils.drawTracerLine(en, rgb, (float) f.getInput());
+            for (EntityPlayer en : mc.theWorld.playerEntities) {
+                if (!Targets.isTarget(en)) {
+                    continue;
+                } else if (!a.isToggled() && en.isInvisible()) {
+                    continue;
                 }
+                GLUtils.drawTracerLine(en, rgb, (float) f.getInput());
             }
         }
     }

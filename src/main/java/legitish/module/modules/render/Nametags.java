@@ -44,7 +44,7 @@ public class Nametags extends Module {
                     return;
                 }
 
-                if (Targets.bot(en) || en.getDisplayName().getUnformattedText().isEmpty()) {
+                if (!Targets.isTarget(en) || en.getDisplayName().getUnformattedText().isEmpty()) {
                     return;
                 }
 

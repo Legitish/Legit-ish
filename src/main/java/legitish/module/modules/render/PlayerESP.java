@@ -48,25 +48,14 @@ public class PlayerESP extends Module {
     public void findTargets(RenderWorldEvent renderWorldEvent) {
         if (GameUtils.isPlayerInGame()) {
             int rgb = this.rgb_c;
-            Iterator<EntityPlayer> var3 = mc.theWorld.playerEntities.iterator();
 
-            while (true) {
-                EntityPlayer en;
-                do {
-                    do {
-                        do {
-                            if (!var3.hasNext()) {
-                                return;
-                            }
-
-                            en = var3.next();
-                        } while (en == mc.thePlayer);
-                    } while (en.deathTime != 0);
-                } while (!f.isToggled() && en.isInvisible());
-
-                if (!Targets.bot(en)) {
-                    this.renderESP(en, rgb);
+            for (EntityPlayer en : mc.theWorld.playerEntities) {
+                if (!Targets.isTarget(en)) {
+                    continue;
+                } else if (!f.isToggled() && en.isInvisible()) {
+                    continue;
                 }
+                this.renderESP(en, rgb);
             }
         }
     }

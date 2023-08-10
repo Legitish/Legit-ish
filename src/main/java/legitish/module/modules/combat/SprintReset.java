@@ -86,7 +86,7 @@ public class SprintReset extends Module {
                         return;
                     }
 
-                    if (Targets.bot((EntityPlayer) target)) {
+                    if (!Targets.isTarget((EntityPlayer) target)) {
                         return;
                     }
 

@@ -12,7 +12,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.input.Mouse;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class AimAssist extends Module {
     public static ModuleSliderSetting speed, fov, distance;
@@ -48,7 +50,6 @@ public class AimAssist extends Module {
                             }
                         }
                     }
-
                 }
             }
         }
@@ -56,27 +57,18 @@ public class AimAssist extends Module {
 
     public Entity getEnemy() {
         int fov = (int) AimAssist.fov.getInput();
-        Iterator<EntityPlayer> var2 = mc.theWorld.playerEntities.iterator();
-
-        EntityPlayer en;
-        do {
-            do {
-                do {
-                    do {
-                        do {
-                            do {
-                                if (!var2.hasNext()) {
-                                    return null;
-                                }
-
-                                en = var2.next();
-                            } while (en == mc.thePlayer);
-                        } while (en.deathTime != 0);
-                    } while (!aimInvis.isToggled() && en.isInvisible());
-                } while ((double) mc.thePlayer.getDistanceToEntity(en) > distance.getInput());
-            } while (Targets.bot(en));
-        } while (!blatantMode.isToggled() && !GameUtils.fov(en, (float) fov));
-
-        return en;
+        for (EntityPlayer en : mc.theWorld.playerEntities) {
+            if (!Targets.isTarget(en)) {
+                continue;
+            } else if (!aimInvis.isToggled() && en.isInvisible()) {
+                continue;
+            } else if ((double) mc.thePlayer.getDistanceToEntity(en) > distance.getInput()) {
+                continue;
+            } else if (!blatantMode.isToggled() && !GameUtils.fov(en, (float) fov)) {
+                continue;
+            }
+            return en;
+        }
+        return null;
     }
 }
