@@ -2,6 +2,7 @@ package legitish.events.mixins;
 
 import com.mojang.authlib.GameProfile;
 import legitish.events.EventBus;
+import legitish.events.impl.SlowdownEvent;
 import legitish.events.impl.SwingEvent;
 import legitish.main.Legitish;
 import legitish.module.ModuleManager;
@@ -26,15 +27,15 @@ public abstract class EntityPlayerSPMixin extends AbstractClientPlayer {
     @Shadow
     public int sprintingTicksLeft;
     @Shadow
-    protected int sprintToggleTimer;
-    @Shadow
     public float prevTimeInPortal;
     @Shadow
     public float timeInPortal;
     @Shadow
-    protected Minecraft mc;
-    @Shadow
     public MovementInput movementInput;
+    @Shadow
+    protected int sprintToggleTimer;
+    @Shadow
+    protected Minecraft mc;
     @Shadow
     private int horseJumpPowerCounter;
     @Shadow
@@ -125,10 +126,9 @@ public abstract class EntityPlayerSPMixin extends AbstractClientPlayer {
 
         if (this.isUsingItem() && !this.isRiding()) {
             MovementInput var10000 = this.movementInput;
-
-            if (ModuleManager.noSlow.isEnabled()) {
-                NoSlow.noSlow();
-            } else {
+            SlowdownEvent event = new SlowdownEvent();
+            eventBus.call(event);
+            if (!event.isCancelled) {
                 var10000.moveStrafe *= 0.2F;
                 var10000.moveForward *= 0.2F;
                 this.sprintToggleTimer = 0;

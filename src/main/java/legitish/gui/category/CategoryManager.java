@@ -1,9 +1,9 @@
 package legitish.gui.category;
 
-import legitish.gui.category.impl.ClientCategory;
+import legitish.gui.category.impl.SettingsCategory;
 import legitish.gui.category.impl.ConfigCategory;
 import legitish.gui.category.impl.ModulesCategory;
-import legitish.gui.category.impl.SettingsCategory;
+import legitish.gui.category.impl.ColorCategory;
 
 import java.util.ArrayList;
 
@@ -12,9 +12,9 @@ public class CategoryManager {
 
     public CategoryManager() {
         categories.add(new ModulesCategory());
-        categories.add(new ClientCategory());
-        categories.add(new ConfigCategory());
         categories.add(new SettingsCategory());
+        categories.add(new ConfigCategory());
+        categories.add(new ColorCategory());
     }
 
     public ArrayList<Category> getCategories() {

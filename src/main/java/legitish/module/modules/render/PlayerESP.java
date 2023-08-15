@@ -13,7 +13,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 
 import java.awt.*;
-import java.util.Iterator;
 
 @SuppressWarnings("unused")
 public class PlayerESP extends Module {

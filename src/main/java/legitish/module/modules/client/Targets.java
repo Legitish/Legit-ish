@@ -7,10 +7,6 @@ import legitish.module.modulesettings.impl.ModuleTickSetting;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.entity.player.EntityPlayer;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 public class Targets extends Module {
     public static ModuleTickSetting bots, removeDead;
 

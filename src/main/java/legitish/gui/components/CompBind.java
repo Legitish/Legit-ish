@@ -1,7 +1,6 @@
 package legitish.gui.components;
 
 import legitish.module.Module;
-import legitish.module.modules.client.Gui;
 import legitish.utils.ColorUtils;
 import legitish.utils.MouseUtils;
 import legitish.utils.font.FontUtils;

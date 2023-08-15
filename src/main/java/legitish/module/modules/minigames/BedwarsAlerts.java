@@ -9,15 +9,10 @@ import legitish.module.modulesettings.impl.ModuleDesc;
 import legitish.module.modulesettings.impl.ModuleTickSetting;
 import legitish.utils.GameUtils;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.*;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionHelper;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemPotion;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
 
 public class BedwarsAlerts extends Module {
     public static ModuleTickSetting sound, fireball, diaSword, invis;
@@ -51,7 +46,7 @@ public class BedwarsAlerts extends Module {
                         mc.thePlayer.playSound("note.pling", 1.0F, 1.0F);
                     } else if (item instanceof ItemPotion) {
                         if (mc.thePlayer.getHeldItem().getItemDamage() == 8206 && invis.isToggled()) {
-                            Notifications.sendNotification(Notifications.NotificationTypes.WARN, en.getName() + " is holding a Diamond Sword! [" + Math.round(en.getDistanceToEntity(mc.thePlayer)) + "m]" + item.getUnlocalizedName(), 5000);
+                            Notifications.sendNotification(Notifications.NotificationTypes.WARN, en.getName() + " is holding an Invisibility Potion! [" + Math.round(en.getDistanceToEntity(mc.thePlayer)) + "m]" + item.getUnlocalizedName(), 5000);
                             mc.thePlayer.playSound("note.pling", 1.0F, 1.0F);
                         }
                     }

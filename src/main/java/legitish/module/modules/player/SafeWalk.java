@@ -2,6 +2,7 @@ package legitish.module.modules.player;
 
 import legitish.events.Subscribe;
 import legitish.events.impl.PlayerTickEvent;
+import legitish.main.Legitish;
 import legitish.module.Module;
 import legitish.module.modulesettings.impl.ModuleDesc;
 import legitish.module.modulesettings.impl.ModuleDoubleSliderSetting;
@@ -49,7 +50,7 @@ public class SafeWalk extends Module {
             return;
         }
 
-        if (shift.isToggled()) {
+        if (shift.isToggled() && mc.currentScreen == null) {
             if (lookDown.isToggled()) {
                 if (mc.thePlayer.rotationPitch < pitchRange.getInputMin() || mc.thePlayer.rotationPitch > pitchRange.getInputMax()) {
                     shouldBridge = false;

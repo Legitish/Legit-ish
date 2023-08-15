@@ -12,10 +12,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.input.Mouse;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 public class AimAssist extends Module {
     public static ModuleSliderSetting speed, fov, distance;
     public static ModuleTickSetting clickAim, weaponOnly, aimInvis, blatantMode;

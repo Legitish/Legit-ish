@@ -3,7 +3,7 @@ plugins {
     id("com.github.weave-mc.weave") version "8b70bcc707"
 }
 
-group = "me.legitish"
+group = "legitish"
 version = "2.0.0"
 
 minecraft.version("1.8.9")

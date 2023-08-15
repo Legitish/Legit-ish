@@ -1,7 +1,6 @@
 package legitish.module.modules.combat;
 
 import legitish.module.Module;
-import legitish.module.modulesettings.impl.ModuleDesc;
 import legitish.utils.GameUtils;
 import net.minecraft.client.Minecraft;
 import net.weavemc.loader.api.event.SubscribeEvent;

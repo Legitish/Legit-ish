@@ -10,7 +10,7 @@ public class MathUtils {
     private static final Random rand = new Random();
 
     public static double round(double value, int places) {
-        if (places < 0) {
+        if (places < 0 || !Double.isFinite(value)) {
             return 0;
         }
         BigDecimal bigDecimal = new BigDecimal(value);

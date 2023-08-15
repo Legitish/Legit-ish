@@ -12,7 +12,6 @@ import legitish.utils.render.GLUtils;
 import net.minecraft.entity.player.EntityPlayer;
 
 import java.awt.*;
-import java.util.Iterator;
 
 public class Tracers extends Module {
     public static ModuleTickSetting a;
