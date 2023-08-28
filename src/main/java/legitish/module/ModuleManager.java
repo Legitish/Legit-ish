@@ -51,6 +51,7 @@ public class ModuleManager {
         this.addModule(new AutoPlace());
         this.addModule(fastPlace = new FastPlace());
         this.addModule(new Freecam());
+        this.addModule(new Refill());
         this.addModule(new SafeWalk());
         // Visual
         this.addModule(new Chams());

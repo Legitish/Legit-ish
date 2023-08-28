@@ -3,7 +3,6 @@ package legitish.events.mixins;
 import com.mojang.authlib.GameProfile;
 import legitish.events.EventBus;
 import legitish.events.impl.SlowdownEvent;
-import legitish.events.impl.SwingEvent;
 import legitish.main.Legitish;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -217,15 +216,5 @@ public abstract class EntityPlayerSPMixin extends AbstractClientPlayer {
             this.sendPlayerAbilities();
         }
         callbackInfo.cancel();
-    }
-
-    @Inject(method = "swingItem", at = @At("HEAD"))
-    public void injectSwingEventPre(final CallbackInfo callbackInfo) {
-        eventBus.call(new SwingEvent(SwingEvent.Type.PRE));
-    }
-
-    @Inject(method = "swingItem", at = @At("RETURN"))
-    public void injectSwingEventPost(final CallbackInfo callbackInfo) {
-        eventBus.call(new SwingEvent(SwingEvent.Type.POST));
     }
 }

@@ -59,7 +59,7 @@ public class SettingsCategory extends Category {
         canToggle = MouseUtils.mouseInBounds(mouseX, mouseY, clickGUI.getX(), clickGUI.getY(), clickGUI.getWidth(), clickGUI.getHeight());
         StencilUtils.disableStencilBuffer();
 
-        FontUtils.regular20.drawString("Client", clickGUI.getX() + 95, clickGUI.getY() + 8, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
+        FontUtils.regular20.drawString("Settings", clickGUI.getX() + 95, clickGUI.getY() + 8, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());
     }
 
     @Override

@@ -12,9 +12,9 @@ public class CategoryManager {
 
     public CategoryManager() {
         categories.add(new ModulesCategory());
-        categories.add(new SettingsCategory());
         categories.add(new ConfigCategory());
         categories.add(new ColorCategory());
+        categories.add(new SettingsCategory());
     }
 
     public ArrayList<Category> getCategories() {

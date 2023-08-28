@@ -99,7 +99,7 @@ public class ClickGui extends GuiScreen {
             } else {
                 if (MouseUtils.mouseInBounds(mouseX, mouseY, this.getX(), this.getY() + this.getHeight() - 30, 85, 30) && mouseButton == 0) {
                     selectedCategory = c;
-                    openModSetting = true;
+                    openModSetting = false;
                 }
             }
 

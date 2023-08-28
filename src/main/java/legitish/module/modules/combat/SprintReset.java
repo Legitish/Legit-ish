@@ -33,10 +33,15 @@ public class SprintReset extends Module {
         this.registerSetting(actionTicks = new ModuleDoubleSliderSetting("Action Time (MS)", 25, 55, 1, 500, 1));
         this.registerSetting(chance = new ModuleSliderSetting("Chance %", 100, 0, 100, 1));
         this.registerSetting(range = new ModuleSliderSetting("Range: ", 3, 1, 6, 0.05));
-        ArrayList<String> options = new ArrayList<>();
-        options.add("Post");
-        options.add("Pre");
-        this.registerSetting(timing = new ModuleComboSetting("Reset timing", "Post", options));
+        ArrayList<String> timing = new ArrayList<>();
+        timing.add("Post");
+        timing.add("Pre");
+        this.registerSetting(SprintReset.timing = new ModuleComboSetting("Reset timing", "Post", timing));
+        ArrayList<String> mode = new ArrayList<>();
+        mode.add("WTap");
+        mode.add("STap");
+        mode.add("Blockhit");
+        this.registerSetting(SprintReset.timing = new ModuleComboSetting("Mode", "WTap", mode));
     }
 
     private static void finishCombo() {
