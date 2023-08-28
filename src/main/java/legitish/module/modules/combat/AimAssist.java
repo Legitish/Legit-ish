@@ -2,6 +2,7 @@ package legitish.module.modules.combat;
 
 import legitish.events.Subscribe;
 import legitish.events.impl.PlayerTickEvent;
+import legitish.events.impl.RenderWorldEvent;
 import legitish.module.Module;
 import legitish.module.modules.client.Targets;
 import legitish.module.modulesettings.impl.ModuleDesc;
@@ -29,8 +30,8 @@ public class AimAssist extends Module {
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(eventClass = PlayerTickEvent.class)
-    public void aim(PlayerTickEvent event) {
+    @Subscribe(eventClass = RenderWorldEvent.class)
+    public void aim(RenderWorldEvent event) {
         if (mc.currentScreen == null && mc.inGameHasFocus) {
             if (!weaponOnly.isToggled() || GameUtils.getWeapon()) {
                 if (!clickAim.isToggled() || (AutoClicker.leftClick.isToggled() && Mouse.isButtonDown(0))) {
