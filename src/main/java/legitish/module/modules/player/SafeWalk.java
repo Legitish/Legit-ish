@@ -2,7 +2,6 @@ package legitish.module.modules.player;
 
 import legitish.events.Subscribe;
 import legitish.events.impl.PlayerTickEvent;
-import legitish.main.Legitish;
 import legitish.module.Module;
 import legitish.module.modulesettings.impl.ModuleDesc;
 import legitish.module.modulesettings.impl.ModuleDoubleSliderSetting;

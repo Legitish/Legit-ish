@@ -1,9 +1,9 @@
 package legitish.gui.category;
 
-import legitish.gui.category.impl.SettingsCategory;
+import legitish.gui.category.impl.ColorCategory;
 import legitish.gui.category.impl.ConfigCategory;
 import legitish.gui.category.impl.ModulesCategory;
-import legitish.gui.category.impl.ColorCategory;
+import legitish.gui.category.impl.SettingsCategory;
 
 import java.util.ArrayList;
 

@@ -58,7 +58,7 @@ public class ClickGui extends GuiScreen {
         RRectUtils.drawGradientRoundCorner(this.getX() + 5D, this.getY() + currentCategoryY, 75, 15, 4);
 
         for (Category category : categoryManager.getCategories()) {
-            float addX = ! selectedCategory.equals(categoryManager.getCategoryByClass(SettingsCategory.class)) ? 88 : 95;
+            float addX = !selectedCategory.equals(categoryManager.getCategoryByClass(SettingsCategory.class)) ? 88 : 95;
 
             if (!category.equals(categoryManager.getCategoryByClass(SettingsCategory.class))) {
                 FontUtils.regular20.drawString(category.getName(), (int) this.getX() + 12, (int) this.getY() + categoryOffset + 5, MinecraftFontRenderer.CenterMode.NONE, false, ColorUtils.getFontColor(2).getRGB());

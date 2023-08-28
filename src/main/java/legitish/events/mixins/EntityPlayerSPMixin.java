@@ -5,8 +5,6 @@ import legitish.events.EventBus;
 import legitish.events.impl.SlowdownEvent;
 import legitish.events.impl.SwingEvent;
 import legitish.main.Legitish;
-import legitish.module.ModuleManager;
-import legitish.module.modules.movement.NoSlow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.entity.AbstractClientPlayer;

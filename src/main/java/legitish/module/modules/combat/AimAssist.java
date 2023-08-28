@@ -1,7 +1,6 @@
 package legitish.module.modules.combat;
 
 import legitish.events.Subscribe;
-import legitish.events.impl.PlayerTickEvent;
 import legitish.events.impl.RenderWorldEvent;
 import legitish.module.Module;
 import legitish.module.modules.client.Targets;
