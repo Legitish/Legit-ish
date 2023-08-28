@@ -59,6 +59,7 @@ public class SafeWalk extends Module {
                     return;
                 }
             }
+
             if (onHold.isToggled()) {
                 if (!Keyboard.isKeyDown(mc.gameSettings.keyBindSneak.getKeyCode())) {
                     shouldBridge = false;
