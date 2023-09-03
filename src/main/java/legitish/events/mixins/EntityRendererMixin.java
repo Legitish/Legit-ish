@@ -14,7 +14,7 @@ public class EntityRendererMixin {
     final EventBus eventBus = Legitish.getEventBus();
 
     @Inject(method = "renderHand(FI)V", at = @At("HEAD"))
-    public void injectRenderWorldEventPre(final CallbackInfo callbackInfo) {
+    public void injectRenderWorldEventPre(final CallbackInfo ci) {
         eventBus.call(new RenderWorldEvent());
     }
 }

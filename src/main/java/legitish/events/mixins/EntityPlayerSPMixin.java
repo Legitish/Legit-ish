@@ -30,13 +30,13 @@ public abstract class EntityPlayerSPMixin extends AbstractClientPlayer {
     @Shadow
     public MovementInput movementInput;
     @Shadow
-    protected int sprintToggleTimer;
+    public int sprintToggleTimer;
     @Shadow
-    protected Minecraft mc;
+    public Minecraft mc;
     @Shadow
-    private int horseJumpPowerCounter;
+    public int horseJumpPowerCounter;
     @Shadow
-    private float horseJumpPower;
+    public float horseJumpPower;
 
     public EntityPlayerSPMixin(World p_i45074_1_, GameProfile p_i45074_2_) {
         super(p_i45074_1_, p_i45074_2_);
@@ -63,8 +63,8 @@ public abstract class EntityPlayerSPMixin extends AbstractClientPlayer {
     @Shadow
     public abstract boolean isSneaking();
 
-    @Inject(method = "onLivingUpdate", at = @At("HEAD"), cancellable = true)
-    public void injectSlowdownEvent(final CallbackInfo callbackInfo) {
+    @Inject(method = "onLivingUpdate", at = @At("HEAD"), cancellable = true) // Couldn't you just do overwrite?
+    public void injectSlowdownEvent(final CallbackInfo ci) {
         if (this.sprintingTicksLeft > 0) {
             --this.sprintingTicksLeft;
 
@@ -215,6 +215,6 @@ public abstract class EntityPlayerSPMixin extends AbstractClientPlayer {
             this.capabilities.isFlying = false;
             this.sendPlayerAbilities();
         }
-        callbackInfo.cancel();
+        ci.cancel();
     }
 }

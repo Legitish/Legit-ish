@@ -14,7 +14,7 @@ public class GuiIngameMixin {
     final EventBus eventBus = Legitish.getEventBus();
 
     @Inject(method = "renderGameOverlay", at = @At("RETURN"))
-    public void injectRenderGameOverlayEvent(final CallbackInfo callbackInfo) {
+    public void injectRenderGameOverlayEvent(final CallbackInfo ci) {
         eventBus.call(new RenderGameOverlayEvent());
     }
 }

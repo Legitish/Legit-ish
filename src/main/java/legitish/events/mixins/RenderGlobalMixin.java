@@ -21,7 +21,7 @@ public class RenderGlobalMixin {
     final Minecraft mc = Minecraft.getMinecraft();
 
     @Inject(method = "drawSelectionBox", at = @At("RETURN"))
-    public void injectDrawBlockHighlightEvent(EntityPlayer player, MovingObjectPosition movingObjectPositionIn, int execute, float partialTicks, final CallbackInfo callbackInfo) {
+    public void injectDrawBlockHighlightEvent(EntityPlayer player, MovingObjectPosition movingObjectPositionIn, int execute, float partialTicks, final CallbackInfo ci) {
         if (execute == 0 && movingObjectPositionIn.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
             BlockPos blockpos = movingObjectPositionIn.getBlockPos();
             Block block = mc.theWorld.getBlockState(blockpos).getBlock();

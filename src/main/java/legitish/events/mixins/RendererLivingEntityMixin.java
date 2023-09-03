@@ -16,22 +16,22 @@ public class RendererLivingEntityMixin {
     final EventBus eventBus = Legitish.getEventBus();
 
     @Inject(method = "renderName(Lnet/minecraft/entity/EntityLivingBase;DDD)V", at = @At("HEAD"), cancellable = true)
-    public void injectRenderNameplateEvent(EntityLivingBase t, double v, double v1, double v2, final CallbackInfo callbackInfo) {
+    public void injectRenderNameplateEvent(EntityLivingBase t, double v, double v1, double v2, final CallbackInfo ci) {
         RenderNameplateEvent event = new RenderNameplateEvent(t, v, v1, v2);
         eventBus.call(event);
 
         if (event.isCancelled) {
-            callbackInfo.cancel();
+            ci.cancel();
         }
     }
 
     @Inject(method = "doRender(Lnet/minecraft/entity/EntityLivingBase;DDDFF)V", at = @At("HEAD"))
-    public void injectRenderLivingEventPre(EntityLivingBase t, double v, double v1, double v2, float v3, float v4, final CallbackInfo callbackInfo) {
+    public void injectRenderLivingEventPre(EntityLivingBase t, double v, double v1, double v2, float v3, float v4, final CallbackInfo ci) {
         eventBus.call(new RenderLivingEvent(t, v, v1, v2, v3, v4, RenderLivingEvent.Type.PRE));
     }
 
     @Inject(method = "doRender(Lnet/minecraft/entity/EntityLivingBase;DDDFF)V", at = @At("RETURN"))
-    public void injectRenderLivingEventPost(EntityLivingBase t, double v, double v1, double v2, float v3, float v4, final CallbackInfo callbackInfo) {
+    public void injectRenderLivingEventPost(EntityLivingBase t, double v, double v1, double v2, float v3, float v4, final CallbackInfo ci) {
         eventBus.call(new RenderLivingEvent(t, v, v1, v2, v3, v4, RenderLivingEvent.Type.POST));
     }
 }
