@@ -29,8 +29,13 @@ public class CompBind extends Comp {
 
     @Override
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
-        if (MouseUtils.mouseInBounds(mouseX, mouseY, x - width - 4.5, y, width + 5, 20) && mouseButton == 0) {
-            this.isBinding = !this.isBinding;
+        if (MouseUtils.mouseInBounds(mouseX, mouseY, x - width - 4.5, y, width + 5, 20)) {
+            if (mouseButton == 0) {
+                this.isBinding = !this.isBinding;
+            } else if (mouseButton == 1) {
+                this.module.setbind(0);
+                this.isBinding = false;
+            }
         }
     }
 
