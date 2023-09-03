@@ -1,9 +1,8 @@
 package legitish.main;
 
+import legitish.module.ModuleManager;
 import net.weavemc.loader.api.ModInitializer;
-import net.weavemc.loader.api.event.EventBus;
-import net.weavemc.loader.api.event.StartGameEvent;
-import net.weavemc.loader.api.event.SubscribeEvent;
+import net.weavemc.loader.api.event.*;
 
 public class Init implements ModInitializer {
     // If I put ANYTHING else in the preInit() function the mod doesnt initialize for some reason ??????
@@ -15,5 +14,17 @@ public class Init implements ModInitializer {
     @SubscribeEvent
     public void onGameStart(StartGameEvent.Post e) {
         Legitish.init();
+        ModuleManager.blink.disable();
     }
+
+    @SubscribeEvent
+    public void onShutdown(ShutdownEvent e) {
+        ModuleManager.blink.disable();
+    }
+
+    @SubscribeEvent
+    public void onWorldLoad(WorldEvent e) {
+        ModuleManager.blink.disable();
+    }
+
 }
