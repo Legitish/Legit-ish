@@ -22,7 +22,7 @@ import java.util.List;
 public class ModuleManager {
     public static final List<Module> moduleList = new ArrayList<>();
     public static final List<Module> enabledModuleList = new ArrayList<>();
-    public static Module blink, fastPlace, targets, autoClicker, reach, arrayList, playerESP, gui, notifications, noSlow;
+    public static Module blink, fastPlace, targets, autoClicker, delayremover, reach, arrayList, playerESP, gui, notifications, noSlow;
 
     public static void sort() {
         enabledModuleList.sort((o1, o2) -> (int) (FontUtils.regular16.getStringWidth(o2.getName()) - FontUtils.regular16.getStringWidth(o1.getName())));
@@ -32,9 +32,9 @@ public class ModuleManager {
         // Combat
         this.addModule(autoClicker = new AutoClicker());
         this.addModule(new AimAssist());
-        //this.addModule(new AutoBlock());
         this.addModule(new ClickAssist());
-        this.addModule(new DelayRemover());
+        this.addModule(delayremover = new DelayRemover());
+        this.addModule(new JumpReset());
         this.addModule(reach = new Reach());
         this.addModule(new SprintReset());
         this.addModule(new Velocity());

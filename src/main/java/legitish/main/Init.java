@@ -27,4 +27,5 @@ public class Init implements ModInitializer {
         ModuleManager.blink.disable();
     }
 
+    // Note: blink is disabled on game start, shutdown, and world load to avoid it bugging out, please do not remove unless you plan to use a better implementation.
 }
