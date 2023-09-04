@@ -5,7 +5,6 @@ import net.weavemc.loader.api.ModInitializer;
 import net.weavemc.loader.api.event.*;
 
 public class Init implements ModInitializer {
-    // If I put ANYTHING else in the preInit() function the mod doesnt initialize for some reason ??????
     @Override
     public void preInit() {
         EventBus.subscribe(this);
@@ -14,21 +13,18 @@ public class Init implements ModInitializer {
     @SubscribeEvent
     public void onGameStart(StartGameEvent.Post e) {
         Legitish.init();
-        if(ModuleManager.blink.isEnabled()) {
-            ModuleManager.blink.disable();
-        }
     }
 
     @SubscribeEvent
     public void onShutdown(ShutdownEvent e) {
-        if(ModuleManager.blink.isEnabled()) {
+        if (ModuleManager.blink.isEnabled()) {
             ModuleManager.blink.disable();
         }
     }
 
     @SubscribeEvent
     public void onWorldLoad(WorldEvent e) {
-        if(ModuleManager.blink.isEnabled()) {
+        if (ModuleManager.blink.isEnabled()) {
             ModuleManager.blink.disable();
         }
     }

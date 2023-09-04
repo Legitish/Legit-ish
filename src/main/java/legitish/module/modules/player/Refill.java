@@ -3,7 +3,6 @@ package legitish.module.modules.player;
 import legitish.module.Module;
 import legitish.module.modulesettings.impl.ModuleSliderSetting;
 import legitish.module.modulesettings.impl.ModuleTickSetting;
-import legitish.utils.GameUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.init.Items;

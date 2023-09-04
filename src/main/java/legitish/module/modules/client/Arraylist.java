@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Arraylist extends Module {
-    // will be improving this later, already looks good
     private static final MinecraftFontRenderer mfr = FontUtils.regular20;
     private static final List<AnimationUtils> animationsX = new ArrayList<>();
     public static ModuleTickSetting editPosition, watermark, rectangles, shadow, background, alphabeticalSort;

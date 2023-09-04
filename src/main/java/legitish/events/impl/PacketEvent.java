@@ -1,31 +1,23 @@
 package legitish.events.impl;
 
 import legitish.events.Event;
-import legitish.events.ext.EventDirection;
-import legitish.events.ext.IEventDirection;
 import net.minecraft.network.Packet;
 
-public class PacketEvent extends Event implements IEventDirection {
+public class PacketEvent extends Event {
+    public final Packet<?> packet;
+    public final Direction type;
 
-    private Packet<?> packet;
-    private final EventDirection direction;
-
-    public PacketEvent(Packet<?> packet, EventDirection direction) {
+    public PacketEvent(final Packet<?> packet, final Direction direction) {
         this.packet = packet;
-        this.direction = direction;
+        this.type = direction;
     }
 
     public <T extends Packet<?>> T getPacket() {
         return (T) this.packet;
     }
 
-    public <T extends Packet<?>> void setPacket(T newPacket) {
-        this.packet = newPacket;
+    public enum Direction {
+        INCOMING,
+        OUTGOING
     }
-
-    @Override
-    public EventDirection getDirection() {
-        return direction;
-    }
-
 }

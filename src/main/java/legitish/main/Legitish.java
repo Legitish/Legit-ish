@@ -15,7 +15,7 @@ import net.minecraft.client.Minecraft;
 
 
 public class Legitish {
-    private static final EventBus eventBussy = new EventBus();
+    private static final EventBus eventBus = new EventBus();
     public static ConfigManager configManager;
     public static ClientConfig clientConfig;
     public static ModuleManager moduleManager;
@@ -40,7 +40,7 @@ public class Legitish {
     }
 
     public static EventBus getEventBus() {
-        return eventBussy;
+        return eventBus;
     }
 
     @SuppressWarnings("unused")
