@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Blink extends Module {
     public static ModuleTickSetting spawnFake;
     private static EntityOtherPlayerMP fakePlayer;
-    private final ArrayList<? extends Packet> outboundPackets = new ArrayList<>();
+    private final ArrayList<Packet<?>> outboundPackets = new ArrayList<>();
 
     public Blink() {
         super("Blink", category.Player, 0);
@@ -28,8 +28,8 @@ public class Blink extends Module {
             if (!event.getPacket().getClass().getCanonicalName().startsWith("net.minecraft.network.play.client"))
                 return;
             outboundPackets.add(event.getPacket());
+            event.setCancelled(true);
         }
-        event.setCancelled(true);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class Blink extends Module {
 
     @Override
     public void onDisable() {
-        for (Packet packet : outboundPackets) {
+        for (Packet<?> packet : outboundPackets) {
             mc.getNetHandler().addToSendQueue(packet);
         }
         outboundPackets.clear();
