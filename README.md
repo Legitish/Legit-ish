@@ -1,23 +1,28 @@
-# LEGIT-ISH, a utility mod for Weave.
+# LEGIT-ISH
+A utility mod for Weave.
 
-## Installation
-### Using Weave Manager
-1. Download and install [Weave-Manager](https://github.com/exejar/Weave-Manager/releases)
-2. In Weave Manager, click Open Mods Folder and drop Legit-ish in the Weave mod folder.
-
-### Using LCQT
-1. Download and run [Youded-byte's LCQT fork](https://github.com/Youded-byte/lunar-client-qt/releases)
-2. In the Mods tab, click Add and select Legit-ish.
-3. Tick the Enable Weave setting.
+---
 
 ## Usage
-Press `L` in-game to open the ClickGUI. 
+- You can press `L` in-game to open the ClickGUI. 
+- To unbind a module press `0`.
 
-To unbind a module press `zero`. (Will improve this later)
+## Installation
+1. Download [Legit-ish](https://github.com/legitish/Legit-ish-Weave/releases/latest) mod.
+2. Place the jars in your Weave mods folder.
+    1. Windows: `%userprofile%\.weave\mods`
+    2. Unix: `~/.weave/mods`
+3. Download [lunar-client-qt](https://github.com/Youded-byte/lunar-client-qt/releases/latest).
 
-## Building with Gradle
-`git clone` the project with
-```bash
-git clone https://github.com/legitish/Legit-ish-Weave.git
-```
-Project uses Java 1.8
+---
+
+## Building
+> Note: This project is built using Gradle 7.4.2, and JDK 8.
+1. Clone the repository.
+2. Run `./gradlew build` in the root directory.
+3. The built jar file will be in `build/libs`.
+
+## License
+Legit-ish is licensed under the [GNU General Public License Version 3](https://github.com/legitish/Legit-ish-Weave/blob/master/LICENSE) license.
+
+---
