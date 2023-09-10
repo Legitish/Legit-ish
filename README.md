@@ -17,7 +17,7 @@ A utility mod for Weave.
 ---
 
 ## Building
-> Note: This project is built using Gradle 7.4.2, and JDK 8.
+> Note: This project is built using Gradle 8.1.1, and JDK 17.
 1. Clone the repository.
 2. Run `./gradlew build` in the root directory.
 3. The built jar file will be in `build/libs`.
