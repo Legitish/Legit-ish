@@ -57,6 +57,7 @@ public class ModuleManager {
         // Visual
         this.addModule(new Chams());
         this.addModule(new ChestESP());
+        this.addModule(new Health());
         this.addModule(new Nametags());
         this.addModule(playerESP = new PlayerESP());
         this.addModule(new Tracers());
