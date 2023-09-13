@@ -222,5 +222,31 @@ public class Arraylist extends Module {
         public boolean doesGuiPauseGame() {
             return false;
         }
+
+        public static MouseUtils.PositionMode getPostitionMode(int marginX, int marginY, double height, double width) {
+            int halfHeight = (int) (height / 4);
+            int halfWidth = (int) width;
+            MouseUtils.PositionMode positionMode = null;
+
+            if (marginY < halfHeight) {
+                if (marginX < halfWidth) {
+                    positionMode = MouseUtils.PositionMode.UPLEFT;
+                }
+                if (marginX > halfWidth) {
+                    positionMode = MouseUtils.PositionMode.UPRIGHT;
+                }
+            }
+
+            if (marginY > halfHeight) {
+                if (marginX < halfWidth) {
+                    positionMode = MouseUtils.PositionMode.DOWNLEFT;
+                }
+                if (marginX > halfWidth) {
+                    positionMode = MouseUtils.PositionMode.DOWNRIGHT;
+                }
+            }
+
+            return positionMode;
+        }
     }
 }

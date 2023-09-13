@@ -82,32 +82,6 @@ public class MouseUtils {
         }
     }
 
-    public static PositionMode getPostitionMode(int marginX, int marginY, double height, double width) {
-        int halfHeight = (int) (height / 4);
-        int halfWidth = (int) width;
-        PositionMode positionMode = null;
-
-        if (marginY < halfHeight) {
-            if (marginX < halfWidth) {
-                positionMode = PositionMode.UPLEFT;
-            }
-            if (marginX > halfWidth) {
-                positionMode = PositionMode.UPRIGHT;
-            }
-        }
-
-        if (marginY > halfHeight) {
-            if (marginX < halfWidth) {
-                positionMode = PositionMode.DOWNLEFT;
-            }
-            if (marginX > halfWidth) {
-                positionMode = PositionMode.DOWNRIGHT;
-            }
-        }
-
-        return positionMode;
-    }
-
     public static String str(String s) {
         char[] n = StringUtils.stripControlCodes(s).toCharArray();
         StringBuilder v = new StringBuilder();
