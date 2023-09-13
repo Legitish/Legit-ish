@@ -5,7 +5,6 @@ A utility mod for Weave.
 
 ## Usage
 - You can press `L` in-game to open the ClickGUI. 
-- To unbind a module press `0`.
 
 ## Installation
 1. Download [Legit-ish](https://github.com/legitish/Legit-ish-Weave/releases/latest) mod.
