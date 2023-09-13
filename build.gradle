@@ -1,6 +1,6 @@
 plugins {
     id "java"
-    id("com.github.weave-mc.weave") version "8b70bcc707"
+    id("com.github.weave-mc.weave-gradle") version "649dba7468"
 }
 
 group = "legitish"
@@ -10,12 +10,8 @@ minecraft.version("1.8.9")
 
 repositories {
     mavenCentral()
-    maven {
-        url "https://jitpack.io"
-    }
-    maven {
-        url "https://repo.spongepowered.org/maven/"
-    }
+    maven { url "https://jitpack.io" }
+    maven { url "https://repo.spongepowered.org/maven/" }
 }
 
 dependencies {
@@ -24,6 +20,5 @@ dependencies {
 }
 
 tasks.compileJava {
-    sourceCompatibility = "1.8" // Java 17 better
-    targetCompatibility = "1.8"
+    options.release.set(17)
 }
