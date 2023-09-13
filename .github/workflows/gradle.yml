@@ -37,4 +37,4 @@ jobs:
         title: "Legitish Pre-Release ${{ env.sha_short }}"
         files: |
           LICENSE.txt
-          *.jar
+          legitish-2.0.0.jar
