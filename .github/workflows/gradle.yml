@@ -29,12 +29,17 @@ jobs:
       run: chmod +x ./gradlew
     - name: Build with Gradle
       run: ./gradlew build
-    - uses: marvinpinto/action-automatic-releases@v1.2.1
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        name: Built Jar
+        path: build/libs/*.jar
+    - name: Automatic Release
+      uses: marvinpinto/action-automatic-releases@v1.2.1
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         automatic_release_tag: "latest"
         prerelease: true
         title: "Legitish Pre-Release ${{ env.sha_short }}"
         files: |
-          LICENSE.txt
-          legitish-2.0.0.jar
+          build/libs/*.jar
