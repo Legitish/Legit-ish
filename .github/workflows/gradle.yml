@@ -34,6 +34,7 @@ jobs:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         automatic_release_tag: "latest"
         prerelease: true
-        title: "Legitish Pre-Release alpha.${GITHUB_SHA::6}"
+        title: "Legitish Pre-Release ${{ env.sha_short }}"
         files: |
+          LICENSE.txt
           *.jar
