@@ -28,8 +28,12 @@ jobs:
       run: chmod +x ./gradlew
     - name: Build with Gradle
       run: ./gradlew build
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v3.1.2
+    - name: Automatic Release
+    - uses: marvinpinto/action-automatic-releases@v1.2.1
       with:
-        name: Built Jar
-        path: build/libs/*.jar
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "latest"
+        prerelease: true
+        title: "Legitish Pre-Release alpha.${GITHUB_SHA::6}"
+        files: |
+          *.jar
