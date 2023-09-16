@@ -3,12 +3,14 @@ package legitish.module.modules.render;
 import legitish.events.Subscribe;
 import legitish.events.impl.RenderLivingEvent;
 import legitish.module.Module;
+import legitish.module.modulesettings.impl.ModuleDesc;
 
 import static org.lwjgl.opengl.GL11.*;
 
 public class Chams extends Module {
     public Chams() {
         super("Chams", category.Visual, 0);
+        this.registerSetting(new ModuleDesc("Render players through walls."));
     }
 
     @SuppressWarnings("unused")
