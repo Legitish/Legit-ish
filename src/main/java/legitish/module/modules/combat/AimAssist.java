@@ -1,7 +1,7 @@
 package legitish.module.modules.combat;
 
 import legitish.events.Subscribe;
-import legitish.events.impl.RenderWorldEvent;
+import legitish.events.impl.LivingUpdateEvent;
 import legitish.module.Module;
 import legitish.module.modules.client.Targets;
 import legitish.module.modulesettings.impl.ModuleDesc;
@@ -29,8 +29,8 @@ public class AimAssist extends Module {
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(eventClass = RenderWorldEvent.class)
-    public void aim(RenderWorldEvent event) {
+    @Subscribe(eventClass = LivingUpdateEvent.class)
+    public void onUpdate(LivingUpdateEvent event) {
         if (mc.currentScreen == null && mc.inGameHasFocus) {
             if (!weaponOnly.isToggled() || GameUtils.getWeapon()) {
                 if (!clickAim.isToggled() || (AutoClicker.leftClick.isToggled() && Mouse.isButtonDown(0))) {
@@ -42,7 +42,7 @@ public class AimAssist extends Module {
                             double n = GameUtils.n(en);
                             if (n > 1.0D || n < -1.0D) {
                                 float val = (float) (-(n / (101.0D - speed.getInput())));
-                                mc.thePlayer.rotationYaw += val;
+                                mc.thePlayer.rotationYaw += val / 2;
                             }
                         }
                     }

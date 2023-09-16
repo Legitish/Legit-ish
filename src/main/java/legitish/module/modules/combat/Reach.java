@@ -35,7 +35,7 @@ public class Reach extends Module {
         this.registerSetting(hitThroughBlocks = new ModuleTickSetting("Hit through blocks", false));
     }
 
-    public static boolean call() {
+    public static boolean callReach() {
         if (!GameUtils.isPlayerInGame()) {
             return false;
         } else if (weaponOnly.isToggled() && !GameUtils.getWeapon()) {
@@ -53,7 +53,7 @@ public class Reach extends Module {
             }
 
             double reach = MathUtils.mmVal(Reach.reach, MathUtils.rand());
-            Object[] object = zz(reach);
+            Object[] object = findEntitiesWithinReach(reach);
             if (object == null) {
                 return false;
             } else {
@@ -65,7 +65,7 @@ public class Reach extends Module {
         }
     }
 
-    private static Object[] zz(double reach) {
+    private static Object[] findEntitiesWithinReach(double reach) {
         if (!ModuleManager.reach.isEnabled()) {
             reach = mc.playerController.extendedReach() ? 6.0D : 3.0D;
         }
@@ -79,9 +79,9 @@ public class Reach extends Module {
             Vec3 eyePosition = renderView.getPositionEyes(1.0F);
             Vec3 playerLook = renderView.getLook(1.0F);
             Vec3 reachTarget = eyePosition.addVector(playerLook.xCoord * reach, playerLook.yCoord * reach, playerLook.zCoord * reach);
-            Vec3 zz6 = null;
+            Vec3 targetHitVec = null;
             List<Entity> targetsWithinReach = mc.theWorld.getEntitiesWithinAABBExcludingEntity(renderView, renderView.getEntityBoundingBox().addCoord(playerLook.xCoord * reach, playerLook.yCoord * reach, playerLook.zCoord * reach).expand(1.0D, 1.0D, 1.0D));
-            double adjustedreachidk = reach;
+            double adjustedReach = reach;
 
             for (Entity entity : targetsWithinReach) {
                 if (entity.canBeCollidedWith()) {
@@ -89,36 +89,36 @@ public class Reach extends Module {
                     AxisAlignedBB entityBoundingBox = entity.getEntityBoundingBox().expand(ex, ex, ex);
                     MovingObjectPosition targetPosition = entityBoundingBox.calculateIntercept(eyePosition, reachTarget);
                     if (entityBoundingBox.isVecInside(eyePosition)) {
-                        if (0.0D < adjustedreachidk || adjustedreachidk == 0.0D) {
+                        if (0.0D < adjustedReach || adjustedReach == 0.0D) {
                             target = entity;
-                            zz6 = targetPosition == null ? eyePosition : targetPosition.hitVec;
-                            adjustedreachidk = 0.0D;
+                            targetHitVec = targetPosition == null ? eyePosition : targetPosition.hitVec;
+                            adjustedReach = 0.0D;
                         }
                     } else if (targetPosition != null) {
-                        double zz15 = eyePosition.distanceTo(targetPosition.hitVec);
-                        if (zz15 < adjustedreachidk || adjustedreachidk == 0.0D) {
+                        double distanceToVec = eyePosition.distanceTo(targetPosition.hitVec);
+                        if (distanceToVec < adjustedReach || adjustedReach == 0.0D) {
                             if (entity == renderView.ridingEntity) {
-                                if (adjustedreachidk == 0.0D) {
+                                if (adjustedReach == 0.0D) {
                                     target = entity;
-                                    zz6 = targetPosition.hitVec;
+                                    targetHitVec = targetPosition.hitVec;
                                 }
                             } else {
                                 target = entity;
-                                zz6 = targetPosition.hitVec;
-                                adjustedreachidk = zz15;
+                                targetHitVec = targetPosition.hitVec;
+                                adjustedReach = distanceToVec;
                             }
                         }
                     }
                 }
             }
 
-            if (adjustedreachidk < reach && !(target instanceof EntityLivingBase) && !(target instanceof EntityItemFrame)) {
+            if (adjustedReach < reach && !(target instanceof EntityLivingBase) && !(target instanceof EntityItemFrame)) {
                 target = null;
             }
 
             mc.mcProfiler.endSection();
-            if (target != null && zz6 != null) {
-                return new Object[]{target, zz6};
+            if (target != null && targetHitVec != null) {
+                return new Object[]{target, targetHitVec};
             } else {
                 return null;
             }
@@ -131,9 +131,9 @@ public class Reach extends Module {
 
     @SuppressWarnings("unused")
     @Subscribe(eventClass = MouseEvent.class)
-    public void e(MouseEvent event) {
+    public void onMouseUpdate(MouseEvent event) {
         if (GameUtils.isPlayerInGame() && event.button == MouseEvent.Button.LEFT && (!ModuleManager.autoClicker.isEnabled() || !AutoClicker.leftClick.isToggled() || !Mouse.isButtonDown(0))) {
-            call();
+            callReach();
         }
     }
 }
