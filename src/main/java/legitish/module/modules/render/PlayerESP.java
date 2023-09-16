@@ -16,14 +16,9 @@ import java.awt.*;
 
 @SuppressWarnings("unused")
 public class PlayerESP extends Module {
-    public static ModuleSliderSetting i;
-    public static ModuleSliderSetting j;
-    public static ModuleTickSetting f;
-    public static ModuleTickSetting h;
-    public static ModuleTickSetting box3d;
-    public static ModuleTickSetting shaded;
-    public static ModuleTickSetting box2d;
-    public static ModuleTickSetting health;
+    public static ModuleSliderSetting expand, xshift;
+    public static ModuleTickSetting showInvis, redOnDamage;
+    public static ModuleTickSetting box2d, box3d, health, shaded;
     private int rgb_c = 0;
 
     public PlayerESP() {
@@ -33,10 +28,10 @@ public class PlayerESP extends Module {
         this.registerSetting(box3d = new ModuleTickSetting("Box", false));
         this.registerSetting(health = new ModuleTickSetting("Health", true));
         this.registerSetting(shaded = new ModuleTickSetting("Shaded", false));
-        this.registerSetting(i = new ModuleSliderSetting("Expand", 0.0D, -0.3D, 2.0D, 0.1D));
-        this.registerSetting(j = new ModuleSliderSetting("X-Shift", 0.0D, -35.0D, 10.0D, 1.0D));
-        this.registerSetting(f = new ModuleTickSetting("Show invis", true));
-        this.registerSetting(h = new ModuleTickSetting("Red on damage", true));
+        this.registerSetting(expand = new ModuleSliderSetting("Expand", 0.0D, -0.3D, 2.0D, 0.1D));
+        this.registerSetting(xshift = new ModuleSliderSetting("X-Shift", 0.0D, -35.0D, 10.0D, 1.0D));
+        this.registerSetting(showInvis = new ModuleTickSetting("Show invis", true));
+        this.registerSetting(redOnDamage = new ModuleTickSetting("Red on damage", true));
     }
 
     public void guiUpdate() {
@@ -51,7 +46,7 @@ public class PlayerESP extends Module {
             for (EntityPlayer en : mc.theWorld.playerEntities) {
                 if (!Targets.isTarget(en)) {
                     continue;
-                } else if (!f.isToggled() && en.isInvisible()) {
+                } else if (!showInvis.isToggled() && en.isInvisible()) {
                     continue;
                 }
                 this.renderESP(en, rgb);
@@ -61,19 +56,19 @@ public class PlayerESP extends Module {
 
     private void renderESP(Entity en, int rgb) {
         if (box3d.isToggled()) {
-            GLUtils.RenderESP(en, GLUtils.ESPTypes.BOX3D, i.getInput(), j.getInput(), rgb, h.isToggled());
+            GLUtils.RenderESP(en, GLUtils.ESPTypes.BOX3D, expand.getInput(), xshift.getInput(), rgb, redOnDamage.isToggled());
         }
 
         if (shaded.isToggled()) {
-            GLUtils.RenderESP(en, GLUtils.ESPTypes.SHADED, i.getInput(), j.getInput(), rgb, h.isToggled());
+            GLUtils.RenderESP(en, GLUtils.ESPTypes.SHADED, expand.getInput(), xshift.getInput(), rgb, redOnDamage.isToggled());
         }
 
         if (box2d.isToggled()) {
-            GLUtils.RenderESP(en, GLUtils.ESPTypes.BOX2D, i.getInput(), j.getInput(), rgb, h.isToggled());
+            GLUtils.RenderESP(en, GLUtils.ESPTypes.BOX2D, expand.getInput(), xshift.getInput(), rgb, redOnDamage.isToggled());
         }
 
         if (health.isToggled()) {
-            GLUtils.RenderESP(en, GLUtils.ESPTypes.HEALTH, i.getInput(), j.getInput(), rgb, h.isToggled());
+            GLUtils.RenderESP(en, GLUtils.ESPTypes.HEALTH, expand.getInput(), xshift.getInput(), rgb, redOnDamage.isToggled());
         }
     }
 }

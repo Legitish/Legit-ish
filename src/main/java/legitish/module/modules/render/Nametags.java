@@ -19,12 +19,13 @@ import static net.minecraft.client.renderer.GlStateManager.*;
 
 public class Nametags extends Module {
     public static ModuleSliderSetting offset;
-    public static ModuleTickSetting rect, showHealth, showInvis, removeTags, noScale;
+    public static ModuleTickSetting shadow, rect, showHealth, showInvis, removeTags, noScale;
 
     public Nametags() {
         super("Nametags", category.Visual, 0);
         this.registerSetting(new ModuleDesc("Improves vanilla nametags."));
         this.registerSetting(offset = new ModuleSliderSetting("Offset", 0.0D, -40.0D, 40.0D, 1.0D));
+        this.registerSetting(shadow = new ModuleTickSetting("Shadow", true));
         this.registerSetting(rect = new ModuleTickSetting("Rect", true));
         this.registerSetting(showHealth = new ModuleTickSetting("Show health", true));
         this.registerSetting(showInvis = new ModuleTickSetting("Show invis", true));
@@ -87,7 +88,11 @@ public class Nametags extends Module {
                 }
 
                 enableTexture2D();
-                mc.fontRendererObj.drawString(str, -mc.fontRendererObj.getStringWidth(str) / 2, i, -1);
+                if (shadow.isToggled()) {
+                    mc.fontRendererObj.drawStringWithShadow(str, (float) -mc.fontRendererObj.getStringWidth(str) / 2, i, -1); // IntelliJ wanted me to cast it to Float for some reason ¯\_(ツ)_/¯
+                } else {
+                    mc.fontRendererObj.drawString(str, -mc.fontRendererObj.getStringWidth(str) / 2, i, -1);
+                }
                 enableDepth();
                 depthMask(true);
                 enableLighting();
