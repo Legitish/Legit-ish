@@ -43,6 +43,7 @@ public class ModuleManager {
         // Movement
         this.addModule(new InvMove());
         this.addModule(new KeepSprint());
+        this.addModule(new NoJumpDelay());
         this.addModule(noSlow = new NoSlow());
         this.addModule(new Sprint());
         // Player
