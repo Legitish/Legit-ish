@@ -2,7 +2,6 @@ package legitish.module.modules.combat;
 
 import legitish.events.Subscribe;
 import legitish.events.impl.LivingUpdateEvent;
-import legitish.events.impl.MouseEvent;
 import legitish.module.Module;
 import legitish.module.modules.client.Targets;
 import legitish.module.modulesettings.impl.ModuleDesc;
