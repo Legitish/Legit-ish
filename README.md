@@ -1,5 +1,5 @@
 # LEGIT-ISH
-A utility mod for Weave.
+A mixin-based utility mod made for Weave.
 
 ---
 
