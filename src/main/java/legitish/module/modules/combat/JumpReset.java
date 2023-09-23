@@ -26,7 +26,7 @@ public class JumpReset extends Module {
 
     @SuppressWarnings("unused")
     @Subscribe(eventClass = LivingUpdateEvent.class)
-    public void onTick(LivingUpdateEvent event) {
+    public void onUpdate(LivingUpdateEvent event) {
         if (GameUtils.isPlayerInGame() && mc.thePlayer.maxHurtTime > 0 && mc.thePlayer.hurtTime == mc.thePlayer.maxHurtTime && event.type == LivingUpdateEvent.Type.PRE) {
             for (PotionEffect effect : mc.thePlayer.getActivePotionEffects()) {
                 String potion = effect.getEffectName();
@@ -50,12 +50,14 @@ public class JumpReset extends Module {
                 }
             }
 
-            int key = mc.gameSettings.keyBindJump.getKeyCode();
-            KeyBinding.setKeyBindState(key, true);
-            KeyBinding.onTick(key);
-            javax.swing.Timer timer = new javax.swing.Timer((int) jumpDelay.getInput(), actionevent -> KeyBinding.setKeyBindState(mc.gameSettings.keyBindJump.getKeyCode(), false));
-            timer.setRepeats(false);
-            timer.start();
+            if (!Keyboard.isKeyDown(mc.gameSettings.keyBindJump.getKeyCode())) {
+                int key = mc.gameSettings.keyBindJump.getKeyCode();
+                KeyBinding.setKeyBindState(key, true);
+                KeyBinding.onTick(key);
+                javax.swing.Timer timer = new javax.swing.Timer((int) jumpDelay.getInput(), actionevent -> KeyBinding.setKeyBindState(mc.gameSettings.keyBindJump.getKeyCode(), false));
+                timer.setRepeats(false);
+                timer.start();
+            }
         }
     }
 
