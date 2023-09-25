@@ -4,6 +4,7 @@ import legitish.events.Subscribe;
 import legitish.events.impl.RenderLivingEvent;
 import legitish.module.Module;
 import legitish.module.modulesettings.impl.ModuleDesc;
+import net.minecraft.entity.player.EntityPlayer;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -17,7 +18,7 @@ public class Chams extends Module {
     @Subscribe(eventClass = RenderLivingEvent.class)
     public void renderChams(RenderLivingEvent event) {
         if (event.type == RenderLivingEvent.Type.PRE) {
-            if (event.entity != mc.thePlayer) {
+            if (event.entity instanceof EntityPlayer && event.entity != mc.thePlayer) {
                 glEnable(GL_POLYGON_OFFSET_FILL);
                 glPolygonOffset(1.0F, -1100000.0F);
             }
