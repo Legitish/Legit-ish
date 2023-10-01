@@ -10,7 +10,7 @@ import legitish.utils.GameUtils;
 import org.lwjgl.input.Keyboard;
 
 public class Velocity extends Module {
-    public static ModuleSliderSetting horizontal, vertical, chance;
+    public static ModuleSliderSetting horizontal, vertical, chance, tickDelay;
     public static ModuleTickSetting onlyWhileTargeting, holdingS;
 
     public Velocity() {
@@ -19,6 +19,7 @@ public class Velocity extends Module {
         this.registerSetting(horizontal = new ModuleSliderSetting("Horizontal", 90.0D, 0.0D, 100.0D, 1.0D));
         this.registerSetting(vertical = new ModuleSliderSetting("Vertical", 100.0D, 0.0D, 100.0D, 1.0D));
         this.registerSetting(chance = new ModuleSliderSetting("Chance", 100.0D, 0.0D, 100.0D, 1.0D));
+        this.registerSetting(tickDelay = new ModuleSliderSetting("Tick Delay", 0.0D, 0.0D, 10.0D, 1.0D));
         this.registerSetting(onlyWhileTargeting = new ModuleTickSetting("Only while targeting", false));
         this.registerSetting(holdingS = new ModuleTickSetting("Disable while holding S", false));
     }
@@ -26,7 +27,7 @@ public class Velocity extends Module {
     @SuppressWarnings("unused")
     @Subscribe(eventClass = LivingUpdateEvent.class)
     public void onTick(LivingUpdateEvent event) {
-        if (GameUtils.isPlayerInGame() && mc.thePlayer.maxHurtTime > 0 && mc.thePlayer.hurtTime == mc.thePlayer.maxHurtTime && event.type == LivingUpdateEvent.Type.PRE) {
+        if (GameUtils.isPlayerInGame() && mc.thePlayer.maxHurtTime > 0 && mc.thePlayer.hurtTime == mc.thePlayer.maxHurtTime - tickDelay.getInput() && event.type == LivingUpdateEvent.Type.PRE) {
             if (onlyWhileTargeting.isToggled() && (mc.objectMouseOver == null || mc.objectMouseOver.entityHit == null)) {
                 return;
             }

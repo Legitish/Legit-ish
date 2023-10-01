@@ -2,6 +2,7 @@ package legitish.module.modules.player;
 
 import legitish.events.Subscribe;
 import legitish.events.impl.DrawBlockHighlightEvent;
+import legitish.events.impl.PlayerTickEvent;
 import legitish.module.Module;
 import legitish.module.ModuleManager;
 import legitish.module.modulesettings.impl.ModuleDesc;
@@ -18,8 +19,6 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
-import net.weavemc.loader.api.event.SubscribeEvent;
-import net.weavemc.loader.api.event.TickEvent;
 import org.lwjgl.input.Mouse;
 
 public class AutoPlace extends Module {
@@ -54,8 +53,8 @@ public class AutoPlace extends Module {
         this.rv();
     }
 
-    @SubscribeEvent
-    public void onTick(TickEvent tickEvent) {
+    @Subscribe(eventClass = PlayerTickEvent.class)
+    public void onTick(PlayerTickEvent tickEvent) {
         if (holdRight.isToggled() && Mouse.isButtonDown(1) && !mc.thePlayer.capabilities.isFlying && !ModuleManager.fastPlace.isEnabled()) {
             ItemStack i = mc.thePlayer.getHeldItem();
             if (i == null || !(i.getItem() instanceof ItemBlock)) {

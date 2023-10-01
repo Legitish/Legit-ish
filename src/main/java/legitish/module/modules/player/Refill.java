@@ -1,5 +1,7 @@
 package legitish.module.modules.player;
 
+import legitish.events.Subscribe;
+import legitish.events.impl.PlayerTickEvent;
 import legitish.module.Module;
 import legitish.module.modulesettings.impl.ModuleSliderSetting;
 import legitish.module.modulesettings.impl.ModuleTickSetting;
@@ -9,8 +11,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.C16PacketClientStatus;
-import net.weavemc.loader.api.event.SubscribeEvent;
-import net.weavemc.loader.api.event.TickEvent;
 
 public class Refill extends Module {
     private final ModuleSliderSetting minDelay;
@@ -101,8 +101,8 @@ public class Refill extends Module {
         delay = (long) (minDelayValue + (Math.random() * (maxDelayValue - minDelayValue)));
     }
 
-    @SubscribeEvent
-    public void onTick(TickEvent event) {
+    @Subscribe(eventClass = PlayerTickEvent.class)
+    public void onTick(PlayerTickEvent event) {
         long currentTime = System.currentTimeMillis();
         if (Minecraft.getMinecraft().currentScreen instanceof GuiInventory && !isHotbarFull()) {
             if (refillOpened && currentTime - lastUsageTime >= delay) {
