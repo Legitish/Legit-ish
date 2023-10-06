@@ -46,6 +46,7 @@ public class ModuleManager {
         this.addModule(new NoJumpDelay());
         this.addModule(noSlow = new NoSlow());
         this.addModule(new Sprint());
+        this.addModule(new InstantStop());
         // Player
         this.addModule(new AutoJump());
         this.addModule(new AutoPlace());
