@@ -7,7 +7,7 @@ import legitish.utils.GameUtils;
 
 public class FastStop extends Module {
     public FastStop() {
-        super("InstantStop", category.Player, 0);
+        super("InstantStop", category.Movement, 0);
     }
 
     @SuppressWarnings("unused")
