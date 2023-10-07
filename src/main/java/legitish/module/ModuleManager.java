@@ -41,6 +41,7 @@ public class ModuleManager {
         this.addModule(new BedPlates());
         this.addModule(new MurderMystery());
         // Movement
+        this.addModule(new FastStop());
         this.addModule(new InvMove());
         this.addModule(new KeepSprint());
         this.addModule(new NoJumpDelay());
