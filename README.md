@@ -16,7 +16,7 @@ A mixin-based utility mod made for Weave.
 ---
 
 ## Building
-> Note: This project is built using Gradle 8.1.1, and JDK 17.
+> Note: This project is built using Gradle 8.4, and JDK 17.
 1. Clone the repository.
 2. Run `./gradlew build` in the root directory.
 3. The built jar file will be in `build/libs`.
